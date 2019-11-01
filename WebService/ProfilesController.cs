@@ -18,9 +18,9 @@ namespace WebService // also add controllers for other ressources in the same wa
         
         // make functions like this example:
         [HttpGet("profileId")]
-        public ActionResult<Profile> GetProfile(int profileId)
+        public ActionResult GetProfile(int profileId)
         {
-            return Ok(/*GetProfile(profileId)*/);
+            return Ok(new Profile());
         }
     }
 }

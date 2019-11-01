@@ -5,8 +5,12 @@
     <e p="$USER_HOME$/.Rider2019.2/system/resharper-host/local/Transient/ReSharperHost/v192/SolutionCaches/_rawdata-portfolioproject-2.941264419.00" t="ExcludeRecursive" />
     <e p="$PROJECT_DIR$" t="IncludeFlat">
       <e p="DataService" t="IncludeRecursive">
+        <e p="DataService.cs" t="Include" />
         <e p="DataService.csproj" t="IncludeRecursive" />
-        <e p="Program.cs" t="Include" />
+        <e p="IDataService.cs" t="Include" />
+        <e p="ProfileData.cs" t="Include" />
+        <e p="QAData.cs" t="Include" />
+        <e p="StackOverflowContext.cs" t="Include" />
         <e p="bin" t="ExcludeRecursive" />
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">

@@ -1,52 +1,54 @@
+using System;
+
 namespace rawdata_portfolioproject_2
 {
     // IMPORTANT CHOOSE WHICH ATTRIBUTES TO INCLUDE: HERE ARE SOME POTENTIAL ONES
     public class Post
     {
-        // id
-        // creationdata
-        // score
-        // body
-        // userid
+        public int Id { get; set; }
+        public DateTime CreationDate { get; set; }
+        public int Score { get; set; }
+        public string Body { get; set; }
+        public int UserId { get; set; }
     }
     
     public class Question
     {
-        // postid
-        // title
-        // tags
-        // acceptedanswerid
+        public int PostId { get; set; }
+        public string Title { get; set; }
+        public string Tags { get; set; }
+        public int AcceptedAnswerId { get; set; }
     }
     
     public class Link
     {
-        // postid
-        // linktopostid
+        public int PostId { get; set; }
+        public int LinkToPostId { get; set; }
     }
     
     public class Answer
     {
-        // postid
-        // answertoid
+        public int PostId { get; set; }
+        public int AnswerToId { get; set; }
     }
     
     public class Comment
     {
-        // commentid
-        // postid
-        // creationdate
-        // score
-        // body
-        // userid
+        public int Id { get; set; }
+        public int PostId { get; set; }
+        public DateTime CreationDate { get; set; }
+        public int Score { get; set; }
+        public string Body { get; set; }
+        public int UserId { get; set; }
     }
     
     public class User
     {
-        // userid
-        // name
-        // creationdate
-        // location
-        // age
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public DateTime CreationDate { get; set; }
+        public string Location { get; set; }
+        public int Age { get; set; }
     }
     
     public class Word // check actual inverted index in db... is this needed in DAL?

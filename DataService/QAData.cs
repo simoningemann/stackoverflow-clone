@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 
@@ -12,6 +13,9 @@ namespace rawdata_portfolioproject_2
         public int Score { get; set; }
         public string Body { get; set; }
         public int UserId { get; set; }
+        public Question Question { get; set; }
+        public Answer Answer { get; set; }
+        public User User { get; set; }
     }
     
     public class Question
@@ -44,6 +48,7 @@ namespace rawdata_portfolioproject_2
         public int Score { get; set; }
         public string Body { get; set; }
         public int UserId { get; set; }
+        public User User { get; set; }
     }
     
     public class User

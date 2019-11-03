@@ -1,3 +1,5 @@
+using System.Dynamic;
+
 namespace rawdata_portfolioproject_2
 {
     public interface IDataService
@@ -16,5 +18,7 @@ namespace rawdata_portfolioproject_2
         // get answer (multiple) (by postid and answertoid)
         // get comment (multiple) (by postid)
         // get user (single) (by userid)
+        
+        Post GetPost(int postId);
     }
 }

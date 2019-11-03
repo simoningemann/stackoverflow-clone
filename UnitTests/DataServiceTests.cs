@@ -13,6 +13,12 @@ namespace UnitTests
         {
             Assert.NotNull(new Profile());
         }
-        
+        [Fact]
+        public void GetPostWithValidId()
+        {
+            var service = new DataService();
+            var post = service.GetPost(19);
+            Assert.Equal(164, post.Score);
+        }
     }
 }

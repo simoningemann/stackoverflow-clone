@@ -18,7 +18,7 @@ namespace rawdata_portfolioproject_2
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder // remember to connect to vpn
-                .UseNpgsql("host=ruc.rawdata.dk;db=raw11;uid=raw11;pwd=eMYte)i.");
+                .UseNpgsql("Server=rawdata.ruc.dk;Port=5432;Database=raw11;User ID=raw11;Password=eMYte)i.");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -37,6 +37,11 @@ namespace rawdata_portfolioproject_2
             modelBuilder.Entity<Post>().Property(x => x.Id).HasColumnName("postid");
             modelBuilder.Entity<Comment>().Property(x => x.Id).HasColumnName("postid");
             modelBuilder.Entity<User>().Property(x => x.Id).HasColumnName("userid");
+            
+            //set composite primary keys
+            modelBuilder.Entity<Bookmark>().HasKey(x => new {x.ProfileId, x.PostId});
+            modelBuilder.Entity<Query>().HasKey(x => new {x.ProfileId, x.TimeSearched});
+            modelBuilder.Entity<Link>().HasKey(x => new {x.PostId, x.LinkToPostId});
         }
     }
     static class ModelBuilderExtensions

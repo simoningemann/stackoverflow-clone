@@ -1,4 +1,6 @@
 using System;
+using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 
 namespace rawdata_portfolioproject_2
 {
@@ -14,6 +16,7 @@ namespace rawdata_portfolioproject_2
     
     public class Question
     {
+        [Key]
         public int PostId { get; set; }
         public string Title { get; set; }
         public string Tags { get; set; }
@@ -28,6 +31,7 @@ namespace rawdata_portfolioproject_2
     
     public class Answer
     {
+        [Key]
         public int PostId { get; set; }
         public int AnswerToId { get; set; }
     }

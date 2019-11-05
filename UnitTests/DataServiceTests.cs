@@ -20,5 +20,13 @@ namespace UnitTests
             var post = service.GetPost(19);
             Assert.Equal(164, post.Score);
         }
+
+        [Fact]
+        public void LoginWithInvalidIdReturnFalse()
+        {
+            var service = new DataService();
+            var login = service.Login("bademail", "badpassword");
+            Assert.False(login);
+        }
     }
 }

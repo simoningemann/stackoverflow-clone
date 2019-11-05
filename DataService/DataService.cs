@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
+using Npgsql;
 
 
 namespace rawdata_portfolioproject_2
@@ -129,7 +131,9 @@ namespace rawdata_portfolioproject_2
 
         public bool Login(string email, string password)
         {
-            throw new NotImplementedException(); // how to do this?
+            using var db = new StackOverflowContext();
+            var result = db.Profile_LoginResults.FromSqlRaw("select profile_login({0},{1})", email, password).ToList().First();
+            return result.Result;
         }
 
         public Query CreateQuery(int profileId, DateTime timeSearched, string queryText)

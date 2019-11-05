@@ -53,7 +53,20 @@ namespace UnitTests
             Assert.Null(profile2);
 
             service.DeleteProfile(email, password);
-            service.DeleteProfile(email, password);
+        }
+        [Fact]
+        public void UpdatePasswordAndLoginReturnTrue()
+        {
+            var email = "test@email.com";
+            var password = "testpassword";
+            var newPassword = "newPassword";
+            var service = new DataService();
+            var profile = service.CreateProfile(email, password);
+            service.UpdateProfilePassword(email, password, newPassword);
+            var login = service.Login(email, newPassword);
+            Assert.True(login);
+
+            service.DeleteProfile(email, newPassword);
         }
     }
 }

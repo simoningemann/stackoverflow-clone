@@ -115,15 +115,17 @@ namespace rawdata_portfolioproject_2
             return true;
         }
 
-        public bool UpdateProfilePassword(int profileId, string password)
+        public bool UpdateProfilePassword(string email, string oldPassword, string newPassword)
         {
             using var db = new StackOverflowContext();
-            Profile profile = db.Profiles.Find(profileId);
+            Profile profile = db.Profiles.Where(x => x.Email == email).Select(x => x).ToList().FirstOrDefault();
             
             if (profile == null)
                 return false;
-            
-            // need a way to change password securely. How to do this??
+            if (!Login(email, oldPassword))
+                return false;
+
+            db.Database.ExecuteSqlRaw("select change_password({0},{1})", email, newPassword);
             return true;
         }
 

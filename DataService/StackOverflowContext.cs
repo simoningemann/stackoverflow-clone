@@ -15,6 +15,8 @@ namespace rawdata_portfolioproject_2
         public DbSet<Comment> Comments { get; set; }
         public DbSet<User> Users { get; set; }
 
+        public DbQuery<Profile_LoginResult> Profile_LoginResults { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder // remember to connect to vpn
@@ -42,6 +44,9 @@ namespace rawdata_portfolioproject_2
             modelBuilder.Entity<Bookmark>().HasKey(x => new {x.ProfileId, x.PostId});
             modelBuilder.Entity<Query>().HasKey(x => new {x.ProfileId, x.TimeSearched});
             modelBuilder.Entity<Link>().HasKey(x => new {x.PostId, x.LinkToPostId});
+            
+            // query result mapping
+            modelBuilder.Entity<Profile_LoginResult>().Property(x => x.Result).HasColumnName("profile_login");
         }
     }
     static class ModelBuilderExtensions

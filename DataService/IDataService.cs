@@ -38,7 +38,7 @@ namespace rawdata_portfolioproject_2
         Profile GetProfile(string email);
         bool UpdateProfileEmail(int profileId, string email);
         bool UpdateProfilePassword (int profileId, string password);
-        bool DeleteProfile(int profileId);
+        bool DeleteProfile(string email, string password);
         bool Login(string email, string password);
         Query CreateQuery(int profileId, DateTime timeSearched, string queryText);
         Query GetQuery(int profileId, DateTime timeSearched);

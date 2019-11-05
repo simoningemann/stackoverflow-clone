@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
+using Npgsql;
 
 
 namespace rawdata_portfolioproject_2
@@ -74,7 +76,18 @@ namespace rawdata_portfolioproject_2
 
         public Profile CreateProfile(string email, string password)
         {
-            throw new NotImplementedException(); // how to do this?
+            using var db = new StackOverflowContext();
+            try
+            {
+                db.Database.ExecuteSqlRaw("select create_profile({0}, {1})", email, password);
+            }
+            catch (Exception)
+            {
+                // in case of duplicate profile
+                return null;
+            }
+
+            return GetProfile(email);
         }
 
         public Profile GetProfile(int profileId)
@@ -114,12 +127,14 @@ namespace rawdata_portfolioproject_2
             return true;
         }
 
-        public bool DeleteProfile(int profileId)
+        public bool DeleteProfile(string email, string password)
         {
             using var db = new StackOverflowContext();
-            Profile profile = db.Profiles.Find(profileId);
+            Profile profile = db.Profiles.Where(x => x.Email == email).Select(x => x).ToList().FirstOrDefault();
             
             if (profile == null)
+                return false;
+            if (!Login(email, password))
                 return false;
             
             db.Profiles.Remove(profile);
@@ -129,7 +144,9 @@ namespace rawdata_portfolioproject_2
 
         public bool Login(string email, string password)
         {
-            throw new NotImplementedException(); // how to do this?
+            using var db = new StackOverflowContext();
+            var result = db.Profile_LoginResults.FromSqlRaw("select profile_login({0},{1})", email, password).ToList().First();
+            return result.Result;
         }
 
         public Query CreateQuery(int profileId, DateTime timeSearched, string queryText)

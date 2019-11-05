@@ -109,6 +109,18 @@ BEGIN
 END$$
 LANGUAGE 'plpgsql';
 
+added change_password function
+create or replace function change_password(email_in text, pw_in text)
+returns void as $$
+declare
+new_hash text := md5((select salt from profiles where email = email_in)|| pw_in);
+begin
+update profiles
+set pwhash = new_hash
+where email = email_in;
+end; $$
+language 'plpgsql';
+select change_password('person2email', 'newpw');
 
 /////////////
 git test

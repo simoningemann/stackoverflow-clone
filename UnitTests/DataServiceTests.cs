@@ -39,7 +39,7 @@ namespace UnitTests
             var login = service.Login(email, password);
             Assert.True(login);
 
-            service.DeleteProfile(email);
+            service.DeleteProfile(email, password);
         }
     }
 }

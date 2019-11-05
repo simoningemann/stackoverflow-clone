@@ -119,25 +119,14 @@ namespace rawdata_portfolioproject_2
             return true;
         }
 
-        public bool DeleteProfile(int profileId)
-        {
-            using var db = new StackOverflowContext();
-            Profile profile = db.Profiles.Find(profileId);
-            
-            if (profile == null)
-                return false;
-            
-            db.Profiles.Remove(profile);
-            db.SaveChanges();
-            return true;
-        }
-        
-        public bool DeleteProfile(string email)
+        public bool DeleteProfile(string email, string password)
         {
             using var db = new StackOverflowContext();
             Profile profile = db.Profiles.Where(x => x.Email == email).Select(x => x).ToList().FirstOrDefault();
             
             if (profile == null)
+                return false;
+            if (Login(email, password))
                 return false;
             
             db.Profiles.Remove(profile);

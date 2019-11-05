@@ -81,6 +81,35 @@ delete from weighted_inverted_index
 where word !~* '^[a-z][a-z0-9_]+$'
 or word in (SELECT word from stopwords)
 
+added this dynamic/variadic search function:
+CREATE OR REPLACE FUNCTION ranked_weight_variadic(variadic keywords text[])
+ RETURNS TABLE (pid integer, w float) as $$
+DECLARE
+    elem text;
+    numkeywords integer = array_length(keywords, 1);
+    counter integer = 0;
+    query text := 'select postid, sum(weight)::float from(';
+BEGIN
+    raise notice '%', numkeywords;
+    foreach elem in array keywords
+    loop
+        raise notice '%', counter;
+        counter := counter +1;
+        query := query || 'select distinct postid, weight from weighted_inverted_index where word = ';
+        query := query || '''' || elem || '''';
+        if (counter < numkeywords) then
+          query := query || ' union all ';
+        else
+            query := query || ' ';
+        end if;
+    end loop;
+    query := query || ') as matches group by postid order by sum(weight) desc;';
+    raise notice '%', query;
+    RETURN QUERY EXECUTE query;
+END$$
+LANGUAGE 'plpgsql';
+
+
 /////////////
 git test
 

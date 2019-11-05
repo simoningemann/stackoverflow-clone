@@ -45,4 +45,35 @@ database changes on rawdata server if any
 commit projects to github with "Section2" tag
 report 10 pages(24000 characters) (with link to github)
 
+/////////////////////////////////////////////////
+////////////// SQL CHANGES //////////////////////
+
+create or replace function profile_login(email_in text, pw_in text)
+returns void as $$
+declare
+actual_hash text := (select pwhash from profiles where email = email_in);
+test_hash text := md5((select salt from profiles where email = email_in)||pw_in);
+begin
+if test_hash = actual_hash then
+raise notice 'email and password correct';
+else
+raise notice 'email and password not correct';
+end if;
+end $$ language 'plpgsql';
+
+changed too:
+
+create or replace function profile_login(email_in text, pw_in text)
+returns boolean as $$
+declare
+actual_hash text := (select pwhash from profiles where email = email_in);
+test_hash text := md5((select salt from profiles where email = email_in)||pw_in);
+begin
+if test_hash = actual_hash then
+return true;
+else
+return false;
+end if;
+end $$ language 'plpgsql';
+
 

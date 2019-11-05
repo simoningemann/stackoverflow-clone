@@ -28,5 +28,18 @@ namespace UnitTests
             var login = service.Login("bademail", "badpassword");
             Assert.False(login);
         }
+
+        [Fact]
+        public void CreateNewProfileAndLoginWithValidIdReturnTrue()
+        {
+            var email = "test@email.com";
+            var password = "testpassword";
+            var service = new DataService();
+            service.CreateProfile(email, password);
+            var login = service.Login(email, password);
+            Assert.True(login);
+
+            service.DeleteProfile(email);
+        }
     }
 }

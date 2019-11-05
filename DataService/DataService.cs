@@ -76,7 +76,10 @@ namespace rawdata_portfolioproject_2
 
         public Profile CreateProfile(string email, string password)
         {
-            throw new NotImplementedException(); // how to do this?
+            using var db = new StackOverflowContext();
+            db.Database.ExecuteSqlRaw("select create_profile({0}, {1})", email, password);
+
+            return GetProfile(email);
         }
 
         public Profile GetProfile(int profileId)
@@ -120,6 +123,19 @@ namespace rawdata_portfolioproject_2
         {
             using var db = new StackOverflowContext();
             Profile profile = db.Profiles.Find(profileId);
+            
+            if (profile == null)
+                return false;
+            
+            db.Profiles.Remove(profile);
+            db.SaveChanges();
+            return true;
+        }
+        
+        public bool DeleteProfile(string email)
+        {
+            using var db = new StackOverflowContext();
+            Profile profile = db.Profiles.Where(x => x.Email == email).Select(x => x).ToList().FirstOrDefault();
             
             if (profile == null)
                 return false;

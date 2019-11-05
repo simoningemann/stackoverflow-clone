@@ -134,7 +134,7 @@ namespace rawdata_portfolioproject_2
             
             if (profile == null)
                 return false;
-            if (Login(email, password))
+            if (!Login(email, password))
                 return false;
             
             db.Profiles.Remove(profile);

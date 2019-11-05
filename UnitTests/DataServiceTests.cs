@@ -53,6 +53,7 @@ namespace UnitTests
             Assert.Null(profile2);
 
             service.DeleteProfile(email, password);
+            service.DeleteProfile(email, password);
         }
     }
 }

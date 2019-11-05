@@ -41,5 +41,18 @@ namespace UnitTests
 
             service.DeleteProfile(email, password);
         }
+        [Fact]
+        public void CreateDuplicateProfileReturnNull()
+        {
+            var email = "test@email.com";
+            var password = "testpassword";
+            var service = new DataService();
+            var profile1 = service.CreateProfile(email, password);
+            var profile2 = service.CreateProfile(email, password);
+            var login = service.Login(email, password);
+            Assert.Null(profile2);
+
+            service.DeleteProfile(email, password);
+        }
     }
 }

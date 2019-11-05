@@ -77,7 +77,15 @@ namespace rawdata_portfolioproject_2
         public Profile CreateProfile(string email, string password)
         {
             using var db = new StackOverflowContext();
-            db.Database.ExecuteSqlRaw("select create_profile({0}, {1})", email, password);
+            try
+            {
+                db.Database.ExecuteSqlRaw("select create_profile({0}, {1})", email, password);
+            }
+            catch (Exception)
+            {
+                // in case of duplicate profile
+                return null;
+            }
 
             return GetProfile(email);
         }

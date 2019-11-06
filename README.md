@@ -76,7 +76,8 @@ return false;
 end if;
 end $$ language 'plpgsql';
 
-///////////// Removing Stopwords and Symbols from words
+///////////// Removal of stopwords and symbols
+
 delete from weighted_inverted_index
 where word !~* '^[a-z][a-z0-9_]+$'
 or word in (SELECT word from stopwords)

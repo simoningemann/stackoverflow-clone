@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Npgsql;
+using DataService;
 
 
 namespace rawdata_portfolioproject_2
@@ -69,10 +70,18 @@ namespace rawdata_portfolioproject_2
             throw new NotImplementedException(); // how to do this?
         }
 
-        public List<Post> RankedWeightSearch(params string[] keywords)
+
+        public IList<weighted_inverted_index> RankedWeightSearch(PagingAttributes pagingAttributes, params string[] keywords)
         {
-            throw new NotImplementedException(); // how to do this??
+            using var db = new StackOverflowContext();
+            var weights = db.weighted_inverted_index.FromSqlRaw("select ranked_weight_variadic({0})", keywords)
+                .Take(pagingAttributes.PageSize).ToList()
+                .Skip(pagingAttributes.Page * pagingAttributes.PageSize)
+                .ToList();
+            //var result = db.RankedWeight_Result.FromSqlRaw("select postid, body from posts where postid in {0}),;
+            return weights;
         }
+
 
         public Profile CreateProfile(string email, string password)
         {

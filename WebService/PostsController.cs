@@ -1,49 +1,54 @@
-﻿using AutoMapper;
-using DatabaseService;
+﻿//using AutoMapper;
+using DataService;
+using WebService;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using WebService.Models;
 
-namespace WebService.Controllers
+//namespace WebService.Controllers
+namespace rawdata_portfolioproject_2
 {
     [ApiController]
     [Route("api/posts")]
     public class PostsController : ControllerBase
     {
         private IDataService _dataService;
-        private IMapper _mapper;
+        //private IMapper _mapper;
 
         public PostsController(
-            IDataService dataService,
-            IMapper mapper)
+            IDataService dataService)
         {
             _dataService = dataService;
-            _mapper = mapper;
+           // _mapper = mapper;
         }
 
-        [HttpGet(Title = nameof(GetPosts))] 
-        public ActionResult GetPosts([FromQuery] PagingAttributes pagingAttributes)
+        [HttpGet("{keywords}", Name = nameof(GetPosts))] 
+        public ActionResult GetPosts([FromQuery] PagingAttributes pagingAttributes, params string[] keywords)
         {
             //var posts = _dataService.GetPosts(pagingAttributes);
             //RankedWeightSearch(params string[] keywords);
-            var posts = _dataService.RankedWeightSearch(pagingAttributes);
+            var posts = _dataService.RankedWeightSearch(pagingAttributes, keywords);
+            if (posts == null)
+            {
+                return NotFound();
+            }
             var result = CreateResult(posts, pagingAttributes);
 
             return Ok(result);
         }
 
-        [HttpGet("{postId}", Title = nameof(GetPost))]
-        public ActionResult GetPost(int postId)
-        {
-            var post = _dataService.GetPost(postId);
-            if (post == null)
-            {
-                return NotFound();
-            }
-            return Ok(CreatePostDto(post));
-        }
+        //[HttpGet("{postId}", Name = nameof(GetPost))]
+        //public ActionResult GetPost(int postId)
+        //{
+        //    var post = _dataService.GetPost(postId);
+        //    if (post == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    return Ok(CreatePostDto(post));
+        //}
 
         ///////////////////
         //
@@ -51,18 +56,19 @@ namespace WebService.Controllers
         //
         //////////////////////
 
-        private PostDto CreatePostDto(Post post)
-        {
-            var dto = _mapper.Map<PostDto>(post);
-            dto.Link = Url.Link(
-                    nameof(GetPost),
-                    new { postId = post.Id });
-            return dto;
-        }
+        //private PostDto CreatePostDto(Post post)
+        //{
+        //    var dto = _mapper.Map<PostDto>(post);
+        //    dto.Link = Url.Link(
+        //            nameof(GetPosts),
+        //            new { postId = post.Id });
+        //    return dto;
+        //}
 
-        private object CreateResult(IEnumerable<Post> post, PagingAttributes attr)
+        private object CreateResult(IEnumerable<weighted_inverted_index> posts, PagingAttributes attr)
         {
-            var totalItems = _dataService.NumberOfPosts();
+            //var totalItems = _dataService.NumberOfPosts();
+            var totalItems = 10;
             var numberOfPages = Math.Ceiling((double)totalItems / attr.PageSize);
 
             var prev = attr.Page > 0
@@ -78,7 +84,8 @@ namespace WebService.Controllers
                 numberOfPages,
                 prev,
                 next,
-                items = posts.Select(CreatePostDto)
+                //items = posts.Select(CreatePostDto)
+                items = posts
             };
         }
 

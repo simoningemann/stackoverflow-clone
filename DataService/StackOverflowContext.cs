@@ -15,6 +15,9 @@ namespace rawdata_portfolioproject_2
         public DbSet<Comment> Comments { get; set; }
         public DbSet<User> Users { get; set; }
 
+        public DbSet<weighted_inverted_index> weighted_inverted_index {get; set;}
+        public DbSet<weighted_inverted_index_result> weighted_inverted_index_result {get; set;}
+
         public DbQuery<Profile_LoginResult> Profile_LoginResults { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -39,7 +42,7 @@ namespace rawdata_portfolioproject_2
             modelBuilder.Entity<Post>().Property(x => x.Id).HasColumnName("postid");
             modelBuilder.Entity<Comment>().Property(x => x.Id).HasColumnName("postid");
             modelBuilder.Entity<User>().Property(x => x.Id).HasColumnName("userid");
-            
+
             //set composite primary keys
             modelBuilder.Entity<Bookmark>().HasKey(x => new {x.ProfileId, x.PostId});
             modelBuilder.Entity<Query>().HasKey(x => new {x.ProfileId, x.TimeSearched});
@@ -47,6 +50,8 @@ namespace rawdata_portfolioproject_2
             
             // query result mapping
             modelBuilder.Entity<Profile_LoginResult>().Property(x => x.Result).HasColumnName("profile_login");
+            modelBuilder.Entity<weighted_inverted_index>().Property(x => x.Id).HasColumnName("pid");
+            modelBuilder.Entity<weighted_inverted_index>().Property(x => x.Id).HasColumnName("w");
         }
     }
     static class ModelBuilderExtensions

@@ -36,7 +36,7 @@ namespace rawdata_portfolioproject_2
         Profile CreateProfile(string email, string password);
         Profile GetProfile(int profileId);
         Profile GetProfile(string email);
-        bool UpdateProfileEmail(int profileId, string email);
+        bool UpdateProfileEmail(string oldEmail, string password, string newEmail);
         bool UpdateProfilePassword (string email, string oldPassword, string newPassword);
         bool DeleteProfile(string email, string password);
         bool Login(string email, string password);

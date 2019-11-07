@@ -102,15 +102,17 @@ namespace rawdata_portfolioproject_2
             return db.Profiles.Where(x => x.Email == email).Select(x => x).First();
         }
 
-        public bool UpdateProfileEmail(int profileId, string email) // improve security here
+        public bool UpdateProfileEmail(string oldEmail, string password, string newEmail) 
         {
             using var db = new StackOverflowContext();
-            Profile profile = db.Profiles.Find(profileId);
+            Profile profile = db.Profiles.Where(x => x.Email == oldEmail).Select(x => x).ToList().FirstOrDefault();
             
             if (profile == null)
                 return false;
+            if (!Login(oldEmail, password))
+                return false;
             
-            profile.Email = email;
+            profile.Email = newEmail;
             db.SaveChanges();
             return true;
         }

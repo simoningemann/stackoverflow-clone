@@ -28,19 +28,26 @@ namespace WebService // also add controllers for other ressources in the same wa
         }
         
         [HttpPost]
-        public IActionResult CreateProfile([FromBody] LoginInfo loginInfo)
+        public IActionResult CreateProfile([FromBody] LoginDto loginDto)
         {
-            var profile = _dataService.CreateProfile(loginInfo.Email, loginInfo.Password);
+            var profile = _dataService.CreateProfile(loginDto.Email, loginDto.Password);
 
             if (profile == null) return BadRequest();
             
             return Created("", profile);
         }
+
+        [HttpPut]
+        public IActionResult UpdatePassword([FromBody] UpdatePasswordDto updatePasswordDto)
+        {
+            //if(!_dataService.UpdateProfilePassword())
+            return Ok();
+        }
         
         [HttpPost("delete")]
-        public IActionResult DeleteProfile([FromBody] LoginInfo loginInfo)
+        public IActionResult DeleteProfile([FromBody] LoginDto loginDto)
         {
-            if (!_dataService.DeleteProfile(loginInfo.Email, loginInfo.Password)) return BadRequest();
+            if (!_dataService.DeleteProfile(loginDto.Email, loginDto.Password)) return BadRequest();
 
             return Ok();
         }

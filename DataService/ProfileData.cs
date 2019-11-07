@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 namespace rawdata_portfolioproject_2
 {
     // IMPORTANT CHOOSE WHICH ATTRIBUTES TO INCLUDE. HERE ARE SOME POTENTIAL ONES
+
     public class Profile
     {
         [Key]
@@ -25,11 +26,5 @@ namespace rawdata_portfolioproject_2
         public int ProfileId { get; set; }
         public int PostId { get; set; }
         public string Note { get; set; }
-    } 
-    
-    public class LoginInfo
-    {
-        public string Email { get; set; }
-        public  string Password { get; set; }
     }
 }

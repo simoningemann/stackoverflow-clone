@@ -6,11 +6,13 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using rawdata_portfolioproject_2;
 
 namespace WebService
 {
     public class Program
     {
+        public static Profile CurrentProfile = null;
         public static void Main(string[] args)
         {
             CreateHostBuilder(args).Build().Run();

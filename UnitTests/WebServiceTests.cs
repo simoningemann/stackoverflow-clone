@@ -23,16 +23,16 @@ namespace UnitTests
         {
             var newProfile = new
             {
-                Email = "test@email.com",
+                Email = "test7@email.com",
                 Password = "testpassword"
             };
             
             var (profile, statusCode) = PostData(ProfilesApi, newProfile);
 
             Assert.Equal(HttpStatusCode.Created, statusCode);
-            Assert.Equal("test@email.com", profile["email"]);
+            Assert.Equal(newProfile.Email, profile["email"]);
 
-            PostData($"{ProfilesApi}/delete)", newProfile);
+            PostData($"{ProfilesApi}/delete", newProfile);
         }
         
         // Helpers

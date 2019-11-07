@@ -5,7 +5,7 @@ namespace WebService // also add controllers for other ressources in the same wa
 {
     [ApiController]
     [Route("api/profiles")]
-    public class ProfilesController : Controller
+    public class ProfilesController : ControllerBase
     {
         private IDataService _dataService;
         // later add mapper.
@@ -38,7 +38,7 @@ namespace WebService // also add controllers for other ressources in the same wa
         }
         
         [HttpPost("delete")]
-        public ActionResult DeleteProfile([FromBody] LoginInfo loginInfo)
+        public IActionResult DeleteProfile([FromBody] LoginInfo loginInfo)
         {
             if (!_dataService.DeleteProfile(loginInfo.Email, loginInfo.Password)) return BadRequest();
 

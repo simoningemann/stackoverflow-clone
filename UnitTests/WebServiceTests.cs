@@ -34,6 +34,23 @@ namespace UnitTests
 
             PostData($"{ProfilesApi}/delete", newProfile);
         }
+
+        [Fact]
+        public void ProfileLoginReturnOk()
+        {
+            var newProfile = new
+            {
+                Email = "test@email.com",
+                Password = "testpassword"
+            };
+            
+            PostData(ProfilesApi, newProfile);
+            var (_, statusCode) = PostData($"{ProfilesApi}/login", newProfile);
+
+            Assert.Equal(HttpStatusCode.OK, statusCode);
+
+            PostData($"{ProfilesApi}/delete", newProfile);
+        }
         
         // Helpers
 

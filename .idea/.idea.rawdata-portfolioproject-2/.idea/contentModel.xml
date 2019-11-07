@@ -13,6 +13,7 @@
       <e p="DataService" t="IncludeRecursive">
         <e p="DataService.cs" t="Include" />
         <e p="DataService.csproj" t="IncludeRecursive" />
+        <e p="DataTransferObjects.cs" t="Include" />
         <e p="IDataService.cs" t="Include" />
         <e p="ProfileData.cs" t="Include" />
         <e p="QAData.cs" t="Include" />

@@ -40,7 +40,16 @@ namespace WebService // also add controllers for other ressources in the same wa
         [HttpPut]
         public IActionResult UpdatePassword([FromBody] UpdatePasswordDto updatePasswordDto)
         {
-            //if(!_dataService.UpdateProfilePassword())
+            if (!_dataService.UpdateProfilePassword(updatePasswordDto.Email, updatePasswordDto.OldPassword,
+                updatePasswordDto.NewPassword)) return BadRequest();
+            return Ok();
+        }
+        
+        [HttpPost("login")]
+        public IActionResult ProfileLogin([FromBody] LoginDto loginDto)
+        {
+            if (!_dataService.Login(loginDto.Email, loginDto.Password)) return BadRequest();
+
             return Ok();
         }
         

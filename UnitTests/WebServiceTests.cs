@@ -19,12 +19,21 @@ namespace UnitTests
         // make tests for the webservice like in the example below
 
         [Fact]
-        public void Dummy_ProfileNotFound()
+        public void CreateProfileReturnStatusCodeCreated()
         {
-            var (_, statusCode) = GetObject(ProfilesApi + "/1");
+            var newProfile = new
+            {
+                Email = "test@email.com",
+                Password = "testpassword"
+            };
+            
+            var (profile, statusCode) = PostData(ProfilesApi, newProfile);
 
-            Assert.Equal(HttpStatusCode.NotFound, statusCode);
-            }
+            Assert.Equal(HttpStatusCode.Created, statusCode);
+            Assert.Equal("test@email.com", profile["email"]);
+
+            PostData($"{ProfilesApi}/delete)", newProfile);
+        }
         
         // Helpers
 

@@ -17,10 +17,32 @@ namespace WebService // also add controllers for other ressources in the same wa
         }
         
         // make functions like this example:
-        [HttpGet("profileId")]
-        public ActionResult GetProfile(int profileId)
+        [HttpGet("email/{email}")]
+        public ActionResult<Profile> GetProfile(string email)
         {
-            return Ok(new Profile());
+            var profile = _dataService.GetProfile(email);
+
+            if (profile == null) return NotFound();
+            
+            return Ok(profile);
+        }
+        
+        [HttpPost]
+        public IActionResult CreateProfile([FromBody] LoginInfo loginInfo)
+        {
+            var profile = _dataService.CreateProfile(loginInfo.Email, loginInfo.Password);
+
+            if (profile == null) return BadRequest();
+            
+            return Created("", profile);
+        }
+        
+        [HttpPost("delete")]
+        public ActionResult DeleteProfile([FromBody] LoginInfo loginInfo)
+        {
+            if (!_dataService.DeleteProfile(loginInfo.Email, loginInfo.Password)) return BadRequest();
+
+            return Ok();
         }
     }
 }

@@ -26,4 +26,10 @@ namespace rawdata_portfolioproject_2
         public int PostId { get; set; }
         public string Note { get; set; }
     } 
+    
+    public class LoginInfo
+    {
+        public string Email { get; set; }
+        public  string Password { get; set; }
+    }
 }

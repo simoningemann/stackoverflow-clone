@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using rawdata_portfolioproject_2;
 using Xunit;
 
 namespace UnitTests
@@ -68,6 +69,26 @@ namespace UnitTests
 
             PostData($"{ProfilesApi}/delete", newProfile);
         }
+        
+        [Fact]
+        public void GetProfileWithLoginReturnOk()
+        {
+            // works in postman but dont know how to add header in C#
+            var newProfile = new
+            {
+                Email = "test@email.com",
+                Password = "testpassword"
+            };
+            
+            PostData(ProfilesApi, newProfile);
+            PostData($"{ProfilesApi}/login", newProfile);
+            var (_, statusCode) = GetObject($"{ProfilesApi}/email/{newProfile.Email}");
+
+            Assert.Equal(HttpStatusCode.OK, statusCode);
+
+            PostData($"{ProfilesApi}/delete", newProfile);
+        }
+        
         
         // Helpers
 

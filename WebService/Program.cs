@@ -12,7 +12,6 @@ namespace WebService
 {
     public class Program
     {
-        public static Profile CurrentProfile = null;
         public static void Main(string[] args)
         {
             CreateHostBuilder(args).Build().Run();

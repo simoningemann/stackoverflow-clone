@@ -27,6 +27,20 @@ namespace WebService // also add controllers for other ressources in the same wa
             return Ok(profile);
         }
         
+        /* Example using authentication
+        [HttpGet]
+        public IActionResult GetPosts()
+        {
+            if (Program.CurrentUser == null)
+                return Unauthorized();
+
+            var posts = _dataService.GetPosts(Program.CurrentUser.Id);
+
+            var result = posts.Select(x => new PostDto { Title = x.Title });
+            return Ok(result);
+        }
+        */
+        
         [HttpPost]
         public IActionResult CreateProfile([FromBody] LoginDto loginDto)
         {

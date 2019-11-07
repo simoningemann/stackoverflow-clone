@@ -2,6 +2,7 @@ using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -25,24 +26,25 @@ namespace WebService // also add controllers for other ressources in the same wa
         }
         
         // make functions like this example:
+        [Authorize]
         [HttpGet("email/{email}")]
         public ActionResult<Profile> GetProfile(string email)
         {
             var profile = _dataService.GetProfile(email);
 
             if (profile == null) return NotFound();
+            if (HttpContext.User.Identity.Name != email) return Unauthorized();
             
             return Ok(profile);
         }
         
         /* Example using authentication
+        [Authorize]
         [HttpGet]
         public IActionResult GetPosts()
         {
-            if (Program.CurrentUser == null)
-                return Unauthorized();
-
-            var posts = _dataService.GetPosts(Program.CurrentUser.Id);
+            int.TryParse(HttpContext.User.Identity.Name, out var id);
+            var posts = _dataService.GetPosts(id);
 
             var result = posts.Select(x => new PostDto { Title = x.Title });
             return Ok(result);
@@ -81,17 +83,17 @@ namespace WebService // also add controllers for other ressources in the same wa
         {
             if (!_dataService.Login(loginDto.Email, loginDto.Password)) return BadRequest();
             
-            /* authentication stuff example
+            // authentication stuff
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.UTF8.GetBytes(_configuration["Auth:Key"]);
-
             var tokenDescription = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim(ClaimTypes.Name, user.Id.ToString()),
+                    // change type to name if this doesnt work
+                    new Claim(ClaimTypes.Name, loginDto.Email),
                 }),
-                Expires = DateTime.Now.AddSeconds(20),
+                Expires = DateTime.Now.AddMinutes(60),
                 SigningCredentials = new SigningCredentials(
                     new SymmetricSecurityKey(key),
                     SecurityAlgorithms.HmacSha256Signature)
@@ -101,10 +103,7 @@ namespace WebService // also add controllers for other ressources in the same wa
 
             var token = tokenHandler.WriteToken(securityToken);
 
-            return Ok(new {user.Username, token});
-            */
-            
-            return Ok();
+            return Ok(new {loginDto.Email, token});
         }
         
         [HttpPost("delete")]

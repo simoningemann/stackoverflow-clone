@@ -52,6 +52,23 @@ namespace UnitTests
             PostData($"{ProfilesApi}/delete", newProfile);
         }
         
+        [Fact]
+        public void GetProfileWithoutLoginReturnUnauthorized()
+        {
+            var newProfile = new
+            {
+                Email = "test@email.com",
+                Password = "testpassword"
+            };
+            
+            PostData(ProfilesApi, newProfile);
+            var (_, statusCode) = GetObject($"{ProfilesApi}/email/{newProfile.Email}");
+
+            Assert.Equal(HttpStatusCode.Unauthorized, statusCode);
+
+            PostData($"{ProfilesApi}/delete", newProfile);
+        }
+        
         // Helpers
 
         (JArray, HttpStatusCode) GetArray(string url)

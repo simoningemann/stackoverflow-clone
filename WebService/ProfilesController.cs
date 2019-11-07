@@ -1,4 +1,10 @@
+using System;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 using rawdata_portfolioproject_2;
 
 namespace WebService // also add controllers for other ressources in the same way as below
@@ -7,13 +13,15 @@ namespace WebService // also add controllers for other ressources in the same wa
     [Route("api/profiles")]
     public class ProfilesController : ControllerBase
     {
-        private IDataService _dataService;
-        // later add mapper.
+        private readonly IDataService _dataService;
+        private readonly IConfiguration _configuration;
+        //optional: add mapper
 
-        public ProfilesController(IDataService dataService)
+        public ProfilesController(IDataService dataService, IConfiguration configuration)
         {
             _dataService = dataService;
-            // later add mapper
+            _configuration = configuration;
+            //optional add mapper
         }
         
         // make functions like this example:
@@ -72,7 +80,30 @@ namespace WebService // also add controllers for other ressources in the same wa
         public IActionResult ProfileLogin([FromBody] LoginDto loginDto)
         {
             if (!_dataService.Login(loginDto.Email, loginDto.Password)) return BadRequest();
+            
+            /* authentication stuff example
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = Encoding.UTF8.GetBytes(_configuration["Auth:Key"]);
 
+            var tokenDescription = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(new Claim[]
+                {
+                    new Claim(ClaimTypes.Name, user.Id.ToString()),
+                }),
+                Expires = DateTime.Now.AddSeconds(20),
+                SigningCredentials = new SigningCredentials(
+                    new SymmetricSecurityKey(key),
+                    SecurityAlgorithms.HmacSha256Signature)
+            };
+
+            var securityToken = tokenHandler.CreateToken(tokenDescription);
+
+            var token = tokenHandler.WriteToken(securityToken);
+
+            return Ok(new {user.Username, token});
+            */
+            
             return Ok();
         }
         

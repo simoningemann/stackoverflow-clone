@@ -1,0 +1,91 @@
+﻿using AutoMapper;
+using DatabaseService;
+using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using WebService.Models;
+
+namespace WebService.Controllers
+{
+    [ApiController]
+    [Route("api/posts")]
+    public class PostsController : ControllerBase
+    {
+        private IDataService _dataService;
+        private IMapper _mapper;
+
+        public PostsController(
+            IDataService dataService,
+            IMapper mapper)
+        {
+            _dataService = dataService;
+            _mapper = mapper;
+        }
+
+        [HttpGet(Title = nameof(GetPosts))] 
+        public ActionResult GetPosts([FromQuery] PagingAttributes pagingAttributes)
+        {
+            //var posts = _dataService.GetPosts(pagingAttributes);
+            //RankedWeightSearch(params string[] keywords);
+            var posts = _dataService.RankedWeightSearch(pagingAttributes);
+            var result = CreateResult(posts, pagingAttributes);
+
+            return Ok(result);
+        }
+
+        [HttpGet("{postId}", Title = nameof(GetPost))]
+        public ActionResult GetPost(int postId)
+        {
+            var post = _dataService.GetPost(postId);
+            if (post == null)
+            {
+                return NotFound();
+            }
+            return Ok(CreatePostDto(post));
+        }
+
+        ///////////////////
+        //
+        // Helpers
+        //
+        //////////////////////
+
+        private PostDto CreatePostDto(Post post)
+        {
+            var dto = _mapper.Map<PostDto>(post);
+            dto.Link = Url.Link(
+                    nameof(GetPost),
+                    new { postId = post.Id });
+            return dto;
+        }
+
+        private object CreateResult(IEnumerable<Post> post, PagingAttributes attr)
+        {
+            var totalItems = _dataService.NumberOfPosts();
+            var numberOfPages = Math.Ceiling((double)totalItems / attr.PageSize);
+
+            var prev = attr.Page > 0
+                ? CreatePagingLink(attr.Page - 1, attr.PageSize)
+                : null;
+            var next = attr.Page < numberOfPages - 1
+                ? CreatePagingLink(attr.Page + 1, attr.PageSize)
+                : null;
+
+            return new
+            {
+                totalItems,
+                numberOfPages,
+                prev,
+                next,
+                items = posts.Select(CreatePostDto)
+            };
+        }
+
+        private string CreatePagingLink(int page, int pageSize)
+        {
+            return Url.Link(nameof(GetPosts), new { page, pageSize });
+        }
+
+    }
+}

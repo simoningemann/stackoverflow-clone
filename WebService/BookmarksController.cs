@@ -49,5 +49,16 @@ namespace WebService // also add controllers for other ressources in the same wa
 
             return Ok(); 
         }
+        
+        [Authorize]
+        [HttpGet("delete")]
+        public IActionResult UpdateBookmark([FromBody] DeleteBookmarkDto dto)
+        {
+            if (HttpContext.User.Identity.Name != _dataService.GetProfile(dto.ProfileId).Email) return Unauthorized();
+            
+            if (!_dataService.DeleteBookmark(dto.ProfileId, dto.BookmarkId)) return NotFound();
+
+            return Ok(); 
+        }
     }
 }

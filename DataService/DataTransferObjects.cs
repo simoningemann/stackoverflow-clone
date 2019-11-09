@@ -26,4 +26,10 @@ namespace rawdata_portfolioproject_2
         public int BookmarkId { get; set; }
         public string Note { get; set; }
     }
+
+    public class DeleteBookmarkDto
+    {
+        public int ProfileId { get; set; }
+        public int BookmarkId { get; set; }
+    }
 }

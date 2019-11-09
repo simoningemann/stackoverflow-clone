@@ -42,6 +42,7 @@
         </e>
       </e>
       <e p="WebService" t="IncludeRecursive">
+        <e p="BookmarksController.cs" t="Include" />
         <e p="ProfilesController.cs" t="Include" />
         <e p="Program.cs" t="Include" />
         <e p="Properties" t="Include">

@@ -34,23 +34,22 @@ namespace WebService // also add controllers for other ressources in the same wa
 
             if (profile == null) return NotFound();
             if (HttpContext.User.Identity.Name != email) return Unauthorized();
-            
+
             return Ok(profile);
         }
         
-        /* Example using authentication
         [Authorize]
-        [HttpGet]
-        public IActionResult GetPosts()
+        [HttpGet("{profileId}")]
+        public ActionResult<Profile> GetProfile(int profileId)
         {
-            int.TryParse(HttpContext.User.Identity.Name, out var id);
-            var posts = _dataService.GetPosts(id);
+            var profile = _dataService.GetProfile(profileId);
 
-            var result = posts.Select(x => new PostDto { Title = x.Title });
-            return Ok(result);
+            if (profile == null) return NotFound();
+            if (HttpContext.User.Identity.Name != profile.Email) return Unauthorized();
+
+            return Ok(profile);
         }
-        */
-        
+
         [HttpPost]
         public IActionResult CreateProfile([FromBody] LoginDto loginDto)
         {
@@ -61,6 +60,7 @@ namespace WebService // also add controllers for other ressources in the same wa
             return Created("", profile);
         }
 
+        [Authorize]
         [HttpPut("updatepassword")]
         public IActionResult UpdatePassword([FromBody] UpdatePasswordDto updatePasswordDto)
         {
@@ -69,6 +69,7 @@ namespace WebService // also add controllers for other ressources in the same wa
             return Ok();
         }
         
+        [Authorize]
         [HttpPut("updateemail")]
         public IActionResult UpdateEmail([FromBody] UpdateEmailDto updateEmailDto)
         {
@@ -106,6 +107,7 @@ namespace WebService // also add controllers for other ressources in the same wa
             return Ok(new {loginDto.Email, token});
         }
         
+        [Authorize]
         [HttpPost("delete")]
         public IActionResult DeleteProfile([FromBody] LoginDto loginDto)
         {

@@ -19,4 +19,11 @@ namespace rawdata_portfolioproject_2
         public  string Password { get; set; }
         public string NewEmail { get; set; }
     }
+
+    public class UpdateBookmerkDto
+    {
+        public int ProfileId { get; set; }
+        public int BookmarkId { get; set; }
+        public string Note { get; set; }
+    }
 }

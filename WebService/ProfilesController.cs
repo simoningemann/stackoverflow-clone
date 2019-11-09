@@ -75,6 +75,8 @@ namespace WebService // also add controllers for other ressources in the same wa
         {
             if (!_dataService.UpdateProfileEmail(updateEmailDto.OldEmail, updateEmailDto.Password,
                 updateEmailDto.NewEmail)) return BadRequest();
+
+            //logout
             
             return Ok();
         }

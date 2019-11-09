@@ -40,8 +40,21 @@ namespace WebService // also add controllers for other ressources in the same wa
         }
         
         [Authorize]
-        [HttpGet("update")]
-        public IActionResult UpdateBookmark([FromBody] UpdateBookmerkDto dto)
+        [HttpPost]
+        public IActionResult CreateBookmark([FromBody] CreateOrUpdateBookmarkDto dto)
+        {
+            if (HttpContext.User.Identity.Name != _dataService.GetProfile(dto.ProfileId).Email) return Unauthorized();
+
+            var bookmark = _dataService.CreateBookmark(dto.ProfileId, dto.BookmarkId, dto.Note);
+            
+            if (bookmark == null) return BadRequest();
+
+            return Ok(bookmark); // is return type ok?
+        }
+        
+        [Authorize]
+        [HttpGet]
+        public IActionResult UpdateBookmark([FromBody] CreateOrUpdateBookmarkDto dto)
         {
             if (HttpContext.User.Identity.Name != _dataService.GetProfile(dto.ProfileId).Email) return Unauthorized();
             
@@ -52,7 +65,7 @@ namespace WebService // also add controllers for other ressources in the same wa
         
         [Authorize]
         [HttpGet("delete")]
-        public IActionResult UpdateBookmark([FromBody] DeleteBookmarkDto dto)
+        public IActionResult DeleteBookmark([FromBody] DeleteBookmarkDto dto)
         {
             if (HttpContext.User.Identity.Name != _dataService.GetProfile(dto.ProfileId).Email) return Unauthorized();
             

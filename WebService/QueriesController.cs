@@ -12,14 +12,14 @@ using rawdata_portfolioproject_2;
 namespace WebService // also add controllers for other ressources in the same way as below
 {
     [ApiController]
-    [Route("api/bookmarks")]
-    public class BookmarksController : ControllerBase
+    [Route("api/queries")]
+    public class QueriesController : ControllerBase
     {
         private readonly IDataService _dataService;
         private readonly IConfiguration _configuration;
         //optional: add mapper
 
-        public BookmarksController(IDataService dataService, IConfiguration configuration)
+        public QueriesController(IDataService dataService, IConfiguration configuration)
         {
             _dataService = dataService;
             _configuration = configuration;
@@ -28,48 +28,48 @@ namespace WebService // also add controllers for other ressources in the same wa
 
         [Authorize]
         [HttpGet("{profileId}")]
-        public IActionResult GetAllBookmarks(int profileId)
+        public IActionResult GetAllQueries(int profileId)
         {
             if (HttpContext.User.Identity.Name != _dataService.GetProfile(profileId).Email) return Unauthorized();
 
-            var bookmarks = _dataService.GetAllBookmarks(profileId);
+            var queries = _dataService.GetAllQueries(profileId);
 
-            var tags = new {tags = bookmarks};
+            var tags = new {tags = queries};
 
             return Ok(JsonConvert.SerializeObject(tags)); // is this correct?
         }
         
         [Authorize]
         [HttpPost]
-        public IActionResult CreateBookmark([FromBody] CreateOrUpdateBookmarkDto dto)
+        public IActionResult CreateQuery([FromBody] CreateQueryDto dto)
         {
             if (HttpContext.User.Identity.Name != _dataService.GetProfile(dto.ProfileId).Email) return Unauthorized();
 
-            var bookmark = _dataService.CreateBookmark(dto.ProfileId, dto.BookmarkId, dto.Note);
+            var query = _dataService.CreateQuery(dto.ProfileId, dto.TimeSearched, dto.QueryText);
             
-            if (bookmark == null) return BadRequest();
+            if (query == null) return BadRequest();
 
-            return Ok(bookmark); // is return type ok?
+            return Ok(query); // is return type ok?
         }
-        
+
         [Authorize]
-        [HttpPut]
-        public IActionResult UpdateBookmark([FromBody] CreateOrUpdateBookmarkDto dto)
+        [HttpDelete]
+        public IActionResult DeleteQuery([FromBody] DeleteQueryDto dto)
         {
             if (HttpContext.User.Identity.Name != _dataService.GetProfile(dto.ProfileId).Email) return Unauthorized();
             
-            if (!_dataService.UpdateBookmark(dto.ProfileId, dto.BookmarkId, dto.Note)) return NotFound();
+            if (!_dataService.DeleteQuery(dto.ProfileId, dto.TimeSearched)) return NotFound();
 
             return Ok(); 
         }
         
         [Authorize]
-        [HttpDelete]
-        public IActionResult DeleteBookmark([FromBody] DeleteBookmarkDto dto)
+        [HttpDelete("{profileId}")]
+        public IActionResult DeleteAllQueries(int profileId)
         {
-            if (HttpContext.User.Identity.Name != _dataService.GetProfile(dto.ProfileId).Email) return Unauthorized();
-            
-            if (!_dataService.DeleteBookmark(dto.ProfileId, dto.BookmarkId)) return NotFound();
+            if (HttpContext.User.Identity.Name != _dataService.GetProfile(profileId).Email) return Unauthorized();
+
+            _dataService.DeleteQueries(_dataService.GetAllQueries(profileId));
 
             return Ok(); 
         }

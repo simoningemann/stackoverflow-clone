@@ -1,3 +1,5 @@
+using System;
+
 namespace rawdata_portfolioproject_2
 {
     public class LoginDto
@@ -31,5 +33,18 @@ namespace rawdata_portfolioproject_2
     {
         public int ProfileId { get; set; }
         public int BookmarkId { get; set; }
+    }
+
+    public class CreateQueryDto
+    {
+        public int ProfileId { get; set; }
+        public DateTime TimeSearched { get; set; }
+        public string QueryText { get; set; }
+    }
+
+    public class DeleteQueryDto
+    {
+        public int ProfileId { get; set; }
+        public DateTime TimeSearched { get; set; }
     }
 }

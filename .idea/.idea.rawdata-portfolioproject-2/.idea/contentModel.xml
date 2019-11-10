@@ -15,6 +15,7 @@
         <e p="DataService.csproj" t="IncludeRecursive" />
         <e p="DataTransferObjects.cs" t="Include" />
         <e p="IDataService.cs" t="Include" />
+        <e p="PagingAttributes.cs" t="Include" />
         <e p="ProfileData.cs" t="Include" />
         <e p="QAData.cs" t="Include" />
         <e p="ResultData.cs" t="Include" />
@@ -43,6 +44,10 @@
       </e>
       <e p="WebService" t="IncludeRecursive">
         <e p="BookmarksController.cs" t="Include" />
+        <e p="Models" t="Include">
+          <e p="PostDto.cs" t="Include" />
+        </e>
+        <e p="PostsController.cs" t="Include" />
         <e p="ProfilesController.cs" t="Include" />
         <e p="Program.cs" t="Include" />
         <e p="Properties" t="Include">

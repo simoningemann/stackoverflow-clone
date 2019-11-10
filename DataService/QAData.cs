@@ -64,4 +64,16 @@ namespace rawdata_portfolioproject_2
     {
         
     }
+
+    public class weighted_inverted_index
+    {
+        public int Id { get; set; }
+        public float W { get; set; }
+    }
+    
+    public class weighted_inverted_index_result
+    {
+        public int Id { get; set; }
+        public string[] Body { get; set; }
+    }
 }

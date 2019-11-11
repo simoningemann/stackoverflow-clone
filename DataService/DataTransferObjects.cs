@@ -50,7 +50,8 @@ namespace rawdata_portfolioproject_2
 
     public class RankedSearchDto
     {
-        //public PagingAttributes PagingAttributes { get; set; }
+        public int PageSize { get; set; }
+        public int PageNum { get; set; }
         public string[] Keywords { get; set; }
     }
     

@@ -28,7 +28,7 @@ namespace WebService
         [HttpGet("rankedsearch")] // works.. tested in postman
         public ActionResult RankedSearch([FromBody] RankedSearchDto dto)
         {
-            var posts = _dataService.RankedWeightSearch(/*dto.PagingAttributes,*/ dto.Keywords);
+            var posts = _dataService.RankedWeightSearch(dto.PageSize, dto.PageNum, dto.Keywords);
             if (posts == null)
             {
                 return NotFound();

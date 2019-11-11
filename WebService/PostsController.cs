@@ -25,7 +25,7 @@ namespace WebService
             // _mapper = mapper;
         }
 
-        [HttpGet("rankedsearch")] 
+        [HttpGet("rankedsearch")] // works.. tested in postman
         public ActionResult RankedSearch([FromBody] RankedSearchDto dto)
         {
             var posts = _dataService.RankedWeightSearch(/*dto.PagingAttributes,*/ dto.Keywords);

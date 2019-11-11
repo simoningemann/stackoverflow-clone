@@ -16,6 +16,7 @@ namespace UnitTests
     public class WebServiceTests
     {
         private const string ProfilesApi = "http://localhost:5000/api/profiles";
+        private const string PostsApi = "http://localhost:5000/api/posts";
         
         // make tests for the webservice like in the example below
 
@@ -88,8 +89,7 @@ namespace UnitTests
 
             PostData($"{ProfilesApi}/delete", newProfile);
         }
-        
-        
+
         // Helpers
 
         (JArray, HttpStatusCode) GetArray(string url)

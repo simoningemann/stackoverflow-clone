@@ -70,10 +70,10 @@ namespace rawdata_portfolioproject_2
         }
 
 
-        public IList<weighted_inverted_index> RankedWeightSearch(PagingAttributes pagingAttributes, params string[] keywords)
+        public IList<Ranked_Weight_VariadicResult> RankedWeightSearch(PagingAttributes pagingAttributes, params string[] keywords)
         {
             using var db = new StackOverflowContext();
-            var weights = db.weighted_inverted_index.FromSqlRaw("select ranked_weight_variadic({0})", keywords)
+            var weights = db.Ranked_Weight_VariadicResults.FromSqlRaw("select ranked_weight_variadic({0})", keywords)
                 .Take(pagingAttributes.PageSize).ToList()
                 .Skip(pagingAttributes.Page * pagingAttributes.PageSize)
                 .ToList();

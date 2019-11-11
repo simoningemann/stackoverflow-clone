@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.Extensions.Configuration;
 using WebService.Models;
 
 //namespace WebService.Controllers
@@ -13,14 +14,15 @@ namespace rawdata_portfolioproject_2
     [Route("api/posts")]
     public class PostsController : ControllerBase
     {
-        private IDataService _dataService;
+        private readonly IDataService _dataService;
+        private readonly IConfiguration _configuration;
         //private IMapper _mapper;
 
-        public PostsController(
-            IDataService dataService)
+        public PostsController(IDataService dataService, IConfiguration configuration)
         {
             _dataService = dataService;
-           // _mapper = mapper;
+            _configuration = configuration;
+            // _mapper = mapper;
         }
 
         [HttpGet("{keywords}", Name = nameof(GetPosts))] 
@@ -64,7 +66,7 @@ namespace rawdata_portfolioproject_2
         //    return dto;
         //}
 
-        private object CreateResult(IEnumerable<weighted_inverted_index> posts, PagingAttributes attr)
+        private object CreateResult(IEnumerable<Ranked_Weight_VariadicResult> posts, PagingAttributes attr)
         {
             //var totalItems = _dataService.NumberOfPosts();
             var totalItems = 10;

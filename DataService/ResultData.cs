@@ -4,4 +4,11 @@ namespace rawdata_portfolioproject_2
     {
         public bool Result { get; set; }
     }
+
+    public class Ranked_Weight_VariadicResult
+    {
+        public int PostId { get; set; }
+        public double Weight { get; set; }
+        
+    }
 }

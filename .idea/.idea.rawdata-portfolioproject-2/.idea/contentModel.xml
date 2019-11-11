@@ -29,6 +29,18 @@
           </e>
         </e>
       </e>
+      <e p="SimpleTests" t="IncludeRecursive">
+        <e p="Program.cs" t="Include" />
+        <e p="SimpleTests.csproj" t="IncludeRecursive" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp3.0" t="Include">
+              <e p="SimpleTests.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+      </e>
       <e p="UnitTests" t="IncludeRecursive">
         <e p="DataServiceTests.cs" t="Include" />
         <e p="UnitTests.csproj" t="IncludeRecursive" />
@@ -44,9 +56,6 @@
       </e>
       <e p="WebService" t="IncludeRecursive">
         <e p="BookmarksController.cs" t="Include" />
-        <e p="Models" t="Include">
-          <e p="PostDto.cs" t="Include" />
-        </e>
         <e p="PostsController.cs" t="Include" />
         <e p="ProfilesController.cs" t="Include" />
         <e p="Program.cs" t="Include" />

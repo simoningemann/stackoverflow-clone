@@ -5,10 +5,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Extensions.Configuration;
-using WebService.Models;
+using rawdata_portfolioproject_2;
 
 //namespace WebService.Controllers
-namespace rawdata_portfolioproject_2
+namespace WebService
 {
     [ApiController]
     [Route("api/posts")]
@@ -25,19 +25,17 @@ namespace rawdata_portfolioproject_2
             // _mapper = mapper;
         }
 
-        [HttpGet("{keywords}", Name = nameof(GetPosts))] 
-        public ActionResult GetPosts([FromQuery] PagingAttributes pagingAttributes, params string[] keywords)
+        [HttpGet("rankedsearch")] 
+        public ActionResult RankedSearch([FromBody] RankedSearchDto dto)
         {
-            //var posts = _dataService.GetPosts(pagingAttributes);
-            //RankedWeightSearch(params string[] keywords);
-            var posts = _dataService.RankedWeightSearch(pagingAttributes, keywords);
+            var posts = _dataService.RankedWeightSearch(/*dto.PagingAttributes,*/ dto.Keywords);
             if (posts == null)
             {
                 return NotFound();
             }
-            var result = CreateResult(posts, pagingAttributes);
+            //var result = CreateResult(posts, dto.PagingAttributes);
 
-            return Ok(result);
+            return Ok(posts);
         }
 
         //[HttpGet("{postId}", Name = nameof(GetPost))]
@@ -57,19 +55,20 @@ namespace rawdata_portfolioproject_2
         //
         //////////////////////
 
-        //private PostDto CreatePostDto(Post post)
-        //{
-        //    var dto = _mapper.Map<PostDto>(post);
-        //    dto.Link = Url.Link(
-        //            nameof(GetPosts),
-        //            new { postId = post.Id });
-        //    return dto;
-        //}
+        private PostDto CreatePostDto(Post post)
+        {
+            var dto = new PostDto();
+            dto.Body = post.Body;
+            dto.Link = Url.Link(
+                    nameof(RankedSearch),
+                    new { postId = post.Id });
+            return dto;
+        }
 
         private object CreateResult(IEnumerable<Ranked_Weight_VariadicResult> posts, PagingAttributes attr)
         {
-            //var totalItems = _dataService.NumberOfPosts();
-            var totalItems = 10;
+            var totalItems = posts.Count();
+            
             var numberOfPages = Math.Ceiling((double)totalItems / attr.PageSize);
 
             var prev = attr.Page > 0
@@ -92,7 +91,7 @@ namespace rawdata_portfolioproject_2
 
         private string CreatePagingLink(int page, int pageSize)
         {
-            return Url.Link(nameof(GetPosts), new { page, pageSize });
+            return Url.Link(nameof(RankedSearch), new { page, pageSize });
         }
 
     }

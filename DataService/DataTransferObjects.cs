@@ -47,4 +47,16 @@ namespace rawdata_portfolioproject_2
         public int ProfileId { get; set; }
         public DateTime TimeSearched { get; set; }
     }
+
+    public class RankedSearchDto
+    {
+        //public PagingAttributes PagingAttributes { get; set; }
+        public string[] Keywords { get; set; }
+    }
+    
+    public class PostDto
+    {
+        public string Link { get; set; }
+        public string Body { get; set; }
+    }
 }

@@ -70,17 +70,30 @@ namespace rawdata_portfolioproject_2
         }
 
 
-        public IList<Ranked_Weight_VariadicResult> RankedWeightSearch(PagingAttributes pagingAttributes, params string[] keywords)
+        public IList<Ranked_Weight_VariadicResult> RankedWeightSearch(/*PagingAttributes pagingAttributes,*/ string[] keywords)
         {
             using var db = new StackOverflowContext();
-            var weights = db.Ranked_Weight_VariadicResults.FromSqlRaw("select ranked_weight_variadic({0})", keywords)
-                .Take(pagingAttributes.PageSize).ToList()
+            var query = CreateSearchQuery(keywords);
+            var weights = db.Ranked_Weight_VariadicResults.FromSqlRaw(query).ToList();
+                /*.Take(pagingAttributes.PageSize).ToList()
                 .Skip(pagingAttributes.Page * pagingAttributes.PageSize)
-                .ToList();
+                .ToList()*/;
             //var result = db.RankedWeight_Result.FromSqlRaw("select postid, body from posts where postid in {0}),;
             return weights;
         }
 
+        public string CreateSearchQuery(string[] keywords)
+        {
+            var query = "select * from ranked_weight_variadic(";
+            foreach (var keyword in keywords)
+            {
+                query = query + "'" + keyword + "',";
+            }
+
+            query = query.Remove(query.Length-1); // remove the last comma
+            query = query + ")";
+            return query;
+        } 
 
         public Profile CreateProfile(string email, string password)
         {

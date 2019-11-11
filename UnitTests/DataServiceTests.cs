@@ -68,5 +68,14 @@ namespace UnitTests
 
             service.DeleteProfile(email, newPassword);
         }
+
+        [Fact]
+        public void RankedSearchReturnCorrectResults()
+        {
+            var keywords = new string[] {"noob", "new", "post"};
+            var service = new DataService();
+            var results = service.RankedWeightSearch(keywords).ToList();
+            Assert.Equal(3741113, results[0].PostId);
+        }
     }
 }

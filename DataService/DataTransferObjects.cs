@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace rawdata_portfolioproject_2
 {
@@ -55,9 +56,19 @@ namespace rawdata_portfolioproject_2
         public string[] Keywords { get; set; }
     }
     
-    public class PostDto
+    public class RankedSearchResultDto
+    {
+        public int TotalQuestions { get; set; }
+        public int TotalPages { get; set; }
+        public string NextPage { get; set; }
+        public string PreviousPage { get; set; }
+        public List<QuestionDto> Questions { get; set; }
+    }
+
+    
+    public class QuestionDto
     {
         public string Link { get; set; }
-        public string Body { get; set; }
+        public Post Question { get; set;}
     }
 }

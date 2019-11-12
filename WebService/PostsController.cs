@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Extensions.Configuration;
 using rawdata_portfolioproject_2;
+using AutoMapper;
 
 //namespace WebService.Controllers
 namespace WebService
@@ -16,26 +17,34 @@ namespace WebService
     {
         private readonly IDataService _dataService;
         private readonly IConfiguration _configuration;
-        //private IMapper _mapper;
+        private readonly IMapper _mapper;
 
-        public PostsController(IDataService dataService, IConfiguration configuration)
+        public PostsController(IDataService dataService, IConfiguration configuration, IMapper mapper)
         {
             _dataService = dataService;
             _configuration = configuration;
-            // _mapper = mapper;
+            _mapper = mapper;
+        }
+        
+        [HttpGet("{postId}", Name = nameof(GetPost))]
+        public IActionResult GetPost(int postId)
+        {
+            var post = _dataService.GetPost(postId);
+
+            if (post == null) return NotFound();
+
+            return Ok(post);
         }
 
         [HttpGet("rankedsearch")] // works.. tested in postman
         public ActionResult RankedSearch([FromBody] RankedSearchDto dto)
         {
-            var posts = _dataService.RankedWeightSearch(dto.PageSize, dto.PageNum, dto.Keywords);
-            if (posts == null)
-            {
-                return NotFound();
-            }
-            //var result = CreateResult(posts, dto.PagingAttributes);
+            var questions = _dataService.RankedWeightSearch(dto.PageSize, dto.PageNum, dto.Keywords);
+            
+            var resultDto = new RankedSearchResultDto();
+            //resultDto.TotalQuestions = work in progress
 
-            return Ok(posts);
+            return Ok();
         }
 
         //[HttpGet("{postId}", Name = nameof(GetPost))]
@@ -55,6 +64,7 @@ namespace WebService
         //
         //////////////////////
 
+        /*
         private PostDto CreatePostDto(Post post)
         {
             var dto = new PostDto();
@@ -64,7 +74,9 @@ namespace WebService
                     new { postId = post.Id });
             return dto;
         }
+        */
 
+        
         private object CreateResult(IEnumerable<Ranked_Weight_VariadicResult> posts, PagingAttributes attr)
         {
             var totalItems = posts.Count();

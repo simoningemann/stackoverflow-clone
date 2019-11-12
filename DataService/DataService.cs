@@ -70,16 +70,25 @@ namespace rawdata_portfolioproject_2
         }
 
 
-        public IList<Ranked_Weight_VariadicResult> RankedWeightSearch(int pageSize, int pageNum, string[] keywords)
+        public List<Post> RankedWeightSearch(int pageSize, int pageNum, string[] keywords)
         {
             using var db = new StackOverflowContext();
             var query = CreateSearchQuery(keywords);
-            var weights = db.Ranked_Weight_VariadicResults.FromSqlRaw(query)
-                .Take(pageSize).ToList()
-                .Skip((pageNum -1) * pageSize)
-                .ToList();
-            //var result = db.RankedWeight_Result.FromSqlRaw("select postid, body from posts where postid in {0}),;
-            return weights;
+            var results = db.Ranked_Weight_VariadicResults.FromSqlRaw(query).ToList();
+            var questions = new List<Post>();
+
+            foreach (var result in results)
+            {
+                var post = GetPost(result.PostId);
+                if (post.Question != null)
+                    questions.Add(post);
+            }
+            
+            questions
+                .Take(pageSize)
+                .Skip((pageNum -1) * pageSize);
+            
+            return questions;
         }
 
         public string CreateSearchQuery(string[] keywords)

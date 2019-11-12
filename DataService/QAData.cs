@@ -24,7 +24,7 @@ namespace rawdata_portfolioproject_2
         public int PostId { get; set; }
         public string Title { get; set; }
         public string Tags { get; set; }
-        public int AcceptedAnswerId { get; set; }
+        public int? AcceptedAnswerId { get; set; }
     }
     
     public class Link
@@ -57,7 +57,7 @@ namespace rawdata_portfolioproject_2
         public string Name { get; set; }
         public DateTime CreationDate { get; set; }
         public string Location { get; set; }
-        public int Age { get; set; }
+        public int? Age { get; set; }
     }
     
     public class Word // check actual inverted index in db... is this needed in DAL?

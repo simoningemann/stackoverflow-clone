@@ -36,15 +36,38 @@ namespace WebService
             return Ok(post);
         }
 
-        [HttpGet("rankedsearch")] // works.. tested in postman
-        public ActionResult RankedSearch([FromBody] RankedSearchDto dto)
+        [HttpGet("rankedsearch", Name = nameof(RankedSearch))] // works.. tested in postman
+        public ActionResult RankedSearch([FromQuery] RankedSearchDto dto)
         {
-            var questions = _dataService.RankedWeightSearch(dto.PageSize, dto.PageNum, dto.Keywords);
+            var result = _dataService.RankedWeightSearch(dto.PageSize, dto.PageNum, dto.Keywords);
+            var questions = result.Item1;
+            var totalQuestions = result.Item2; 
             
             var resultDto = new RankedSearchResultDto();
-            //resultDto.TotalQuestions = work in progress
+            resultDto.TotalQuestions = totalQuestions;//small hack
+            resultDto.TotalPages = (int)Math.Ceiling((double)resultDto.TotalQuestions/dto.PageSize);
+            var previousPage = dto.PageNum - 1;
+            resultDto.PreviousPage = dto.PageNum -1 > 0
+                ? Url.Link(nameof(RankedSearch), new {PageNum = previousPage,  dto.PageSize, dto.Keywords})
+                : null;
+            var nextPage = dto.PageNum + 1;
+            resultDto.NextPage = dto.PageNum < resultDto.TotalPages
+                ? Url.Link(nameof(RankedSearch), new {PageNum = nextPage, dto.PageSize, dto.Keywords})
+                : null;
+            
+            var questionDtos = new List<QuestionDto>();
 
-            return Ok();
+            foreach (var question in questions)
+            {
+                var questionDto = new QuestionDto();
+                questionDto.Link = Url.Link(nameof(GetPost), new {postId = question.Id});
+                questionDto.Question = question;
+                questionDtos.Add(questionDto);
+            }
+            
+            resultDto.Questions = questionDtos;
+
+            return Ok(resultDto);
         }
 
         //[HttpGet("{postId}", Name = nameof(GetPost))]

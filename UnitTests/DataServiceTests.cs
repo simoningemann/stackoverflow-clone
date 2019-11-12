@@ -74,7 +74,7 @@ namespace UnitTests
         {
             var keywords = new string[] {"noob", "new", "post"};
             var service = new DataService();
-            var results = service.RankedWeightSearch(10, 1, keywords).ToList();
+            var results = service.RankedWeightSearch(10, 1, keywords).Item1.ToList();
             Assert.Equal(3741113, results[0].Id);
         }
     }

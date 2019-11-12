@@ -37,6 +37,9 @@ namespace rawdata_portfolioproject_2
             // map the primary <attribute>id columns to their respective <Property>.Id property names (for convienience)
             modelBuilder.Entity<Profile>().Property(x => x.Id).HasColumnName("profileid");
             modelBuilder.Entity<Post>().Property(x => x.Id).HasColumnName("postid");
+            modelBuilder.Entity<Post>().Ignore(x => x.Answer);
+            modelBuilder.Entity<Post>().Ignore(x => x.Question);
+            modelBuilder.Entity<Post>().Ignore(x => x.User);
             modelBuilder.Entity<Comment>().Property(x => x.Id).HasColumnName("postid");
             modelBuilder.Entity<User>().Property(x => x.Id).HasColumnName("userid");
 

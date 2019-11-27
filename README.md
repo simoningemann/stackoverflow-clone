@@ -1,6 +1,6 @@
-#SECTION 3 NOTES
+##SECTION 3 NOTES
 
-## A. Application design
+### A. Application design
 Make wwwroot folder with libraries, css and javascript.
 - A.1. Make diagram like the one in the project description
 - A.2. Choose multi-device layout pattern: Mostly Fluid, Column Drop or Layout Shifter.
@@ -8,14 +8,14 @@ If there is time go for layout-shifter (best for more advanced apps) otherwise g
 - A.3. Make sketches of pages showing how bootstrap is used.
 Make drawings and point to elements made with bootstrap.
 
-## B. Data Access
+### B. Data Access
 
 - B.1. Explain the revealing module pattern
 - B.2. Make the different services that make the http request using callbacks.
 
-## C. Business Logic
+### C. Business Logic
 
-## D. Presentation
+### D. Presentation
 Must use bootstrap for some reason.. Use mobile-first principle, meaning, first design layout for mobile, then (theoretically) tablet and then PC.
 - D.1. Must be SPA (single page application). Use knockout templates.
 - D.2. Must use a navigation bar (lookup bs navigation bar)
@@ -26,20 +26,20 @@ Get creative. Look here for inspiration: https://www.anychart.com/blog/2019/04/3
 - D.6. OPTIONAL: Make it pretty
 - D.7. OPTIONAL: Advanced controls like dropdowns, modals, alerts and what do I know..
 
-## E. OPTIONAL: Make other client app like mobile app or similar.
-## F. OPTIONAL: Deploy(make available) the service on the rawdata-app.ruc.dk server
+### E. OPTIONAL: Make other client app like mobile app or similar.
+### F. OPTIONAL: Deploy(make available) the service on the rawdata-app.ruc.dk server
 
-## Changes and other notes
+### Changes and other notes
 
-### Changes to web service
+#### Changes to web service
 
-### Changes to data base
+#### Changes to data base
 
-### Future works
+#### Future works
 
-#SECTION 2 NOTES
+## SECTION 2 NOTES
 
-A. Application Design (Not done)
+###A. Application Design (Not done)
 
 A.0 Define use cases and user stories (Alma)
 A.1 Backend architecture (figure with layers and names)

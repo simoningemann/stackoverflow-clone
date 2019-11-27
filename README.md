@@ -1,4 +1,43 @@
-NOTES FOR PORTFOLIO PROJECT
+#SECTION 3 NOTES
+
+## A. Application design
+Make wwwroot folder with libraries, css and javascript.
+- A.1. Make diagram like the one in the project description
+- A.2. Choose multi-device layout pattern: Mostly Fluid, Column Drop or Layout Shifter.
+If there is time go for layout-shifter (best for more advanced apps) otherwise go for column drop (matches our initial sketch better than mostly fluid) inspiration: https://www.lukew.com/ff/entry.asp?1514
+- A.3. Make sketches of pages showing how bootstrap is used.
+Make drawings and point to elements made with bootstrap.
+
+## B. Data Access
+
+- B.1. Explain the revealing module pattern
+- B.2. Make the different services that make the http request using callbacks.
+
+## C. Business Logic
+
+## D. Presentation
+Must use bootstrap for some reason.. Use mobile-first principle, meaning, first design layout for mobile, then (theoretically) tablet and then PC.
+- D.1. Must be SPA (single page application). Use knockout templates.
+- D.2. Must use a navigation bar (lookup bs navigation bar)
+- D.3. Pagination where needed (see exercise 3.2 for inspiration)
+- D.4. Must use bootstrap form-group/form-control classes(lookup bs forms) and include validation
+- D.5. Make wordcloud
+Get creative. Look here for inspiration: https://www.anychart.com/blog/2019/04/30/create-javascript-word-cloud-chart-tutorial/
+- D.6. OPTIONAL: Make it pretty
+- D.7. OPTIONAL: Advanced controls like dropdowns, modals, alerts and what do I know..
+
+## E. OPTIONAL: Make other client app like mobile app or similar.
+## F. OPTIONAL: Deploy(make available) the service on the rawdata-app.ruc.dk server
+
+## Changes and other notes
+
+### Changes to web service
+
+### Changes to data base
+
+### Future works
+
+#SECTION 2 NOTES
 
 A. Application Design (Not done)
 

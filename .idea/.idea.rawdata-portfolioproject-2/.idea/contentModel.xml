@@ -75,6 +75,9 @@
             </e>
           </e>
         </e>
+        <e p="wwwroot" t="Include">
+          <e p="index.html" t="Include" />
+        </e>
       </e>
       <e p="packages" t="ExcludeRecursive" />
       <e p="rawdata-portfolioproject-2.sln" t="IncludeFlat" />

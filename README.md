@@ -10,10 +10,16 @@ Make drawings and point to elements made with bootstrap.
 
 ### B. Data Access
 
-- B.1. Explain the revealing module pattern
-- B.2. Make the different services that make the http request using callbacks.
+- B.1. Explain the revealing module pattern (use return to reveal functions of the module )
+- B.2. Make the different services that make the http request using async,  callbacks and await structure.
 
 ### C. Business Logic
+Explain MVVM model(data to and from web service) view(data as shown to user (html css)) viewmodel (data revealed to the presentation layer)
+- C.1. A view model must be associated to each view (make a view-model for each feature) (separtation of concern)
+- C.2. Use knockout components
+- C.3. Use requirejs module loading
+- C.4. Use Databinding.
+- C.5. Navigation must also use databinding.
 
 ### D. Presentation
 Must use bootstrap for some reason.. Use mobile-first principle, meaning, first design layout for mobile, then (theoretically) tablet and then PC.

@@ -41,7 +41,19 @@ Get creative. Look here for inspiration: https://www.anychart.com/blog/2019/04/3
 
 #### Changes to data base
 
-#### Future works
+### REFLEXIVE SYNOPSIS
+Summarize project 1, 2 and 3, relate implementation and theory
+1. Introduction
+2. Project Summary
+3. Relevant topics (one per group member 2-ish pages or collectively).
+
+- Simon: Something about networking perhaps..
+- Christian: ??
+- Alma: ??
+- Sergi: ??
+
+4. Project Discussion
+5. Conclusion and Future Work
 
 ## SECTION 2 NOTES
 

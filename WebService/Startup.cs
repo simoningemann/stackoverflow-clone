@@ -58,6 +58,8 @@ namespace WebService
             }
 
             app.UseRouting();
+
+            app.UseFileServer();
             
             app.UseAuthentication();
             app.UseAuthorization();

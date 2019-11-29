@@ -1,14 +1,11 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
-using AutoMapper.Configuration;
 using Microsoft.AspNetCore.Mvc;
-using rawdata_portfolioproject_2;
 using rawdata_portfolioproject_2.Models;
 using rawdata_portfolioproject_2.Services;
 
-namespace WebService
+namespace WebService.Controllers
 {
     [ApiController]
     [Route("api/questions")]

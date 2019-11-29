@@ -1,16 +1,15 @@
-﻿using WebService;
-using Microsoft.AspNetCore.Mvc;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using rawdata_portfolioproject_2;
-using AutoMapper;
 using rawdata_portfolioproject_2.Models;
 using rawdata_portfolioproject_2.Services;
 
 //namespace WebService.Controllers
-namespace WebService
+namespace WebService.Controllers
 {
     [ApiController]
     [Route("api/posts")]

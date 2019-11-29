@@ -6,11 +6,10 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using rawdata_portfolioproject_2;
 using rawdata_portfolioproject_2.Models;
 using rawdata_portfolioproject_2.Services;
 
-namespace WebService // also add controllers for other ressources in the same way as below
+namespace WebService.Controllers // also add controllers for other ressources in the same way as below
 {
     [ApiController]
     [Route("api/profiles")]

@@ -1,17 +1,11 @@
-using System;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
-using rawdata_portfolioproject_2;
 using rawdata_portfolioproject_2.Models;
 using rawdata_portfolioproject_2.Services;
 
-namespace WebService // also add controllers for other ressources in the same way as below
+namespace WebService.Controllers // also add controllers for other ressources in the same way as below
 {
     [ApiController]
     [Route("api/bookmarks")]

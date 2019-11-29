@@ -15,6 +15,13 @@ namespace rawdata_portfolioproject_2.Services
             
             return questions;
         }
+        
+        public Question GetQuestion (int postId)
+        {
+            using var db = new StackOverflowContext();
+            var question = db.Questions.Find(postId);
+            return question;
+        }
 
         private string CreateSearchQuestionsQuery(string[] keywords)
         {

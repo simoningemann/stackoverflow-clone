@@ -1,8 +1,8 @@
-using rawdata_portfolioproject_2;
 using rawdata_portfolioproject_2.Models;
+using WebService.Models;
 using Profile = AutoMapper.Profile;
 
-namespace WebService
+namespace WebService.Profiles
 {
     public class QuestionProfile : Profile
     {

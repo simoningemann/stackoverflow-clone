@@ -4,6 +4,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using rawdata_portfolioproject_2.Models;
 using rawdata_portfolioproject_2.Services;
+using WebService.Models;
 
 namespace WebService.Controllers
 {

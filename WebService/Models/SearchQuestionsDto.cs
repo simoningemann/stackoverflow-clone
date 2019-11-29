@@ -1,6 +1,6 @@
-namespace rawdata_portfolioproject_2.Models
+namespace WebService.Models
 {
-    public class RankedSearchDto
+    public class SearchQuestionsDto
     {
         public int PageNum { get; set; }
         public int PageSize { get; set; }

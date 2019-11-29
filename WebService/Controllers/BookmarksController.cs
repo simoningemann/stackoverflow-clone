@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using rawdata_portfolioproject_2.Models;
 using rawdata_portfolioproject_2.Services;
+using WebService.Models;
 
 namespace WebService.Controllers // also add controllers for other ressources in the same way as below
 {

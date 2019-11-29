@@ -1,4 +1,4 @@
-namespace WebService
+namespace WebService.Models
 {
     public class QuestionDto
     {

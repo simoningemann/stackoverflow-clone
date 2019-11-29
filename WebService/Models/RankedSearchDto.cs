@@ -1,6 +1,6 @@
-namespace WebService
+namespace WebService.Models
 {
-    public class SearchQuestionsDto
+    public class RankedSearchDto
     {
         public int PageNum { get; set; }
         public int PageSize { get; set; }

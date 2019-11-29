@@ -1,4 +1,4 @@
-namespace rawdata_portfolioproject_2.Models
+namespace WebService.Models
 {
     public class CreateOrUpdateBookmarkDto
     {

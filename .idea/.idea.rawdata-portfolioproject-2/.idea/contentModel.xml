@@ -451,6 +451,13 @@
               <e p="package.json" t="Include" />
               <e p="require.js" t="Include" />
             </e>
+            <e p="requirejs-text" t="Include">
+              <e p="LICENSE" t="Include" />
+              <e p="README.md" t="Include" />
+              <e p="bower.json" t="Include" />
+              <e p="package.json" t="Include" />
+              <e p="text.js" t="Include" />
+            </e>
           </e>
           <e p="libman.json" t="Include" />
           <e p="main.js" t="Include" />

@@ -17,6 +17,10 @@
     {
       "library": "jquery@3.4.1",
       "destination": "lib/jquery"
+    },
+    {
+      "library": "requirejs-text@2.0.15",
+      "destination": "lib/requirejs-text"
     }
   ]
 }

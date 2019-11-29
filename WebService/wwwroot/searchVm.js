@@ -1,4 +1,4 @@
 require(["knockout"/*, "postService"*/], function(ko/*, ps*/) {
 
-	console.log("Hello from searchVm");
+	console.log("Hello from postsCo");
 }); // end

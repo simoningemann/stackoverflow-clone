@@ -300,15 +300,14 @@ begin
     order by sum(weight) desc;
 end; $$ language 'plpgsql';
 
-CREATE OR REPLACE FUNCTION ranked_weight_variadic(variadic keywords text[])
- RETURNS TABLE (pid integer, w float) as $$
-DECLARE
+create or replace function ranked_weight_variadic(variadic keywords text[])
+ returns table (pid integer, w float) as $$
+declare
     elem text;
     numkeywords integer = array_length(keywords, 1);
     counter integer = 0;
-    query text := 'select postid, sum(weight)::float from(';
-BEGIN
-    raise notice '%', numkeywords;
+    query text := 'select postid, sum(weight*100000)::float from(';
+begin
     foreach elem in array keywords
     loop
         raise notice '%', counter;
@@ -322,10 +321,9 @@ BEGIN
         end if;
     end loop;
     query := query || ') as matches group by postid order by sum(weight) desc;';
-    raise notice '%', query;
-    RETURN QUERY EXECUTE query;
-END$$
-LANGUAGE 'plpgsql';
+    return query execute query;
+end$$
+language 'plpgsql';
 
 create or replace function word_to_word(kw1 text, kw2 text)
 returns table(pid integer, w_count integer, w text) as

@@ -25,16 +25,6 @@ namespace rawdata_portfolioproject_2
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // map relational model to object model like so:
-            //modelBuilder.Entity<Category>().ToTable("categories");
-            //modelBuilder.Entity<Category>().Property(x => x.Id).HasColumnName("categoryid");
-            //modelBuilder.Entity<Category>().Property(x => x.Name).HasColumnName("categoryname");
-            //modelBuilder.Entity<Category>().Property(x => x.Description).HasColumnName("description");
-            //modelBuilder.Entity<Post>().Ignore(x => x.Answer);
-            // or use the CreateMap function at the bottom
-            //modelBuilder.Entity<Bookmark>().HasKey(x => new {x.ProfileId, x.PostId});
-            //modelBuilder.Entity<Profile_LoginResult>().HasNoKey();
-            
             modelBuilder.CreateMap(); // maps all entities and properties to their respective tables and columns
             
             //set composite primary keys

@@ -24,7 +24,6 @@
           <e p="Question.cs" t="Include" />
           <e p="User.cs" t="Include" />
         </e>
-        <e p="PagingAttributes.cs" t="Include" />
         <e p="Services" t="Include">
           <e p="DataService.cs" t="Include" />
           <e p="IDataService.cs" t="Include" />

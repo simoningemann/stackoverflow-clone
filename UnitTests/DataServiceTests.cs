@@ -10,11 +10,6 @@ namespace UnitTests
     {
         // add functions to test DataService like so:
         [Fact]
-        public void DummyTest_ProfileClassExists()
-        {
-            Assert.NotNull(new Profile());
-        }
-        [Fact]
         public void GetPostWithValidId()
         {
             var service = new DataService();

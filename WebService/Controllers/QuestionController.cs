@@ -57,7 +57,12 @@ namespace WebService.Controllers
         [HttpGet("{questionId}", Name = nameof(GetQuestion))] 
         public ActionResult GetQuestion(int questionId)
         {
-            return Ok();
+            var question = _questionService.GetQuestion(questionId);
+
+            if (question == null)
+                return NotFound();
+            
+            return Ok(CreateQuestionDto(question));
         }
 
         private QuestionDto CreateQuestionDto(Question question)

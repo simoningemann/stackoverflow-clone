@@ -12,11 +12,13 @@ namespace WebService.Controllers
             var welcome = "Welcome to the raw11 project portfolio rest api!";
             var searchQuestionsExample = "/api/questions?PageNum=2&PageSize=10&Keywords=noob&Keywords=new&Keywords=post";
             var getQuestionExample = "/api/questions/12473210";
+            var getPostExample = "/api/posts/12473210";
             return Ok(new
             {
                 welcome,
                 searchQuestionsExample,
-                getQuestionExample
+                getQuestionExample,
+                getPostExample
             });
         }
     }

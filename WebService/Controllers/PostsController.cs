@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using rawdata_portfolioproject_2.Models;
 using rawdata_portfolioproject_2.Services;
+using WebService.Models;
 
 //namespace WebService.Controllers
 namespace WebService.Controllers
@@ -29,7 +30,16 @@ namespace WebService.Controllers
 
             if (post == null) return NotFound();
 
-            return Ok(post);
+            return Ok(CreatePostDto(post));
+        }
+
+        private PostDto CreatePostDto(Post post)
+        {
+            var dto = _mapper.Map<PostDto>(post);
+            dto.Link = Url.Link(
+                nameof(GetPost),
+                new { postId = post.PostId });
+            return dto;
         }
     }
 }

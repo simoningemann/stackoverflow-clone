@@ -310,7 +310,6 @@ declare
 begin
     foreach elem in array keywords
     loop
-        raise notice '%', counter;
         counter := counter +1;
         query := query || 'select distinct postid, weight from weighted_inverted_index where word = ';
         query := query || '''' || elem || '''';
@@ -321,6 +320,27 @@ begin
         end if;
     end loop;
     query := query || ') as matches group by postid order by sum(weight) desc;';
+    return query execute query;
+end$$
+language 'plpgsql';
+
+create or replace function searchquestions(variadic keywords text[])
+ returns table (postid integer, title text) as $$
+declare
+    elem text;
+    numkeywords integer = array_length(keywords, 1);
+    counter integer = 0;
+    query text := 'select postid, title from ranked_weight_variadic(';
+begin
+    foreach elem in array keywords
+    loop
+        counter := counter +1;
+            query := query || '''' || elem || '''';
+        if (counter < numkeywords) then
+            query := query || ', ';
+        end if;
+    end loop;
+    query := query || '), questions where pid=questions.postid;';
     return query execute query;
 end$$
 language 'plpgsql';

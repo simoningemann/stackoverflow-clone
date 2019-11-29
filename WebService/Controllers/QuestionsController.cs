@@ -10,12 +10,12 @@ namespace WebService.Controllers
 {
     [ApiController]
     [Route("api/questions")]
-    public class QuestionController : ControllerBase
+    public class QuestionsController : ControllerBase
     {
         private readonly IQuestionService _questionService;
         private readonly IMapper _mapper;
 
-        public QuestionController(IQuestionService questionService, IMapper mapper)
+        public QuestionsController(IQuestionService questionService, IMapper mapper)
         {
             _questionService = questionService;
             _mapper = mapper;

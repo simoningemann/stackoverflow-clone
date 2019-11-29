@@ -72,6 +72,7 @@
           <e p="ProfilesController.cs" t="Include" />
           <e p="QueriesController.cs" t="Include" />
           <e p="QuestionController.cs" t="Include" />
+          <e p="RootController.cs" t="Include" />
         </e>
         <e p="Models" t="Include">
           <e p="CreateOrUpdateBookmarkDto.cs" t="Include" />

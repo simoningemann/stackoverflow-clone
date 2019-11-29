@@ -47,7 +47,7 @@ create or replace function create_bookmark(profileid_in integer, postid_in integ
 returns void as
 $$ begin
 insert into bookmarks
-values (profileid_in, postid_in, '');
+values (nextval('bookmarks_sequence'), profileid_in, postid_in, '');
 end; $$
 language 'plpgsql';
 
@@ -55,7 +55,7 @@ create or replace function store_query(profileid_in integer, query_in text)
 returns void as
 $$ begin
 insert into queries
-values (profileid_in, now(), query_in);
+values (nextval('queries_sequence'), profileid_in, now(), query_in);
 end; $$
 language 'plpgsql';
 

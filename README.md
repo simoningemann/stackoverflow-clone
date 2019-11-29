@@ -38,8 +38,11 @@ Get creative. Look here for inspiration: https://www.anychart.com/blog/2019/04/3
 ### Changes and other notes
 
 #### Changes to web service
+- remember: dont parse timesearched of queries to db because it is generated there
+- changed objects to fit names and new primary keys in database
 
 #### Changes to data base
+- added primary keys and serials to bookmarks and queries
 
 ### REFLEXIVE SYNOPSIS
 Summarize project 1, 2 and 3, relate implementation and theory

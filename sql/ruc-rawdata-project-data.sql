@@ -2,7 +2,7 @@
 
 -- cleanup
 drop table if exists users, posts, questions, answers, comments, links, lemmas, profiles, bookmarks, queries;
-drop sequence if exists profiles_sequence;
+drop sequence if exists profiles_sequence, queries_sequence, bookmarks_sequence;
 
 -- step 1: create new tables for QA data
 create table users (
@@ -186,17 +186,25 @@ start 1
 increment 1;
 
 create table queries (
+queryid serial primary key,
 profileid integer references profiles(profileid) on delete cascade,
 timesearched timestamp with time zone default current_timestamp,
-querytext text,
-primary key (profileid, timesearched)
+querytext text
 );
 
+create sequence queries_sequence
+start 1
+increment 1;
+
 create table bookmarks (
+bookmarkid serial primary key,
 profileid integer references profiles(profileid) on delete cascade,
 postid integer references posts(postid),
-note text,
-primary key (profileid, postid)
+note text
 );
+
+create sequence bookmarks_sequence
+start 1
+increment 1;
 
 -- end of script

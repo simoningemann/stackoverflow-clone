@@ -31,6 +31,18 @@ return false;
 end if;
 end $$ language 'plpgsql';
 
+create or replace function change_password(email_in text, pw_in text)
+returns void as $$
+declare
+new_hash text := md5((select salt from profiles where email = email_in)|| pw_in);
+begin
+update profiles
+set pwhash = new_hash
+where email = email_in;
+end; $$
+language 'plpgsql';
+select change_password('person2email', 'newpw');
+
 create or replace function create_bookmark(profileid_in integer, postid_in integer)
 returns void as
 $$ begin
@@ -235,6 +247,10 @@ and words.word = temp_term_freq.word
 and words.word = temp_inv_post_freq.word
 and tablename = 'posts';
 
+delete from weighted_inverted_index
+where word !~* '^[a-z][a-z0-9_]+$'
+or word in (SELECT word from stopwords);
+
 drop table if exists temp_inv_post_freq, temp_term_freq, temp_num_post_with_term, temp_num_specific_in_post, temp_num_terms_in_post;
 -- end weighted index
 
@@ -311,17 +327,6 @@ BEGIN
 END$$
 LANGUAGE 'plpgsql';
 
--- word_to_word
--- d7 make into function
-/*
-select distinct word, count(word)
-from words
-where id in (select * from exact_match('noob','new'))
-group by word
-order by count(word) desc;
-*/
-
--- d7 alternative
 create or replace function word_to_word(kw1 text, kw2 text)
 returns table(pid integer, w_count integer, w text) as
 $$ begin
@@ -353,6 +358,19 @@ order by postid, weight desc;
 end $$ language 'plpgsql';
 
 /* omitted stuff
+
+   -- word_to_word
+-- d7 make into function
+
+select distinct word, count(word)
+from words
+where id in (select * from exact_match('noob','new'))
+group by word
+order by count(word) desc;
+
+
+-- d7 alternative
+
 -- D5 (Needs framework compatibility). Other TF-IDF methods can be implemented. Unsure if requirement
 -- Is for an array of keywords or just one word. From the document looks like it is meant for
 -- only one keyword... From my understanding, D7 asks for the same but with an array of keywords(Query)

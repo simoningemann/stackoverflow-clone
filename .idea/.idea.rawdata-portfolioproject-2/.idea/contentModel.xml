@@ -16,23 +16,12 @@
           <e p="Answer.cs" t="Include" />
           <e p="Bookmark.cs" t="Include" />
           <e p="Comment.cs" t="Include" />
-          <e p="CreateOrUpdateBookmarkDto.cs" t="Include" />
-          <e p="CreateQueryDto.cs" t="Include" />
-          <e p="DeleteBookmarkDto.cs" t="Include" />
-          <e p="DeleteQueryDto.cs" t="Include" />
           <e p="Link.cs" t="Include" />
-          <e p="LoginDto.cs" t="Include" />
           <e p="Post.cs" t="Include" />
           <e p="Profile.cs" t="Include" />
           <e p="Profile_LoginResult.cs" t="Include" />
           <e p="Query.cs" t="Include" />
           <e p="Question.cs" t="Include" />
-          <e p="RankedSearchDto.cs" t="Include" />
-          <e p="RankedSearchResultDto.cs" t="Include" />
-          <e p="Ranked_Weight_VariadicResult.cs" t="Include" />
-          <e p="SearchQuestionsResult.cs" t="Include" />
-          <e p="UpdateEmailDto.cs" t="Include" />
-          <e p="UpdatePasswordDto.cs" t="Include" />
           <e p="User.cs" t="Include" />
         </e>
         <e p="PagingAttributes.cs" t="Include" />
@@ -78,18 +67,33 @@
         </e>
       </e>
       <e p="WebService" t="IncludeRecursive">
-        <e p="BookmarksController.cs" t="Include" />
-        <e p="PostsController.cs" t="Include" />
-        <e p="ProfilesController.cs" t="Include" />
+        <e p="Controllers" t="Include">
+          <e p="BookmarksController.cs" t="Include" />
+          <e p="PostsController.cs" t="Include" />
+          <e p="ProfilesController.cs" t="Include" />
+          <e p="QueriesController.cs" t="Include" />
+          <e p="QuestionController.cs" t="Include" />
+        </e>
+        <e p="Models" t="Include">
+          <e p="CreateOrUpdateBookmarkDto.cs" t="Include" />
+          <e p="CreateQueryDto.cs" t="Include" />
+          <e p="DeleteBookmarkDto.cs" t="Include" />
+          <e p="DeleteQueryDto.cs" t="Include" />
+          <e p="LoginDto.cs" t="Include" />
+          <e p="QuestionDto.cs" t="Include" />
+          <e p="RankedSearchDto.cs" t="Include" />
+          <e p="RankedSearchResultDto.cs" t="Include" />
+          <e p="SearchQuestionsDto.cs" t="Include" />
+          <e p="UpdateEmailDto.cs" t="Include" />
+          <e p="UpdatePasswordDto.cs" t="Include" />
+        </e>
+        <e p="Profiles" t="Include">
+          <e p="QuestionProfile.cs" t="Include" />
+        </e>
         <e p="Program.cs" t="Include" />
         <e p="Properties" t="Include">
           <e p="launchSettings.json" t="Include" />
         </e>
-        <e p="QueriesController.cs" t="Include" />
-        <e p="QuestionController.cs" t="Include" />
-        <e p="QuestionDto.cs" t="Include" />
-        <e p="QuestionProfile.cs" t="Include" />
-        <e p="SearchQuestionsDto.cs" t="Include" />
         <e p="Startup.cs" t="Include" />
         <e p="WebService.csproj" t="IncludeRecursive" />
         <e p="appsettings.Development.json" t="Include" />

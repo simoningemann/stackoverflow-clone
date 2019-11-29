@@ -32,7 +32,6 @@ namespace rawdata_portfolioproject_2.Services
         List<Post> BestMatchSearch(params string[] keywords);
         List<Post> ExactMatchSearch(params string[] keywords);
         List<Post> SimpleSearch(params string[] keywords);
-        (List<Post>, int) RankedWeightSearch(int pageSize, int pageNum, string[] keywords);
         Profile CreateProfile(string email, string password);
         Profile GetProfile(int profileId);
         Profile GetProfile(string email);

@@ -66,31 +66,6 @@ namespace rawdata_portfolioproject_2.Services
         }
 
 
-        public (List<Post>, int) RankedWeightSearch(int pageSize, int pageNum, string[] keywords)
-        {
-            using var db = new StackOverflowContext();
-            var query = CreateSearchQuery(keywords);
-            var results = db.Ranked_Weight_VariadicResults.FromSqlRaw(query).ToList();
-            var totalPages = results.Count();
-            var questions = new List<Post>();
-            
-            /* obsolete
-            foreach (var result in results)
-            {
-                var post = GetPost(result.PostId);
-                if (post.Question != null)
-                    questions.Add(post);
-            }
-            
-            questions = questions
-                .Skip((pageNum -1) * pageSize)
-                .Take(pageSize)
-                .ToList();
-            */
-            
-            return (questions, totalPages);
-        }
-
         public string CreateSearchQuery(string[] keywords)
         {
             var query = "select * from ranked_weight_variadic(";

@@ -15,7 +15,6 @@ namespace rawdata_portfolioproject_2
         public DbSet<Answer> Answers { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<User> Users { get; set; }
-        public DbSet<Ranked_Weight_VariadicResult> Ranked_Weight_VariadicResults {get; set;}
         public DbSet<Profile_LoginResult> Profile_LoginResults { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -44,9 +43,6 @@ namespace rawdata_portfolioproject_2
             // query result mapping
             modelBuilder.Entity<Profile_LoginResult>().HasNoKey();
             modelBuilder.Entity<Profile_LoginResult>().Property(x => x.Result).HasColumnName("profile_login");
-            modelBuilder.Entity<Ranked_Weight_VariadicResult>().HasNoKey();
-            modelBuilder.Entity<Ranked_Weight_VariadicResult>().Property(x => x.PostId).HasColumnName("pid");
-            modelBuilder.Entity<Ranked_Weight_VariadicResult>().Property(x => x.Weight).HasColumnName("w");
         }
     }
     static class ModelBuilderExtensions

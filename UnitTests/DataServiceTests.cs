@@ -1,5 +1,4 @@
 using System;
-using System.Linq;
 using rawdata_portfolioproject_2;
 using rawdata_portfolioproject_2.Models;
 using rawdata_portfolioproject_2.Services;
@@ -69,15 +68,6 @@ namespace UnitTests
             Assert.True(login);
 
             service.DeleteProfile(email, newPassword);
-        }
-
-        [Fact]
-        public void RankedSearchReturnCorrectResults()
-        {
-            var keywords = new string[] {"noob", "new", "post"};
-            var service = new DataService();
-            var results = service.RankedWeightSearch(10, 1, keywords).Item1.ToList();
-            Assert.Equal(3741113, results[0].PostId);
         }
     }
 }

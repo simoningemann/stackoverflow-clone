@@ -11,14 +11,37 @@
     <e p="$USER_HOME$/.nuget/packages/xunit.runner.visualstudio/2.4.0/build/netcoreapp1.0/xunit.runner.visualstudio.dotnetcore.testadapter.dll" t="Include" />
     <e p="$PROJECT_DIR$" t="IncludeFlat">
       <e p="DataService" t="IncludeRecursive">
-        <e p="DataService.cs" t="Include" />
         <e p="DataService.csproj" t="IncludeRecursive" />
-        <e p="DataTransferObjects.cs" t="Include" />
-        <e p="IDataService.cs" t="Include" />
+        <e p="Models" t="Include">
+          <e p="Answer.cs" t="Include" />
+          <e p="Bookmark.cs" t="Include" />
+          <e p="Comment.cs" t="Include" />
+          <e p="CreateOrUpdateBookmarkDto.cs" t="Include" />
+          <e p="CreateQueryDto.cs" t="Include" />
+          <e p="DeleteBookmarkDto.cs" t="Include" />
+          <e p="DeleteQueryDto.cs" t="Include" />
+          <e p="Link.cs" t="Include" />
+          <e p="LoginDto.cs" t="Include" />
+          <e p="Post.cs" t="Include" />
+          <e p="Profile.cs" t="Include" />
+          <e p="Profile_LoginResult.cs" t="Include" />
+          <e p="Query.cs" t="Include" />
+          <e p="Question.cs" t="Include" />
+          <e p="RankedSearchDto.cs" t="Include" />
+          <e p="RankedSearchResultDto.cs" t="Include" />
+          <e p="Ranked_Weight_VariadicResult.cs" t="Include" />
+          <e p="SearchQuestionsResult.cs" t="Include" />
+          <e p="UpdateEmailDto.cs" t="Include" />
+          <e p="UpdatePasswordDto.cs" t="Include" />
+          <e p="User.cs" t="Include" />
+        </e>
         <e p="PagingAttributes.cs" t="Include" />
-        <e p="ProfileData.cs" t="Include" />
-        <e p="QAData.cs" t="Include" />
-        <e p="ResultData.cs" t="Include" />
+        <e p="Services" t="Include">
+          <e p="DataService.cs" t="Include" />
+          <e p="IDataService.cs" t="Include" />
+          <e p="IQuestionService.cs" t="Include" />
+          <e p="QuestionService.cs" t="Include" />
+        </e>
         <e p="StackOverflowContext.cs" t="Include" />
         <e p="bin" t="ExcludeRecursive" />
         <e p="obj" t="ExcludeRecursive">
@@ -63,6 +86,10 @@
           <e p="launchSettings.json" t="Include" />
         </e>
         <e p="QueriesController.cs" t="Include" />
+        <e p="QuestionController.cs" t="Include" />
+        <e p="QuestionDto.cs" t="Include" />
+        <e p="QuestionProfile.cs" t="Include" />
+        <e p="SearchQuestionsDto.cs" t="Include" />
         <e p="Startup.cs" t="Include" />
         <e p="WebService.csproj" t="IncludeRecursive" />
         <e p="appsettings.Development.json" t="Include" />

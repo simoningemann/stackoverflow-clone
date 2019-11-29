@@ -43,6 +43,7 @@ Get creative. Look here for inspiration: https://www.anychart.com/blog/2019/04/3
 
 #### Changes to data base
 - added primary keys and serials to bookmarks and queries
+- added searchquestions function
 
 ### REFLEXIVE SYNOPSIS
 Summarize project 1, 2 and 3, relate implementation and theory

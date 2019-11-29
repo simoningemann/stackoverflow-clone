@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using rawdata_portfolioproject_2.Models;
 
 namespace rawdata_portfolioproject_2
 {
@@ -30,22 +31,14 @@ namespace rawdata_portfolioproject_2
             //modelBuilder.Entity<Category>().Property(x => x.Id).HasColumnName("categoryid");
             //modelBuilder.Entity<Category>().Property(x => x.Name).HasColumnName("categoryname");
             //modelBuilder.Entity<Category>().Property(x => x.Description).HasColumnName("description");
+            //modelBuilder.Entity<Post>().Ignore(x => x.Answer);
             // or use the CreateMap function at the bottom
+            //modelBuilder.Entity<Bookmark>().HasKey(x => new {x.ProfileId, x.PostId});
+            //modelBuilder.Entity<Profile_LoginResult>().HasNoKey();
             
             modelBuilder.CreateMap(); // maps all entities and properties to their respective tables and columns
             
-            // map the primary <attribute>id columns to their respective <Property>.Id property names (for convienience)
-            modelBuilder.Entity<Profile>().Property(x => x.Id).HasColumnName("profileid");
-            modelBuilder.Entity<Post>().Property(x => x.Id).HasColumnName("postid");
-            modelBuilder.Entity<Post>().Ignore(x => x.Answer);
-            modelBuilder.Entity<Post>().Ignore(x => x.Question);
-            modelBuilder.Entity<Post>().Ignore(x => x.User);
-            modelBuilder.Entity<Comment>().Property(x => x.Id).HasColumnName("postid");
-            modelBuilder.Entity<User>().Property(x => x.Id).HasColumnName("userid");
-
             //set composite primary keys
-            modelBuilder.Entity<Bookmark>().HasKey(x => new {x.ProfileId, x.PostId});
-            modelBuilder.Entity<Query>().HasKey(x => new {x.ProfileId, x.TimeSearched});
             modelBuilder.Entity<Link>().HasKey(x => new {x.PostId, x.LinkToPostId});
             
             // query result mapping

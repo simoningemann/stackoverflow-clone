@@ -2,10 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
-using Npgsql;
+using rawdata_portfolioproject_2.Models;
 
-
-namespace rawdata_portfolioproject_2
+namespace rawdata_portfolioproject_2.Services
 {
     public class DataService : IDataService
     {
@@ -14,9 +13,6 @@ namespace rawdata_portfolioproject_2
         {
             using var db = new StackOverflowContext();
             Post post = db.Posts.Find(postId);
-            post.Question = GetQuestion(postId);
-            post.Answer = GetAnswer(postId);
-            post.User = GetUser(post.UserId);
             return post;
         }
         public Question GetQuestion(int postId)
@@ -77,7 +73,8 @@ namespace rawdata_portfolioproject_2
             var results = db.Ranked_Weight_VariadicResults.FromSqlRaw(query).ToList();
             var totalPages = results.Count();
             var questions = new List<Post>();
-
+            
+            /* obsolete
             foreach (var result in results)
             {
                 var post = GetPost(result.PostId);
@@ -89,6 +86,7 @@ namespace rawdata_portfolioproject_2
                 .Skip((pageNum -1) * pageSize)
                 .Take(pageSize)
                 .ToList();
+            */
             
             return (questions, totalPages);
         }

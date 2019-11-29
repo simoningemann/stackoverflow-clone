@@ -13,6 +13,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using rawdata_portfolioproject_2;
 using AutoMapper;
+using rawdata_portfolioproject_2.Services;
 
 namespace WebService
 {
@@ -32,7 +33,8 @@ namespace WebService
             services.AddControllers();
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddSingleton<IDataService, DataService>();
-            
+            services.AddSingleton<IQuestionService, QuestionService>();
+
             var key = Encoding.UTF8.GetBytes(Configuration.GetSection("Auth:Key").Value);
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>

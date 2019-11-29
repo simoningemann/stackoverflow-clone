@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
-using System.Dynamic;
+using rawdata_portfolioproject_2.Models;
 
-namespace rawdata_portfolioproject_2
+namespace rawdata_portfolioproject_2.Services
 {
     public interface IDataService
     {

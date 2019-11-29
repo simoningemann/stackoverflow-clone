@@ -325,12 +325,12 @@ end$$
 language 'plpgsql';
 
 create or replace function searchquestions(variadic keywords text[])
- returns table (postid integer, title text) as $$
+ returns table (postid integer, title text, tags text, acceptedanswerid integer) as $$
 declare
     elem text;
     numkeywords integer = array_length(keywords, 1);
     counter integer = 0;
-    query text := 'select postid, title from ranked_weight_variadic(';
+    query text := 'select postid, title, tags, acceptedanswerid from ranked_weight_variadic(';
 begin
     foreach elem in array keywords
     loop

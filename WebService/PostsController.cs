@@ -1,5 +1,4 @@
-﻿//using AutoMapper;
-using WebService;
+﻿using WebService;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -7,6 +6,8 @@ using System.Linq;
 using Microsoft.Extensions.Configuration;
 using rawdata_portfolioproject_2;
 using AutoMapper;
+using rawdata_portfolioproject_2.Models;
+using rawdata_portfolioproject_2.Services;
 
 //namespace WebService.Controllers
 namespace WebService
@@ -60,12 +61,12 @@ namespace WebService
             foreach (var question in questions)
             {
                 var questionDto = new QuestionDto();
-                questionDto.Link = Url.Link(nameof(GetPost), new {postId = question.Id});
-                questionDto.Question = question;
+                questionDto.Link = Url.Link(nameof(GetPost), new {postId = question.PostId});
+                //questionDto.Question = question;
                 questionDtos.Add(questionDto);
             }
             
-            resultDto.Questions = questionDtos;
+            //resultDto.Questions = questionDtos;
 
             return Ok(resultDto);
         }

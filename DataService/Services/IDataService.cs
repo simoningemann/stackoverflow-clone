@@ -6,25 +6,7 @@ namespace rawdata_portfolioproject_2.Services
 {
     public interface IDataService
     {
-        // THESE SUGGESTIONS ARE ONLY PRELIMINARY. ADD/REMOVE/REFINE FUNCTIONS AS NEEDED
-        
-        // PROFILE FUNCTIONS
-        // create/read/update/delete (CRUD) profile
-        // login/out
-        // CRUD bookmarkLink
-        
-        // QA FUNCTIONS
-        // get post (single or multiple) (by id or searchwords)
-        // get question (single) (by postid)
-        // get link (multiple) by (by postid and linktoid)
-        // get answer (multiple) (by postid and answertoid)
-        // get comment (multiple) (by postid)
-        // get user (single) (by userid)
-        
-        // IMPORTANT QUESTION: HOW TO USE STORED PROCEDURES?? ARE WE SUPPOSED TO USE THE STORED PROCEDURES???
-        Post GetPost(int postId);
         Link GetLink(int postId, int linkToPostId);
-        Answer GetAnswer(int postId);
         Comment GetComment(int commentId);
         List<Comment> GetCommentsByPostId(int postId);
         User GetUser(int userId);

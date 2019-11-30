@@ -9,21 +9,10 @@ namespace rawdata_portfolioproject_2.Services
     public class DataService : IDataService
     {
         // make functions here
-        public Post GetPost(int postId)
-        {
-            using var db = new StackOverflowContext();
-            Post post = db.Posts.Find(postId);
-            return post;
-        }
         public Link GetLink(int postId, int linkToPostId)
         {
             using var db = new StackOverflowContext();
             return db.Links.Find(postId, linkToPostId);
-        }
-        public Answer GetAnswer(int postId)
-        {
-            using var db = new StackOverflowContext();
-            return db.Answers.Find(postId);
         }
         public Comment GetComment(int commentId)
         {

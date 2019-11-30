@@ -34,6 +34,7 @@ namespace WebService
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddSingleton<IDataService, DataService>();
             services.AddSingleton<IQuestionService, QuestionService>();
+            services.AddSingleton<IAnswerService, AnswerService>();
 
             var key = Encoding.UTF8.GetBytes(Configuration.GetSection("Auth:Key").Value);
 

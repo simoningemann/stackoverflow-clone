@@ -15,11 +15,6 @@ namespace rawdata_portfolioproject_2.Services
             Post post = db.Posts.Find(postId);
             return post;
         }
-        public Question GetQuestion(int postId)
-        {
-            using var db = new StackOverflowContext();
-            return db.Questions.Find(postId);
-        }
         public Link GetLink(int postId, int linkToPostId)
         {
             using var db = new StackOverflowContext();

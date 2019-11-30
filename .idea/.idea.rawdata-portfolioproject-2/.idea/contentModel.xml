@@ -25,7 +25,9 @@
           <e p="User.cs" t="Include" />
         </e>
         <e p="Services" t="Include">
+          <e p="AnswerService.cs" t="Include" />
           <e p="DataService.cs" t="Include" />
+          <e p="IAnswerService.cs" t="Include" />
           <e p="IDataService.cs" t="Include" />
           <e p="IQuestionService.cs" t="Include" />
           <e p="QuestionService.cs" t="Include" />
@@ -67,11 +69,12 @@
       </e>
       <e p="WebService" t="IncludeRecursive">
         <e p="Controllers" t="Include">
+          <e p="AnswersController.cs" t="Include" />
           <e p="BookmarksController.cs" t="Include" />
           <e p="PostsController.cs" t="Include" />
           <e p="ProfilesController.cs" t="Include" />
           <e p="QueriesController.cs" t="Include" />
-          <e p="QuestionController.cs" t="Include" />
+          <e p="QuestionsController.cs" t="Include" />
           <e p="RootController.cs" t="Include" />
         </e>
         <e p="Models" t="Include">

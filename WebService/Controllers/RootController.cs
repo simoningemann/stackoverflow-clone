@@ -9,16 +9,20 @@ namespace WebService.Controllers
         [HttpGet]
         public ActionResult GetRoot()
         {
+            var postId = 19;
+            var keywords = new [] {"noob", "new", "post"};
             var welcome = "Welcome to the raw11 project portfolio rest api!";
-            var searchQuestionsExample = "/api/questions?PageNum=2&PageSize=10&Keywords=noob&Keywords=new&Keywords=post";
-            var getQuestionExample = "/api/questions/12473210";
-            var getPostExample = "/api/posts/12473210";
+            var searchQuestionsExample = Url.Link(nameof(QuestionsController.SearchQuestions), new {PageNum = 1, PageSize = 10, keywords});
+            var getQuestionExample = Url.Link(nameof(QuestionsController.GetQuestion), new {postId});
+            var getPostExample = Url.Link(nameof(PostsController.GetPost), new {postId});
+            var getAnswersByAnswersToIdExample = Url.Link(nameof(AnswersController.GetAnswersByAnswerToId), new {postId});
             return Ok(new
             {
                 welcome,
                 searchQuestionsExample,
                 getQuestionExample,
-                getPostExample
+                getPostExample,
+                getAnswersByAnswersToIdExample
             });
         }
     }

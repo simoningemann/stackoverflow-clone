@@ -23,7 +23,6 @@ namespace rawdata_portfolioproject_2.Services
         
         // IMPORTANT QUESTION: HOW TO USE STORED PROCEDURES?? ARE WE SUPPOSED TO USE THE STORED PROCEDURES???
         Post GetPost(int postId);
-        Question GetQuestion(int postId);
         Link GetLink(int postId, int linkToPostId);
         Answer GetAnswer(int postId);
         Comment GetComment(int commentId);

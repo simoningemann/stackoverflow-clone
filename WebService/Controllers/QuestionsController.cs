@@ -24,6 +24,7 @@ namespace WebService.Controllers
         [HttpGet(Name = nameof(SearchQuestions))] 
         public ActionResult SearchQuestions([FromQuery] SearchQuestionsDto dto)
         {
+            var thisPage = Url.Link(nameof(SearchQuestions), new {dto.PageNum, dto.PageSize, dto.Keywords});
             var tempQuestions = _questionService.SearchQuestions(dto.Keywords);
             var totalQuestions = tempQuestions.Count;
             var totalPages = (int)Math.Ceiling((double)totalQuestions/dto.PageSize);
@@ -45,6 +46,7 @@ namespace WebService.Controllers
             
             return Ok(new
             {
+                thisPage,
                 totalQuestions,
                 totalPages,
                 prevPage,
@@ -54,10 +56,10 @@ namespace WebService.Controllers
             });
         }
         
-        [HttpGet("{questionId}", Name = nameof(GetQuestion))] 
-        public ActionResult GetQuestion(int questionId)
+        [HttpGet("{postId}", Name = nameof(GetQuestion))] 
+        public ActionResult GetQuestion(int postId)
         {
-            var question = _questionService.GetQuestion(questionId);
+            var question = _questionService.GetQuestion(postId);
 
             if (question == null)
                 return NotFound();
@@ -70,7 +72,7 @@ namespace WebService.Controllers
             var dto = _mapper.Map<QuestionDto>(question);
             dto.Link = Url.Link(
                 nameof(GetQuestion),
-                new { questionId = question.PostId });
+                new { question.PostId });
             return dto;
         }
     }

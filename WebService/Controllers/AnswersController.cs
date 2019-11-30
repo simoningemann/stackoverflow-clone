@@ -4,21 +4,36 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using rawdata_portfolioproject_2.Models;
 using rawdata_portfolioproject_2.Services;
-using WebService.Models;
+using WebService.Controllers;
 
 namespace WebService.Controllers
 {
     [ApiController]
-    [Route("api/Answers")]
+    [Route("api/answers")]
     public class AnswersController : ControllerBase
     {
-        private readonly IQuestionService _questionService;
+        private readonly IAnswerService _answerService;
         private readonly IMapper _mapper;
 
-        public AnswersController(IQuestionService questionService, IMapper mapper)
+        public AnswersController(IAnswerService answerService, IMapper mapper)
         {
-            _questionService = questionService;
+            _answerService = answerService;
             _mapper = mapper;
+        }
+
+        [HttpGet("{postId}",Name = nameof(GetAnswersByAnswerToId))]
+        public ActionResult GetAnswersByAnswerToId(int postId)
+        {
+            var thisLink = Url.Link(nameof(GetAnswersByAnswerToId), new {postId});
+            var linkToQuestion = Url.Link(nameof(QuestionsController.GetQuestion), new {postId});
+            var answers = _answerService.GetAnswersByAnswerToId(postId);
+            
+            return Ok(new
+            {
+                thisLink,
+                linkToQuestion,
+                answers
+            });
         }
     }
 }

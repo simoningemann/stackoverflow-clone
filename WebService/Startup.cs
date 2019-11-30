@@ -36,6 +36,7 @@ namespace WebService
             services.AddSingleton<IQuestionService, QuestionService>();
             services.AddSingleton<IAnswerService, AnswerService>();
             services.AddSingleton<IPostService, PostService>();
+            services.AddSingleton<ICommentService, CommentService>();
 
             var key = Encoding.UTF8.GetBytes(Configuration.GetSection("Auth:Key").Value);
 

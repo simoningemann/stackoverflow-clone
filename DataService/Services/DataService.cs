@@ -14,41 +14,12 @@ namespace rawdata_portfolioproject_2.Services
             using var db = new StackOverflowContext();
             return db.Links.Find(postId, linkToPostId);
         }
-        public Comment GetComment(int commentId)
-        {
-            using var db = new StackOverflowContext();
-            Comment comment = db.Comments.Find(commentId);
-            comment.User = GetUser(comment.UserId);
-            return comment;
-        }
-
-        public List<Comment> GetCommentsByPostId(int postId)
-        {
-            using var db = new StackOverflowContext();
-            return db.Comments.Where(x => x.PostId == postId).Select(x => x).ToList();
-        }
 
         public User GetUser(int userId)
         {
             using var db = new StackOverflowContext();
             return db.Users.Find(userId);
         }
-
-        public List<Post> BestMatchSearch(params string[] keywords)
-        {
-            throw new NotImplementedException(); // how to do this?
-        }
-
-        public List<Post> ExactMatchSearch(params string[] keywords)
-        {
-            throw new NotImplementedException(); // how to do this??
-        }
-
-        public List<Post> SimpleSearch(params string[] keywords)
-        {
-            throw new NotImplementedException(); // how to do this?
-        }
-
 
         public string CreateSearchQuery(string[] keywords)
         {

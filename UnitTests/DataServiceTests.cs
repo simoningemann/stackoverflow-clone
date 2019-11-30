@@ -12,7 +12,7 @@ namespace UnitTests
         [Fact]
         public void GetPostWithValidId()
         {
-            var service = new DataService();
+            var service = new PostService();
             var post = service.GetPost(19);
             Assert.Equal(164, post.Score);
         }

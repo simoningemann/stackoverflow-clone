@@ -7,12 +7,6 @@ namespace rawdata_portfolioproject_2.Services
     public interface IDataService
     {
         Link GetLink(int postId, int linkToPostId);
-        Comment GetComment(int commentId);
-        List<Comment> GetCommentsByPostId(int postId);
-        User GetUser(int userId);
-        List<Post> BestMatchSearch(params string[] keywords);
-        List<Post> ExactMatchSearch(params string[] keywords);
-        List<Post> SimpleSearch(params string[] keywords);
         Profile CreateProfile(string email, string password);
         Profile GetProfile(int profileId);
         Profile GetProfile(string email);

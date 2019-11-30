@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
@@ -25,11 +26,15 @@ namespace WebService.Controllers
         public ActionResult GetCommentsByPostIds([FromQuery] int[] postIds)
         {
             var link = Url.Link(nameof(GetCommentsByPostIds), new {postIds});
+            var getPostsLink = Url.Link(nameof(PostsController.GetPosts), new {postIds});
+
             var comments = _commentService.GetCommentsByPostIds(postIds);
 
             return Ok( new
                 {
                     link,
+                    postIds,
+                    getPostsLink,
                     comments
                 }
             );

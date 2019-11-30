@@ -45,6 +45,7 @@ namespace WebService.Controllers
             return Ok(new
             {
                 link,
+                postIds,
                 posts
             });
         }

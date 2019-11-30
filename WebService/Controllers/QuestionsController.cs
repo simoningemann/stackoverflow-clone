@@ -47,6 +47,7 @@ namespace WebService.Controllers
             return Ok(new
             {
                 thisPage,
+                dto.Keywords,
                 totalQuestions,
                 totalPages,
                 prevPage,

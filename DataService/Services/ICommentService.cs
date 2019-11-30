@@ -5,6 +5,6 @@ namespace rawdata_portfolioproject_2.Services
 {
     public interface ICommentService
     {
-        List<List<Comment>> GetCommentsByPostIds(int[] postIds);
+        List<Comment> GetCommentsByPostIds(int[] postIds);
     }
 }

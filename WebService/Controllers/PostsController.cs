@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System.Linq;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using rawdata_portfolioproject_2.Models;
@@ -12,25 +13,40 @@ namespace WebService.Controllers
     [Route("api/posts")]
     public class PostsController : ControllerBase
     {
-        private readonly IDataService _dataService;
+        private readonly IPostService _postService;
         private readonly IConfiguration _configuration;
         private readonly IMapper _mapper;
 
-        public PostsController(IDataService dataService, IConfiguration configuration, IMapper mapper)
+        public PostsController(IPostService postService, IConfiguration configuration, IMapper mapper)
         {
-            _dataService = dataService;
+            _postService = postService;
             _configuration = configuration;
             _mapper = mapper;
         }
         
         [HttpGet("{postId}", Name = nameof(GetPost))]
-        public IActionResult GetPost(int postId)
+        public ActionResult GetPost(int postId)
         {
-            var post = _dataService.GetPost(postId);
+            var post = _postService.GetPost(postId);
 
             if (post == null) return NotFound();
 
             return Ok(CreatePostDto(post));
+        }
+
+        [HttpGet(Name = nameof(GetPosts))]
+        public ActionResult GetPosts([FromQuery] GetPostsDto dto)
+        {
+            var link = Url.Link(nameof(GetPosts), new {dto.PostIds});
+            var tempPosts = _postService.GetPosts(dto.PostIds);
+
+            var posts = tempPosts.Select(CreatePostDto);
+
+            return Ok(new
+            {
+                link,
+                posts
+            });
         }
 
         private PostDto CreatePostDto(Post post)

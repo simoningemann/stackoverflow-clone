@@ -29,7 +29,9 @@
           <e p="DataService.cs" t="Include" />
           <e p="IAnswerService.cs" t="Include" />
           <e p="IDataService.cs" t="Include" />
+          <e p="IPostService.cs" t="Include" />
           <e p="IQuestionService.cs" t="Include" />
+          <e p="PostService.cs" t="Include" />
           <e p="QuestionService.cs" t="Include" />
         </e>
         <e p="StackOverflowContext.cs" t="Include" />
@@ -82,6 +84,7 @@
           <e p="CreateQueryDto.cs" t="Include" />
           <e p="DeleteBookmarkDto.cs" t="Include" />
           <e p="DeleteQueryDto.cs" t="Include" />
+          <e p="GetPostsDto.cs" t="Include" />
           <e p="LoginDto.cs" t="Include" />
           <e p="PostDto.cs" t="Include" />
           <e p="QuestionDto.cs" t="Include" />

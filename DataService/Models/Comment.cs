@@ -12,6 +12,5 @@ namespace rawdata_portfolioproject_2.Models
         public int Score { get; set; }
         public string Body { get; set; }
         public int UserId { get; set; }
-        public User User { get; set; }
     }
 }

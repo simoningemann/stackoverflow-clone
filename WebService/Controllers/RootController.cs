@@ -18,6 +18,7 @@ namespace WebService.Controllers
             var getPostExample = Url.Link(nameof(PostsController.GetPost), new {postId});
             var getPostsExample = Url.Link(nameof(PostsController.GetPosts), new {postIds});
             var getAnswersByAnswersToIdExample = Url.Link(nameof(AnswersController.GetAnswersByAnswerToId), new {postId});
+            var getCommentsByPostIdsExample = Url.Link(nameof(CommentsController.GetCommentsByPostIds), new {postIds});
             return Ok(new
             {
                 welcome,
@@ -25,7 +26,8 @@ namespace WebService.Controllers
                 getQuestionExample,
                 getPostExample,
                 getPostsExample,
-                getAnswersByAnswersToIdExample
+                getAnswersByAnswersToIdExample,
+                getCommentsByPostIdsExample
             });
         }
     }

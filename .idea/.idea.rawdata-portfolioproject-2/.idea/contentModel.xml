@@ -26,8 +26,10 @@
         </e>
         <e p="Services" t="Include">
           <e p="AnswerService.cs" t="Include" />
+          <e p="CommentService.cs" t="Include" />
           <e p="DataService.cs" t="Include" />
           <e p="IAnswerService.cs" t="Include" />
+          <e p="ICommentService.cs" t="Include" />
           <e p="IDataService.cs" t="Include" />
           <e p="IPostService.cs" t="Include" />
           <e p="IQuestionService.cs" t="Include" />
@@ -73,6 +75,7 @@
         <e p="Controllers" t="Include">
           <e p="AnswersController.cs" t="Include" />
           <e p="BookmarksController.cs" t="Include" />
+          <e p="CommentsController.cs" t="Include" />
           <e p="PostsController.cs" t="Include" />
           <e p="ProfilesController.cs" t="Include" />
           <e p="QueriesController.cs" t="Include" />
@@ -84,7 +87,6 @@
           <e p="CreateQueryDto.cs" t="Include" />
           <e p="DeleteBookmarkDto.cs" t="Include" />
           <e p="DeleteQueryDto.cs" t="Include" />
-          <e p="GetPostsDto.cs" t="Include" />
           <e p="LoginDto.cs" t="Include" />
           <e p="PostDto.cs" t="Include" />
           <e p="QuestionDto.cs" t="Include" />

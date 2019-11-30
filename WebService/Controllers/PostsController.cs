@@ -35,10 +35,10 @@ namespace WebService.Controllers
         }
 
         [HttpGet(Name = nameof(GetPosts))]
-        public ActionResult GetPosts([FromQuery] GetPostsDto dto)
+        public ActionResult GetPosts([FromQuery] int [] postIds)
         {
-            var link = Url.Link(nameof(GetPosts), new {dto.PostIds});
-            var tempPosts = _postService.GetPosts(dto.PostIds);
+            var link = Url.Link(nameof(GetPosts), new {postIds});
+            var tempPosts = _postService.GetPosts(postIds);
 
             var posts = tempPosts.Select(CreatePostDto);
 

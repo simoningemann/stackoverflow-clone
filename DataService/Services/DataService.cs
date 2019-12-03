@@ -9,12 +9,6 @@ namespace rawdata_portfolioproject_2.Services
 {
     public class DataService : IDataService
     {
-        // make functions here
-        public User GetUser(int userId)
-        {
-            using var db = new StackOverflowContext();
-            return db.Users.Find(userId);
-        }
 
         public Profile CreateProfile(string email, string password)
         {

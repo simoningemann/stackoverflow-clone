@@ -6,8 +6,8 @@ namespace rawdata_portfolioproject_2.Models
     {
         [Key]
         public int ProfileId { get; set; }
-        public  string Email { get; set; }
-        // salt only needed in database
-        // hash only needed in database
+        public string Email { get; set; }
+        public string Salt { get; set; }
+        public string Hash { get; set; }
     }
 }

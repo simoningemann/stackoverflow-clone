@@ -178,7 +178,7 @@ create table profiles (
 profileid serial primary key,
 email text unique not null,
 salt text unique not null,
-pwhash text unique not null
+hash text unique not null
 );
 
 create sequence profiles_sequence

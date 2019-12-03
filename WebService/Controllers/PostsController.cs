@@ -50,6 +50,22 @@ namespace WebService.Controllers
                 posts
             });
         }
+        
+        [HttpGet("wordcloud/{postId}",Name = nameof(GetWordCloud))]
+        public ActionResult GetWordCloud(int postId)
+        {
+            var link = Url.Link(nameof(GetWordCloud), new {postId});
+            var wordCloud = _postService.GetWordCloud(postId);
+
+            
+            
+            return Ok(new
+            {
+                link,
+                postId,
+                wordCloud
+            });
+        }
 
         private PostDto CreatePostDto(Post post)
         {

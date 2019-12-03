@@ -20,6 +20,8 @@ namespace WebService.Controllers
             var getPostsExample = Url.Link(nameof(PostsController.GetPosts), new {postIds});
             var getAnswersByAnswersToIdExample = Url.Link(nameof(AnswersController.GetAnswersByAnswerToId), new {postId});
             var getCommentsByPostIdsExample = Url.Link(nameof(CommentsController.GetCommentsByPostIds), new {postIds});
+            var getWordCloudExample = Url.Link(nameof(PostsController.GetWordCloud), new {postId});
+            
             return Ok(new
             {
                 welcome,
@@ -29,7 +31,8 @@ namespace WebService.Controllers
                 getPostExample,
                 getPostsExample,
                 getAnswersByAnswersToIdExample,
-                getCommentsByPostIdsExample
+                getCommentsByPostIdsExample,
+                getWordCloudExample
             });
         }
     }

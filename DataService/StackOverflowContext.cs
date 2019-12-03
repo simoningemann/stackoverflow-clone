@@ -15,6 +15,7 @@ namespace rawdata_portfolioproject_2
         public DbSet<Answer> Answers { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<WordWeight> Weighted_Inverted_Index { get; set; }
         public DbSet<Profile_LoginResult> Profile_LoginResults { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -33,6 +34,7 @@ namespace rawdata_portfolioproject_2
             // query result mapping
             modelBuilder.Entity<Profile_LoginResult>().HasNoKey();
             modelBuilder.Entity<Profile_LoginResult>().Property(x => x.Result).HasColumnName("profile_login");
+            modelBuilder.Entity<WordWeight>().HasNoKey();
         }
     }
     static class ModelBuilderExtensions

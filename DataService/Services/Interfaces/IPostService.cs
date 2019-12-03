@@ -7,5 +7,6 @@ namespace rawdata_portfolioproject_2.Services.Interfaces
     {
         Post GetPost(int postId);
         List<Post> GetPosts(int[] postIds);
+        List<WordWeight> GetWordCloud(int postId);
     }
 }

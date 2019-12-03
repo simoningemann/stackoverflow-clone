@@ -27,7 +27,7 @@ Must use bootstrap for some reason.. Use mobile-first principle, meaning, first 
 - D.2. Must use a navigation bar (lookup bs navigation bar)
 - D.3. Pagination where needed (see exercise 3.2 for inspiration)
 - D.4. Must use bootstrap form-group/form-control classes(lookup bs forms) and include validation
-- D.5. Make wordcloud
+- D.5. Make wordcloud - use jqcloud (jquery extention)
 Get creative. Look here for inspiration: https://www.anychart.com/blog/2019/04/30/create-javascript-word-cloud-chart-tutorial/
 - D.6. OPTIONAL: Make it pretty
 - D.7. OPTIONAL: Advanced controls like dropdowns, modals, alerts and what do I know..

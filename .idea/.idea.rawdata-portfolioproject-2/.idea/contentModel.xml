@@ -23,6 +23,7 @@
           <e p="Query.cs" t="Include" />
           <e p="Question.cs" t="Include" />
           <e p="User.cs" t="Include" />
+          <e p="WordWeight.cs" t="Include" />
         </e>
         <e p="Services" t="Include">
           <e p="AnswerService.cs" t="Include" />

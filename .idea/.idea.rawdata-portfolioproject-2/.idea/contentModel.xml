@@ -35,9 +35,11 @@
             <e p="IDataService.cs" t="Include" />
             <e p="IPostService.cs" t="Include" />
             <e p="IQuestionService.cs" t="Include" />
+            <e p="IUserService.cs" t="Include" />
           </e>
           <e p="PostService.cs" t="Include" />
           <e p="QuestionService.cs" t="Include" />
+          <e p="UserService.cs" t="Include" />
         </e>
         <e p="StackOverflowContext.cs" t="Include" />
         <e p="bin" t="ExcludeRecursive" />
@@ -72,6 +74,7 @@
           <e p="QueriesController.cs" t="Include" />
           <e p="QuestionsController.cs" t="Include" />
           <e p="RootController.cs" t="Include" />
+          <e p="UsersController.cs" t="Include" />
         </e>
         <e p="ExtentionMethods.cs" t="Include" />
         <e p="Models" t="Include">
@@ -88,6 +91,7 @@
           <e p="UpdateEmailDto.cs" t="Include" />
           <e p="UpdatePasswordDto.cs" t="Include" />
         </e>
+        <e p="PasswordService.cs" t="Include" />
         <e p="Profiles" t="Include">
           <e p="PostProfile.cs" t="Include" />
           <e p="QuestionProfile.cs" t="Include" />

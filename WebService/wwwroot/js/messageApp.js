@@ -9,8 +9,9 @@
             component: "cloud"
         }
     ];
+    var loginElem = { name: "Login", component: "component2"};
 
-    var currentComponent = ko.observable("cloud");
+    var currentComponent = ko.observable("component1");
 
     var changeContent = function(menu) {
         currentComponent(menu.component);
@@ -19,6 +20,7 @@
     return {
         currentComponent,
         changeContent,
-        menuElements
+        menuElements,
+        loginElem
     };
 });

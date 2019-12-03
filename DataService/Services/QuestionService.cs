@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using rawdata_portfolioproject_2.Models;
+using rawdata_portfolioproject_2.Services.Interfaces;
 
 namespace rawdata_portfolioproject_2.Services
 {
@@ -23,6 +24,15 @@ namespace rawdata_portfolioproject_2.Services
             return question;
         }
 
+        public List<Question> GetLinkedQuestions(int postId)
+        {
+            using var db = new StackOverflowContext();
+            var links = db.Links.Where(x => x.PostId == postId).Select(x => x.LinkPostId).ToList();
+            var questions = db.Questions.Where(x => links.Contains(x.PostId)).Select(x => x).ToList();
+
+            return questions;
+        } 
+
         private string CreateSearchQuestionsQuery(string[] keywords)
         {
             var query = "select * from searchquestions(";
@@ -35,5 +45,7 @@ namespace rawdata_portfolioproject_2.Services
             query = query + ");";
             return query;
         }
+        
+        
     }
 }

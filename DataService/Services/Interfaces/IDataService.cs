@@ -2,11 +2,10 @@ using System;
 using System.Collections.Generic;
 using rawdata_portfolioproject_2.Models;
 
-namespace rawdata_portfolioproject_2.Services
+namespace rawdata_portfolioproject_2.Services.Interfaces
 {
     public interface IDataService
     {
-        Link GetLink(int postId, int linkToPostId);
         Profile CreateProfile(string email, string password);
         Profile GetProfile(int profileId);
         Profile GetProfile(string email);

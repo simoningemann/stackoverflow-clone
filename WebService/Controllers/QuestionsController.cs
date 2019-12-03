@@ -4,6 +4,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using rawdata_portfolioproject_2.Models;
 using rawdata_portfolioproject_2.Services;
+using rawdata_portfolioproject_2.Services.Interfaces;
 using WebService.Models;
 
 namespace WebService.Controllers
@@ -67,7 +68,22 @@ namespace WebService.Controllers
             
             return Ok(CreateQuestionDto(question));
         }
-
+        
+        [HttpGet("links/{postId}", Name = nameof(GetLinkedQuestions))]
+        public ActionResult GetLinkedQuestions(int postId)
+        {
+            var thisLink = Url.Link(nameof(GetLinkedQuestions), new {postId});
+            var questionLink = Url.Link(nameof(GetQuestion), new{ postId });
+            var questions = _questionService.GetLinkedQuestions(postId).Select(CreateQuestionDto);
+            
+            return Ok(new
+            {
+                postId,
+                thisLink,
+                questionLink,
+                questions
+            });
+        }
         private QuestionDto CreateQuestionDto(Question question)
         {
             var dto = _mapper.Map<QuestionDto>(question);

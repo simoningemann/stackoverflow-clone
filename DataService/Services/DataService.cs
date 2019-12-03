@@ -3,36 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using rawdata_portfolioproject_2.Models;
+using rawdata_portfolioproject_2.Services.Interfaces;
 
 namespace rawdata_portfolioproject_2.Services
 {
     public class DataService : IDataService
     {
         // make functions here
-        public Link GetLink(int postId, int linkToPostId)
-        {
-            using var db = new StackOverflowContext();
-            return db.Links.Find(postId, linkToPostId);
-        }
-
         public User GetUser(int userId)
         {
             using var db = new StackOverflowContext();
             return db.Users.Find(userId);
         }
-
-        public string CreateSearchQuery(string[] keywords)
-        {
-            var query = "select * from ranked_weight_variadic(";
-            foreach (var keyword in keywords)
-            {
-                query = query + "'" + keyword + "',";
-            }
-
-            query = query.Remove(query.Length-1); // remove the last comma
-            query = query + ")";
-            return query;
-        } 
 
         public Profile CreateProfile(string email, string password)
         {

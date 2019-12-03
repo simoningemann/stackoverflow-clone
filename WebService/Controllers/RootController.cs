@@ -15,6 +15,7 @@ namespace WebService.Controllers
             var welcome = "Welcome to the raw11 project portfolio rest api!";
             var searchQuestionsExample = Url.Link(nameof(QuestionsController.SearchQuestions), new {PageNum = 1, PageSize = 10, keywords});
             var getQuestionExample = Url.Link(nameof(QuestionsController.GetQuestion), new {postId});
+            var getLinksExample = Url.Link(nameof(QuestionsController.GetLinkedQuestions), new {postId});
             var getPostExample = Url.Link(nameof(PostsController.GetPost), new {postId});
             var getPostsExample = Url.Link(nameof(PostsController.GetPosts), new {postIds});
             var getAnswersByAnswersToIdExample = Url.Link(nameof(AnswersController.GetAnswersByAnswerToId), new {postId});
@@ -24,6 +25,7 @@ namespace WebService.Controllers
                 welcome,
                 searchQuestionsExample,
                 getQuestionExample,
+                getLinksExample,
                 getPostExample,
                 getPostsExample,
                 getAnswersByAnswersToIdExample,

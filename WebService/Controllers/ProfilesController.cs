@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using rawdata_portfolioproject_2.Models;
 using rawdata_portfolioproject_2.Services;
+using rawdata_portfolioproject_2.Services.Interfaces;
 using WebService.Models;
 
 namespace WebService.Controllers // also add controllers for other ressources in the same way as below

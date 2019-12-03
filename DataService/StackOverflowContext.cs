@@ -28,7 +28,7 @@ namespace rawdata_portfolioproject_2
             modelBuilder.CreateMap(); // maps all entities and properties to their respective tables and columns
             
             //set composite primary keys
-            modelBuilder.Entity<Link>().HasKey(x => new {x.PostId, x.LinkToPostId});
+            modelBuilder.Entity<Link>().HasKey(x => new {x.PostId, x.LinkPostId});
             
             // query result mapping
             modelBuilder.Entity<Profile_LoginResult>().HasNoKey();

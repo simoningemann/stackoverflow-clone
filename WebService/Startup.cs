@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using rawdata_portfolioproject_2;
 using AutoMapper;
 using rawdata_portfolioproject_2.Services;
+using rawdata_portfolioproject_2.Services.Interfaces;
 
 namespace WebService
 {

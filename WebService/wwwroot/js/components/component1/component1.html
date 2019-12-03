@@ -1,0 +1,10 @@
+﻿<h1>Person List (component1)</h1>
+<ul data-bind="foreach: persons">
+    <li data-bind="click: $parent.selectPerson">
+        <span data-bind="text: name"></span>
+    </li>
+</ul>
+
+<component2></component2>
+
+<pre data-bind="text: ko.toJSON($data, null, 2)"></pre>

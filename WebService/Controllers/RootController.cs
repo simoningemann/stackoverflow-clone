@@ -26,7 +26,7 @@ namespace WebService.Controllers
             var getWordCloudExample = Url.Link(nameof(PostsController.GetWordCloud), new {postId});
             var getUserExample = Url.Link(nameof(UsersController.GetUser), new{userId});
             var getUsersExample = Url.Link(nameof(UsersController.GetUsers), new {userIds});
-            
+
             return Ok(new
             {
                 welcome,

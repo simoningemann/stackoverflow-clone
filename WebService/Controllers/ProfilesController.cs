@@ -44,6 +44,46 @@ namespace WebService.Controllers // also add controllers for other ressources in
             return Created("", profile.Email);
         }
         
+        [HttpPost("login")]
+        public ActionResult ProfileLogin([FromBody] LoginDto dto)
+        {
+            var profile = _profileService.GetProfile(dto.Email);
+            
+            if (profile == null) return NotFound("Profile not found");
+
+            int.TryParse(
+                _configuration.GetSection("Auth:PwdSize").Value, 
+                out var size);
+
+            if (size == 0) return BadRequest("Hash size should be bigger than 0");
+
+            var hash = PasswordService.HashPassword(dto.Password, profile.Salt, size);
+
+            if (hash != profile.Hash) return BadRequest("Wrong password.");
+            
+            // authentication stuff
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = Encoding.UTF8.GetBytes(_configuration["Auth:Key"]);
+            var tokenDescription = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(new Claim[]
+                {
+                    // change type to name if this doesnt work
+                    new Claim(ClaimTypes.Name, dto.Email),
+                }),
+                Expires = DateTime.Now.AddMinutes(5),
+                SigningCredentials = new SigningCredentials(
+                    new SymmetricSecurityKey(key),
+                    SecurityAlgorithms.HmacSha256Signature)
+            };
+
+            var securityToken = tokenHandler.CreateToken(tokenDescription);
+
+            var token = tokenHandler.WriteToken(securityToken);
+
+            return Ok(new {dto.Email, token});
+        }
+        
         /*
         [Authorize]
         [HttpGet("email/{email}")]

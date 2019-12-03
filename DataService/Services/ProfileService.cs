@@ -30,6 +30,14 @@ namespace rawdata_portfolioproject_2.Services
             }
         }
 
+        public Profile GetProfile(string email)
+        {
+            using var db = new StackOverflowContext();
+            var profile = db.Profiles.Where(x => x.Email == email).Select(x => x).FirstOrDefault();
+
+            return profile;
+        }
+
         private int NextProfileId(StackOverflowContext db)
         {
             int id = 1;

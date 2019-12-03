@@ -72,6 +72,7 @@
           <e p="QuestionsController.cs" t="Include" />
           <e p="RootController.cs" t="Include" />
         </e>
+        <e p="ExtentionMethods.cs" t="Include" />
         <e p="Models" t="Include">
           <e p="CreateOrUpdateBookmarkDto.cs" t="Include" />
           <e p="CreateQueryDto.cs" t="Include" />

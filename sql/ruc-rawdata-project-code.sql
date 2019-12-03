@@ -345,6 +345,14 @@ begin
 end$$
 language 'plpgsql';
 
+create or replace function wordcloud(postid_in integer)
+returns table(word text, weight float) as
+$$ begin
+return query execute 'select weighted_inverted_index.word, weighted_inverted_index.weight*100000::float
+from weighted_inverted_index
+where public.weighted_inverted_index.postid = ' || postid_in;
+end $$ language 'plpgsql';
+
 create or replace function word_to_word(kw1 text, kw2 text)
 returns table(pid integer, w_count integer, w text) as
 $$ begin

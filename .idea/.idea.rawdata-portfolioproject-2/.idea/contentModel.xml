@@ -34,10 +34,12 @@
             <e p="ICommentService.cs" t="Include" />
             <e p="IDataService.cs" t="Include" />
             <e p="IPostService.cs" t="Include" />
+            <e p="IProfileService.cs" t="Include" />
             <e p="IQuestionService.cs" t="Include" />
             <e p="IUserService.cs" t="Include" />
           </e>
           <e p="PostService.cs" t="Include" />
+          <e p="ProfileService.cs" t="Include" />
           <e p="QuestionService.cs" t="Include" />
           <e p="UserService.cs" t="Include" />
         </e>

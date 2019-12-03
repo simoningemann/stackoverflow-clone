@@ -17,18 +17,34 @@ namespace WebService.Controllers // also add controllers for other ressources in
     [Route("api/profiles")]
     public class ProfilesController : ControllerBase
     {
-        private readonly IDataService _dataService;
+        private readonly IProfileService _profileService;
         private readonly IConfiguration _configuration;
         //optional: add mapper
 
-        public ProfilesController(IDataService dataService, IConfiguration configuration)
+        public ProfilesController(IProfileService profileService, IConfiguration configuration)
         {
-            _dataService = dataService;
+            _profileService = profileService;
             _configuration = configuration;
             //optional add mapper
         }
         
-        // make functions like this example:
+        [HttpPost(Name = nameof(CreateProfile))]
+        public ActionResult CreateProfile([FromBody] LoginDto loginDto)
+        {
+            int.TryParse(_configuration.GetSection("Auth:PwdSize").Value, out var size);
+
+            if (size == 0) return BadRequest("Hash size must be bigger than 0.");
+                
+            var salt = PasswordService.GenerateSalt(size);
+            var hash = PasswordService.HashPassword(loginDto.Password, salt, size);
+            var profile = _profileService.CreateProfile(loginDto.Email, salt, hash);
+
+            if (profile == null) return BadRequest("Non-unique email");
+            
+            return Created("", profile.Email);
+        }
+        
+        /*
         [Authorize]
         [HttpGet("email/{email}")]
         public ActionResult<Profile> GetProfile(string email)
@@ -119,6 +135,6 @@ namespace WebService.Controllers // also add controllers for other ressources in
             if (!_dataService.DeleteProfile(loginDto.Email, loginDto.Password)) return BadRequest();
 
             return Ok();
-        }
+        }*/
     }
 }

@@ -40,6 +40,15 @@ Get creative. Look here for inspiration: https://www.anychart.com/blog/2019/04/3
 #### Changes to web service
 - remember: dont parse timesearched of queries to db because it is generated there
 - changed objects to fit names and new primary keys in database
+- Made specialized services
+- Moved model objects to seperate files
+- Added custom paging for questions search
+- Added more linking
+- Added weighhted\_inverted\_index mapping to WordWeights
+- Made API helper page
+- Made wordcloud api
+- Improvements to QA data API in general - comments, posts, questions, answers
+
 
 #### Changes to data base
 - added primary keys and serials to bookmarks and queries

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -56,14 +57,18 @@ namespace WebService.Controllers
         {
             var link = Url.Link(nameof(GetWordCloud), new {postId});
             var wordCloud = _postService.GetWordCloud(postId);
+            var words = new List<object>();
 
-            
+            foreach (var word in wordCloud)
+            {
+                words.Add(new {word.Word, word.Weight});
+            }
             
             return Ok(new
             {
                 link,
                 postId,
-                wordCloud
+                words
             });
         }
 

@@ -29,23 +29,27 @@ namespace WebService.Controllers // also add controllers for other ressources in
         }
         
         [HttpPost(Name = nameof(CreateProfile))]
-        public ActionResult CreateProfile([FromBody] LoginDto loginDto)
+        public ActionResult CreateProfile([FromBody] ProfileForCreation dto)
         {
             int.TryParse(_configuration.GetSection("Auth:PwdSize").Value, out var size);
 
             if (size == 0) return BadRequest("Hash size must be bigger than 0.");
                 
             var salt = PasswordService.GenerateSalt(size);
-            var hash = PasswordService.HashPassword(loginDto.Password, salt, size);
-            var profile = _profileService.CreateProfile(loginDto.Email, salt, hash);
+            var hash = PasswordService.HashPassword(dto.Password, salt, size);
+            var profile = _profileService.CreateProfile(dto.Email, salt, hash);
 
             if (profile == null) return BadRequest("Non-unique email");
             
-            return Created("", profile.Email);
+            return Created("", new
+            {
+                profile.ProfileId,
+                profile.Email
+            });
         }
         
         [HttpPost("login")]
-        public ActionResult ProfileLogin([FromBody] LoginDto dto)
+        public ActionResult ProfileLogin([FromBody] ProfileForLogin dto)
         {
             var profile = _profileService.GetProfile(dto.Email);
             
@@ -61,7 +65,7 @@ namespace WebService.Controllers // also add controllers for other ressources in
 
             if (hash != profile.Hash) return BadRequest("Wrong password.");
 
-            var token = CreateToken(profile.ProfileId, 5);
+            var token = CreateToken(profile.ProfileId, 30);
 
             return Ok(new
             {
@@ -174,65 +178,5 @@ namespace WebService.Controllers // also add controllers for other ressources in
 
             return tokenHandler.WriteToken(securityToken);
         }
-
-        /*
-
-        [Authorize]
-        [HttpPut("updatepassword")]
-        public IActionResult UpdatePassword([FromBody] UpdatePasswordDto updatePasswordDto)
-        {
-            if (!_dataService.UpdateProfilePassword(updatePasswordDto.Email, updatePasswordDto.OldPassword,
-                updatePasswordDto.NewPassword)) return BadRequest();
-            return Ok();
-        }
-        
-        [Authorize]
-        [HttpPut("updateemail")]
-        public IActionResult UpdateEmail([FromBody] UpdateEmailDto updateEmailDto)
-        {
-            if (!_dataService.UpdateProfileEmail(updateEmailDto.OldEmail, updateEmailDto.Password,
-                updateEmailDto.NewEmail)) return BadRequest();
-
-            //logout
-            
-            return Ok();
-        }
-        
-        [HttpPost("login")]
-        public IActionResult ProfileLogin([FromBody] LoginDto loginDto)
-        {
-            if (!_dataService.Login(loginDto.Email, loginDto.Password)) return BadRequest();
-            
-            // authentication stuff
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.UTF8.GetBytes(_configuration["Auth:Key"]);
-            var tokenDescription = new SecurityTokenDescriptor
-            {
-                Subject = new ClaimsIdentity(new Claim[]
-                {
-                    // change type to name if this doesnt work
-                    new Claim(ClaimTypes.Name, loginDto.Email),
-                }),
-                Expires = DateTime.Now.AddMinutes(60),
-                SigningCredentials = new SigningCredentials(
-                    new SymmetricSecurityKey(key),
-                    SecurityAlgorithms.HmacSha256Signature)
-            };
-
-            var securityToken = tokenHandler.CreateToken(tokenDescription);
-
-            var token = tokenHandler.WriteToken(securityToken);
-
-            return Ok(new {loginDto.Email, token});
-        }
-        
-        [Authorize]
-        [HttpPost("delete")]
-        public IActionResult DeleteProfile([FromBody] LoginDto loginDto)
-        {
-            if (!_dataService.DeleteProfile(loginDto.Email, loginDto.Password)) return BadRequest();
-
-            return Ok();
-        }*/
     }
 }

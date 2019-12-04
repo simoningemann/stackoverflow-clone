@@ -40,6 +40,7 @@ namespace WebService
             services.AddSingleton<ICommentService, CommentService>();
             services.AddSingleton<IUserService, UserService>();
             services.AddSingleton<IProfileService, ProfileService>();
+            services.AddSingleton<IBookmarkService, BookmarkService>();
 
             var key = Encoding.UTF8.GetBytes(Configuration.GetSection("Auth:Key").Value);
 

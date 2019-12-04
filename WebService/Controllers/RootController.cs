@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using rawdata_portfolioproject_2.Models;
+using WebService.Models;
 
 namespace WebService.Controllers
 {
@@ -26,7 +27,10 @@ namespace WebService.Controllers
             var getWordCloudExample = Url.Link(nameof(PostsController.GetWordCloud), new {postId});
             var getUserExample = Url.Link(nameof(UsersController.GetUser), new{userId});
             var getUsersExample = Url.Link(nameof(UsersController.GetUsers), new {userIds});
-            // createprofileexample
+            var createProfileExample = Url.Link(nameof(ProfilesController.CreateProfile), new {});
+            var profileforCreationExample = new ProfileForCreation();
+            profileforCreationExample.Email = "example@email.com";
+            profileforCreationExample.Password = "examplepassword";
             // login example
             
             return Ok(new
@@ -41,7 +45,9 @@ namespace WebService.Controllers
                 getCommentsByPostIdsExample,
                 getWordCloudExample,
                 getUserExample,
-                getUsersExample
+                getUsersExample,
+                createProfileExample,
+                profileforCreationExample
             });
         }
     }

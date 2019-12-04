@@ -28,7 +28,7 @@ namespace WebService.Controllers // also add controllers for other ressources in
         [HttpGet("{profileId}")]
         public IActionResult GetAllQueries(int profileId)
         {
-            if (HttpContext.User.Identity.Name != _dataService.GetProfile(profileId).Email) return Unauthorized();
+            //if (HttpContext.User.Identity.Name != _dataService.GetProfile(profileId).Email) return Unauthorized();
 
             var queries = _dataService.GetAllQueries(profileId);
 
@@ -41,7 +41,7 @@ namespace WebService.Controllers // also add controllers for other ressources in
         [HttpPost]
         public IActionResult CreateQuery([FromBody] CreateQueryDto dto)
         {
-            if (HttpContext.User.Identity.Name != _dataService.GetProfile(dto.ProfileId).Email) return Unauthorized();
+            //if (HttpContext.User.Identity.Name != _dataService.GetProfile(dto.ProfileId).Email) return Unauthorized();
 
             var query = _dataService.CreateQuery(dto.ProfileId, dto.TimeSearched, dto.QueryText);
             
@@ -54,7 +54,7 @@ namespace WebService.Controllers // also add controllers for other ressources in
         [HttpDelete]
         public IActionResult DeleteQuery([FromBody] DeleteQueryDto dto)
         {
-            if (HttpContext.User.Identity.Name != _dataService.GetProfile(dto.ProfileId).Email) return Unauthorized();
+            //if (HttpContext.User.Identity.Name != _dataService.GetProfile(dto.ProfileId).Email) return Unauthorized();
             
             if (!_dataService.DeleteQuery(dto.ProfileId, dto.TimeSearched)) return NotFound();
 
@@ -65,7 +65,7 @@ namespace WebService.Controllers // also add controllers for other ressources in
         [HttpDelete("{profileId}")]
         public IActionResult DeleteAllQueries(int profileId)
         {
-            if (HttpContext.User.Identity.Name != _dataService.GetProfile(profileId).Email) return Unauthorized();
+            //if (HttpContext.User.Identity.Name != _dataService.GetProfile(profileId).Email) return Unauthorized();
 
             _dataService.DeleteQueries(_dataService.GetAllQueries(profileId));
 

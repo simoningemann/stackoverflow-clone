@@ -59,13 +59,13 @@ namespace WebService.Controllers // also add controllers for other ressources in
         
         [Authorize]
         [HttpPost(Name = nameof(CreateBookmark))]
-        public ActionResult CreateBookmark([FromBody] BookmarkForCreation forCreation)
+        public ActionResult CreateBookmark([FromBody] BookmarkForCreation dto)
         {
             int.TryParse(HttpContext.User.Identity.Name, out var profileId);
 
             var bookmark = _bookmarkService.CreateBookmark(profileId,
-                forCreation.PostId,
-                forCreation.Note);
+                dto.PostId,
+                dto.Note);
             
             if (bookmark == null) return BadRequest();
 
@@ -73,7 +73,7 @@ namespace WebService.Controllers // also add controllers for other ressources in
         }
         
         [Authorize]
-        [HttpPut]
+        [HttpPut(Name = nameof(UpdateBookmark))]
         public ActionResult UpdateBookmark([FromBody] UpdateBookmarkDto dto)
         {
             int.TryParse(HttpContext.User.Identity.Name, out var profileId);
@@ -85,7 +85,7 @@ namespace WebService.Controllers // also add controllers for other ressources in
         }
         
         [Authorize]
-        [HttpDelete]
+        [HttpDelete("{bookmarkId}", Name = nameof(DeleteBookmark))]
         public ActionResult DeleteBookmark(int bookmarkId)
         {
             int.TryParse(HttpContext.User.Identity.Name, out var profileId);

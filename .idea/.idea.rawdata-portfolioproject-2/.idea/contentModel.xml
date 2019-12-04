@@ -27,10 +27,12 @@
         </e>
         <e p="Services" t="Include">
           <e p="AnswerService.cs" t="Include" />
+          <e p="BookmarkService.cs" t="Include" />
           <e p="CommentService.cs" t="Include" />
           <e p="DataService.cs" t="Include" />
           <e p="Interfaces" t="Include">
             <e p="IAnswerService.cs" t="Include" />
+            <e p="IBookmarkService.cs" t="Include" />
             <e p="ICommentService.cs" t="Include" />
             <e p="IDataService.cs" t="Include" />
             <e p="IPostService.cs" t="Include" />
@@ -80,7 +82,8 @@
         </e>
         <e p="ExtentionMethods.cs" t="Include" />
         <e p="Models" t="Include">
-          <e p="CreateOrUpdateBookmarkDto.cs" t="Include" />
+          <e p="BookmarkDto.cs" t="Include" />
+          <e p="BookmarkForCreation.cs" t="Include" />
           <e p="CreateQueryDto.cs" t="Include" />
           <e p="DeleteBookmarkDto.cs" t="Include" />
           <e p="DeleteProfileDto.cs" t="Include" />
@@ -91,6 +94,7 @@
           <e p="RankedSearchDto.cs" t="Include" />
           <e p="RankedSearchResultDto.cs" t="Include" />
           <e p="SearchQuestionsDto.cs" t="Include" />
+          <e p="UpdateBookmarkDto.cs" t="Include" />
           <e p="UpdateEmailDto.cs" t="Include" />
           <e p="UpdatePasswordDto.cs" t="Include" />
         </e>

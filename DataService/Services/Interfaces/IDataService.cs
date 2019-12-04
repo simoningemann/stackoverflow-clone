@@ -6,13 +6,6 @@ namespace rawdata_portfolioproject_2.Services.Interfaces
 {
     public interface IDataService
     {
-        Profile CreateProfile(string email, string password);
-        Profile GetProfile(int profileId);
-        Profile GetProfile(string email);
-        bool UpdateProfileEmail(string oldEmail, string password, string newEmail);
-        bool UpdateProfilePassword (string email, string oldPassword, string newPassword);
-        bool DeleteProfile(string email, string password);
-        bool Login(string email, string password);
         Query CreateQuery(int profileId, DateTime timeSearched, string queryText);
         Query GetQuery(int profileId, DateTime timeSearched);
         List<Query> GetAllQueries(int profileId);

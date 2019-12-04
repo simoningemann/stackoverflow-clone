@@ -25,8 +25,8 @@ namespace WebService.Controllers // also add controllers for other ressources in
         }
 
         [Authorize]
-        [HttpGet("{profileId}")]
-        public IActionResult GetAllBookmarks(int profileId)
+        [HttpGet(Name = nameof(GetBookmarks))]
+        public IActionResult GetBookmarks()
         {
             if (HttpContext.User.Identity.Name != _dataService.GetProfile(profileId).Email) return Unauthorized();
 

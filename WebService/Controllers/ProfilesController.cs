@@ -61,17 +61,23 @@ namespace WebService.Controllers // also add controllers for other ressources in
 
             if (hash != profile.Hash) return BadRequest("Wrong password.");
 
-            var token = CreateToken(profile.Email, 5);
+            var token = CreateToken(profile.ProfileId, 5);
 
-            return Ok(new {profile.Email, token});
+            return Ok(new
+            {
+                profile.ProfileId,
+                profile.Email,
+                token
+            });
+            
         }
 
         [Authorize]
         [HttpPost("delete", Name = nameof(DeleteProfile))]
         public ActionResult DeleteProfile([FromBody] DeleteProfileDto dto)
         {
-            var email = HttpContext.User.Identity.Name;
-            var profile = _profileService.GetProfile(email);
+            int.TryParse(HttpContext.User.Identity.Name, out var profileId);
+            var profile = _profileService.GetProfile(profileId);
 
             if (profile == null) return NotFound();
             
@@ -85,7 +91,7 @@ namespace WebService.Controllers // also add controllers for other ressources in
 
             if (hash != profile.Hash) return BadRequest("Wrong password.");
 
-            var deletedProfile = _profileService.DeleteProfile(email);
+            var deletedProfile = _profileService.DeleteProfile(profileId);
 
             if (deletedProfile == null) return BadRequest("Error on deleting profile");
             
@@ -98,8 +104,8 @@ namespace WebService.Controllers // also add controllers for other ressources in
         [HttpPut("updatepassword")]
         public ActionResult UpdateProfilePassword([FromBody] UpdatePasswordDto dto)
         {
-            var email = HttpContext.User.Identity.Name;
-            var profile = _profileService.GetProfile(email);
+            int.TryParse(HttpContext.User.Identity.Name, out var profileId);
+            var profile = _profileService.GetProfile(profileId);
 
             if (profile == null) return NotFound();
             
@@ -115,7 +121,7 @@ namespace WebService.Controllers // also add controllers for other ressources in
 
             var newHash = PasswordService.HashPassword(dto.NewPassword, profile.Salt, size);
 
-            var updatedProfile = _profileService.UpdateProfilePassword(email, newHash);
+            var updatedProfile = _profileService.UpdateProfilePassword(profileId, newHash);
 
             if (updatedProfile == null) return BadRequest("Error on updating profile");
 
@@ -126,8 +132,8 @@ namespace WebService.Controllers // also add controllers for other ressources in
         [HttpPut("updateemail")]
         public ActionResult UpdateProfileEmail([FromBody] UpdateEmailDto dto)
         {
-            var email = HttpContext.User.Identity.Name;
-            var profile = _profileService.GetProfile(email);
+            int.TryParse(HttpContext.User.Identity.Name, out var profileId);
+            var profile = _profileService.GetProfile(profileId);
 
             if (profile == null) return NotFound();
             
@@ -141,14 +147,14 @@ namespace WebService.Controllers // also add controllers for other ressources in
 
             if (profile.Hash != hash) return Unauthorized("Wrong password");
 
-            var updatedProfile = _profileService.UpdateProfileEmail(email, dto.NewEmail);
+            var updatedProfile = _profileService.UpdateProfileEmail(profileId, dto.NewEmail);
 
             if (updatedProfile == null) return BadRequest("Error on updating profile");
 
             return Ok("Updated email to: " + updatedProfile.Email);
         }
         
-        private string CreateToken(string email, int timeValid)
+        private string CreateToken(int profileId, int timeValid)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.UTF8.GetBytes(_configuration["Auth:Key"]);
@@ -156,7 +162,7 @@ namespace WebService.Controllers // also add controllers for other ressources in
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim(ClaimTypes.Name, email),
+                    new Claim(ClaimTypes.Name, profileId.ToString()),
                 }),
                 Expires = DateTime.Now.AddMinutes(timeValid),
                 SigningCredentials = new SigningCredentials(

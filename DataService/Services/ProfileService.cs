@@ -37,11 +37,19 @@ namespace rawdata_portfolioproject_2.Services
 
             return profile;
         }
-
-        public Profile DeleteProfile(string email)
+        
+        public Profile GetProfile(int profileId)
         {
             using var db = new StackOverflowContext();
-            var profile = db.Profiles.Where(x => x.Email == email).Select(x => x).FirstOrDefault();
+            var profile = db.Profiles.Find(profileId);
+
+            return profile;
+        }
+
+        public Profile DeleteProfile(int profileId)
+        {
+            using var db = new StackOverflowContext();
+            var profile = db.Profiles.Find(profileId);
             
             try
             {
@@ -55,10 +63,10 @@ namespace rawdata_portfolioproject_2.Services
             }
         }
 
-        public Profile UpdateProfilePassword(string email, string newHash)
+        public Profile UpdateProfilePassword(int profileId, string newHash)
         {
             using var db = new StackOverflowContext();
-            var profile = db.Profiles.Where(x => x.Email == email).Select(x => x).FirstOrDefault();
+            var profile = db.Profiles.Find(profileId);
             
             try
             {
@@ -71,10 +79,10 @@ namespace rawdata_portfolioproject_2.Services
                 return null;
             }
         }
-        public Profile UpdateProfileEmail(string email, string newEmail)
+        public Profile UpdateProfileEmail(int profileId, string newEmail)
         {
             using var db = new StackOverflowContext();
-            var profile = db.Profiles.Where(x => x.Email == email).Select(x => x).FirstOrDefault();
+            var profile = db.Profiles.Find(profileId);
             
             try
             {

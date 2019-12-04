@@ -48,7 +48,7 @@ namespace WebService.Controllers // also add controllers for other ressources in
             });
         }
         
-        [HttpPost("login")]
+        [HttpPost("login", Name = nameof(ProfileLogin))]
         public ActionResult ProfileLogin([FromBody] ProfileForLogin dto)
         {
             var profile = _profileService.GetProfile(dto.Email);

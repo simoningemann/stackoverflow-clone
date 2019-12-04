@@ -18,6 +18,9 @@ namespace WebService.Controllers
             var keywords = new[] {"noob", "new", "post"};
             var email = "example@email.com";
             var password = "examplepassword";
+            var token = "eyJhbGciOiJIUzI1NiIsInR5pHQ0";
+            var bookmarkId = 1;
+            var note = "noteexample";
 
             var profileForCreationExample = new ProfileForCreation();
             profileForCreationExample.Email = email;
@@ -37,6 +40,14 @@ namespace WebService.Controllers
             var emailForUpdateExample = new EmailForUpdate();
             emailForUpdateExample.NewEmail = email;
             emailForUpdateExample.Password = password;
+            
+            var bookmarkForCreationExample = new BookmarkForCreation();
+            bookmarkForCreationExample.PostId = postId;
+            bookmarkForCreationExample.Note = note;
+            
+            var updateBookmarkDtoExample = new UpdateBookmarkDto();
+            updateBookmarkDtoExample.BookmarkId = bookmarkId;
+            updateBookmarkDtoExample.Note = note;
 
                 // QA API
             var welcome = "Welcome to the raw11 project portfolio rest api!";
@@ -118,6 +129,7 @@ namespace WebService.Controllers
             {
                 type = "POST",
                 url = Url.Link(nameof(ProfilesController.DeleteProfile), new {}),
+                token,
                 body = profileForDeletionExample
             };
 
@@ -125,6 +137,7 @@ namespace WebService.Controllers
             {
                 type = "PUT",
                 url = Url.Link(nameof(ProfilesController.UpdateProfilePassword), new {}),
+                token,
                 body = passwordForUpdateExample
             };
 
@@ -132,7 +145,45 @@ namespace WebService.Controllers
             {
                 type = "PUT",
                 url = Url.Link(nameof(ProfilesController.UpdateProfileEmail), new { }),
+                token,
                 body = emailForUpdateExample
+            };
+
+            var getBookmarksExample = new
+            {
+                type = "GET",
+                url = Url.Link(nameof(BookmarksController.GetBookmarks), new {}),
+                token
+            };
+
+            var getBookmarkExample = new
+            {
+                type = "GET",
+                url = Url.Link(nameof(BookmarksController.GetBookmark), new {bookmarkId}),
+                token
+            };
+
+            var createBookmarkExample = new
+            {
+                type = "POST",
+                url = Url.Link(nameof(BookmarksController.CreateBookmark), new {}),
+                token,
+                body = bookmarkForCreationExample
+            };
+
+            var updateBookmarkExample = new
+            {
+                type = "PUT",
+                url = Url.Link(nameof(BookmarksController.UpdateBookmark), new {}),
+                token,
+                body = updateBookmarkDtoExample
+            };
+
+            var deleteBookmarkExample = new
+            {
+                type = "DELETE",
+                url = Url.Link(nameof(BookmarksController.DeleteBookmark), new {bookmarkId}),
+                token
             };
 
             return Ok(new
@@ -152,7 +203,12 @@ namespace WebService.Controllers
                 profileLoginExample,
                 deleteProfileExample,
                 updateProfilePasswordExample,
-                updateProfileEmailExample
+                updateProfileEmailExample,
+                getBookmarksExample,
+                getBookmarkExample,
+                createBookmarkExample,
+                updateBookmarkExample,
+                deleteBookmarkExample
             });
         }
     }

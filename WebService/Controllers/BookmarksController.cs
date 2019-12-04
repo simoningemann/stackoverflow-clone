@@ -1,3 +1,4 @@
+using System.Linq;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -26,51 +27,86 @@ namespace WebService.Controllers // also add controllers for other ressources in
 
         [Authorize]
         [HttpGet(Name = nameof(GetBookmarks))]
-        public IActionResult GetBookmarks()
+        public ActionResult GetBookmarks()
         {
             int.TryParse(HttpContext.User.Identity.Name, out var profileId);
-            var bookmarks = _bookmarkService.GetAllBookmarks(profileId);
+            var tempBookmarks = _bookmarkService.GetAllBookmarks(profileId);
+            var bookmarks = tempBookmarks.Select(CreateBookmarkDto);
 
-            return Ok(bookmarks);
+            return Ok(new
+            {
+                link = Url.Link(nameof(GetBookmarks), new {}),
+                bookmarks
+            });
             //var tags = new {tags = bookmarks};
             //return Ok(JsonConvert.SerializeObject(tags)); // is this correct?
         }
         
         [Authorize]
-        [HttpPost]
-        public IActionResult CreateBookmark([FromBody] CreateOrUpdateBookmarkDto dto)
+        [HttpGet("{bookmarkId}",Name = nameof(GetBookmark))]
+        public ActionResult GetBookmark(int bookmarkId)
+        {
+            int.TryParse(HttpContext.User.Identity.Name, out var profileId);
+            var bookmark = _bookmarkService.GetBookmark(bookmarkId);
+
+            if (bookmark == null) return NotFound();
+            if (bookmark.ProfileId != profileId) return Unauthorized("Bookmark does not belong to profile");
+
+            return Ok(CreateBookmarkDto(bookmark));
+            //var tags = new {tags = bookmarks};
+            //return Ok(JsonConvert.SerializeObject(tags)); // is this correct?
+        }
+        
+        [Authorize]
+        [HttpPost(Name = nameof(CreateBookmark))]
+        public ActionResult CreateBookmark([FromBody] BookmarkForCreation forCreation)
         {
             int.TryParse(HttpContext.User.Identity.Name, out var profileId);
 
             var bookmark = _bookmarkService.CreateBookmark(profileId,
-                dto.BookmarkId,
-                dto.Note);
+                forCreation.PostId,
+                forCreation.Note);
             
             if (bookmark == null) return BadRequest();
 
-            return Ok(bookmark); // is return type ok?
+            return Created("", CreateBookmarkDto(bookmark));
         }
         
         [Authorize]
         [HttpPut]
-        public IActionResult UpdateBookmark([FromBody] CreateOrUpdateBookmarkDto dto)
+        public ActionResult UpdateBookmark([FromBody] UpdateBookmarkDto dto)
         {
-            if (HttpContext.User.Identity.Name != _bookmarkService.GetProfile(dto.ProfileId).Email) return Unauthorized();
-            
-            if (!_bookmarkService.UpdateBookmark(dto.ProfileId, dto.BookmarkId, dto.Note)) return NotFound();
+            int.TryParse(HttpContext.User.Identity.Name, out var profileId);
+            var bookmark = _bookmarkService.UpdateBookmark(dto.BookmarkId, profileId, dto.Note);
 
-            return Ok(); 
+            if (bookmark == null) return BadRequest("Error updating bookmark, bookmark not found or bookmark does not belong to profile.");
+
+            return Ok(CreateBookmarkDto(bookmark)); 
         }
         
         [Authorize]
         [HttpDelete]
-        public IActionResult DeleteBookmark([FromBody] DeleteBookmarkDto dto)
+        public ActionResult DeleteBookmark(int bookmarkId)
         {
-            if (HttpContext.User.Identity.Name != _bookmarkService.GetProfile(dto.ProfileId).Email) return Unauthorized();
+            int.TryParse(HttpContext.User.Identity.Name, out var profileId);
             
-            if (!_bookmarkService.DeleteBookmark(dto.ProfileId, dto.BookmarkId)) return NotFound();
+            var bookmark = _bookmarkService.DeleteBookmark(bookmarkId, profileId);
 
-            return Ok(); 
+            if (bookmark == null) return BadRequest();
+
+            return Ok("Deleted bookmark: " + bookmark.BookmarkId); 
+        }
+
+        private BookmarkDto CreateBookmarkDto(Bookmark bookmark)
+        {
+            var dto = new BookmarkDto();
+            dto.Link = Url.Link(nameof(GetBookmark), new {bookmark.BookmarkId});
+            dto.BookmarkId = bookmark.BookmarkId;
+            dto.PostLink = Url.Link(nameof(PostsController.GetPost), new {bookmark.PostId});
+            dto.PostId = bookmark.PostId;
+            dto.Note = bookmark.Note;
+
+            return dto;
         }
     }
 }

@@ -38,7 +38,9 @@ namespace rawdata_portfolioproject_2.Services
         public List<Bookmark> GetAllBookmarks(int profileId)
         {
             using var db = new StackOverflowContext();
-            return db.Bookmarks.Where(x => x.ProfileId == profileId).Select(x => x).ToList();
+            var bookmarks = db.Bookmarks.Where(x => x.ProfileId == profileId).Select(x => x).ToList();
+            
+            return bookmarks;
         }
 
         public List<Bookmark> GetBookmarksByString(int profileId, params string[] keywords)
@@ -58,11 +60,13 @@ namespace rawdata_portfolioproject_2.Services
             }*/
         }
 
-        public Bookmark UpdateBookmark(int bookmarkId, string note)
+        public Bookmark UpdateBookmark(int bookmarkId, int profileId, string note)
         {
             using var db = new StackOverflowContext();
             var bookmark = db.Bookmarks.Find(bookmarkId);
-
+            
+            if (bookmark == null) return null;
+            if (bookmark.ProfileId != profileId) return null;
 
             try
             {
@@ -76,10 +80,13 @@ namespace rawdata_portfolioproject_2.Services
             }
         }
 
-        public Bookmark DeleteBookmark(int bookmarkId)
+        public Bookmark DeleteBookmark(int bookmarkId, int profileId)
         {
             using var db = new StackOverflowContext();
             var bookmark = db.Bookmarks.Find(bookmarkId);
+
+            if (bookmark == null) return null;
+            if (profileId != bookmark.ProfileId) return null;
 
             try
             {

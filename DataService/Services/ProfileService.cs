@@ -20,7 +20,7 @@ namespace rawdata_portfolioproject_2.Services
 
             try
             {
-                db.Add(profile);
+                db.Profiles.Add(profile);
                 db.SaveChanges();
                 return profile;
             }
@@ -36,6 +36,23 @@ namespace rawdata_portfolioproject_2.Services
             var profile = db.Profiles.Where(x => x.Email == email).Select(x => x).FirstOrDefault();
 
             return profile;
+        }
+
+        public Profile DeleteProfile(string email)
+        {
+            using var db = new StackOverflowContext();
+            var profile = db.Profiles.Where(x => x.Email == email).Select(x => x).FirstOrDefault();
+            
+            try
+            {
+                db.Profiles.Remove(profile);
+                db.SaveChanges();
+                return profile;
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
         }
 
         private int NextProfileId(StackOverflowContext db)

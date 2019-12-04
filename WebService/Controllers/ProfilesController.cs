@@ -50,7 +50,32 @@ namespace WebService.Controllers // also add controllers for other ressources in
             var profile = _profileService.GetProfile(dto.Email);
             
             if (profile == null) return NotFound("Profile not found");
+            
+            int.TryParse(
+                _configuration.GetSection("Auth:PwdSize").Value, 
+                out var size);
 
+            if (size == 0) return BadRequest("Hash size should be bigger than 0");
+            
+            var hash = PasswordService.HashPassword(dto.Password, profile.Salt, size);
+
+            if (hash != profile.Hash) return BadRequest("Wrong password.");
+
+            var token = CreateToken(profile.Email, 5);
+
+            return Ok(new {profile.Email, token});
+        }
+
+        [Authorize]
+        [HttpPost("delete", Name = nameof(DeleteProfile))]
+        public ActionResult DeleteProfile([FromBody] LoginDto dto)
+        {
+            var email = HttpContext.User.Identity.Name;
+            var profile = _profileService.GetProfile(email);
+
+            if (profile == null)
+                return NotFound();
+            
             int.TryParse(
                 _configuration.GetSection("Auth:PwdSize").Value, 
                 out var size);
@@ -60,18 +85,25 @@ namespace WebService.Controllers // also add controllers for other ressources in
             var hash = PasswordService.HashPassword(dto.Password, profile.Salt, size);
 
             if (hash != profile.Hash) return BadRequest("Wrong password.");
+
+            var deletedProfile = _profileService.DeleteProfile(email);
             
-            // authentication stuff
+            // preferable end session here
+
+            return Ok(deletedProfile.Email);
+        }
+
+        private string CreateToken(string email, int timeValid)
+        {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.UTF8.GetBytes(_configuration["Auth:Key"]);
             var tokenDescription = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    // change type to name if this doesnt work
-                    new Claim(ClaimTypes.Name, dto.Email),
+                    new Claim(ClaimTypes.Name, email),
                 }),
-                Expires = DateTime.Now.AddMinutes(5),
+                Expires = DateTime.Now.AddMinutes(timeValid),
                 SigningCredentials = new SigningCredentials(
                     new SymmetricSecurityKey(key),
                     SecurityAlgorithms.HmacSha256Signature)
@@ -79,11 +111,9 @@ namespace WebService.Controllers // also add controllers for other ressources in
 
             var securityToken = tokenHandler.CreateToken(tokenDescription);
 
-            var token = tokenHandler.WriteToken(securityToken);
-
-            return Ok(new {dto.Email, token});
+            return tokenHandler.WriteToken(securityToken);
         }
-        
+
         /*
         [Authorize]
         [HttpGet("email/{email}")]

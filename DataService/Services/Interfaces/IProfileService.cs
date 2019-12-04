@@ -6,5 +6,6 @@ namespace rawdata_portfolioproject_2.Services.Interfaces
     {
         Profile CreateProfile(string email, string salt, string hash);
         Profile GetProfile(string email);
+        Profile DeleteProfile(string email);
     }
 }

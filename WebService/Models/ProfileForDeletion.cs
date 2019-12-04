@@ -1,6 +1,6 @@
 namespace WebService.Models
 {
-    public class DeleteProfileDto
+    public class ProfileForDeletion
     {
         public string Password { get; set; }
     }

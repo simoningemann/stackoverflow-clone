@@ -78,7 +78,7 @@ namespace WebService.Controllers // also add controllers for other ressources in
 
         [Authorize]
         [HttpPost("delete", Name = nameof(DeleteProfile))]
-        public ActionResult DeleteProfile([FromBody] DeleteProfileDto dto)
+        public ActionResult DeleteProfile([FromBody] ProfileForDeletion dto)
         {
             int.TryParse(HttpContext.User.Identity.Name, out var profileId);
             var profile = _profileService.GetProfile(profileId);
@@ -99,14 +99,14 @@ namespace WebService.Controllers // also add controllers for other ressources in
 
             if (deletedProfile == null) return BadRequest("Error on deleting profile");
             
-            // preferable end session here
+            // preferably end session here
 
             return Ok("Deleted: " + deletedProfile.Email);
         }
 
         [Authorize]
-        [HttpPut("updatepassword")]
-        public ActionResult UpdateProfilePassword([FromBody] UpdatePasswordDto dto)
+        [HttpPut("updatepassword", Name = nameof(UpdateProfilePassword))]
+        public ActionResult UpdateProfilePassword([FromBody] PasswordForUpdate dto)
         {
             int.TryParse(HttpContext.User.Identity.Name, out var profileId);
             var profile = _profileService.GetProfile(profileId);
@@ -133,8 +133,8 @@ namespace WebService.Controllers // also add controllers for other ressources in
         }
         
         [Authorize]
-        [HttpPut("updateemail")]
-        public ActionResult UpdateProfileEmail([FromBody] UpdateEmailDto dto)
+        [HttpPut("updateemail", Name = nameof(UpdateProfileEmail))]
+        public ActionResult UpdateProfileEmail([FromBody] EmailForUpdate dto)
         {
             int.TryParse(HttpContext.User.Identity.Name, out var profileId);
             var profile = _profileService.GetProfile(profileId);

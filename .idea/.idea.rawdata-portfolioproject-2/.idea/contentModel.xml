@@ -86,17 +86,18 @@
           <e p="BookmarkForCreation.cs" t="Include" />
           <e p="CreateQueryDto.cs" t="Include" />
           <e p="DeleteBookmarkDto.cs" t="Include" />
-          <e p="DeleteProfileDto.cs" t="Include" />
           <e p="DeleteQueryDto.cs" t="Include" />
-          <e p="LoginDto.cs" t="Include" />
+          <e p="EmailForUpdate.cs" t="Include" />
+          <e p="PasswordForUpdate.cs" t="Include" />
           <e p="PostDto.cs" t="Include" />
+          <e p="ProfileForCreation.cs" t="Include" />
+          <e p="ProfileForDeletion.cs" t="Include" />
+          <e p="ProfileForLogin.cs" t="Include" />
           <e p="QuestionDto.cs" t="Include" />
           <e p="RankedSearchDto.cs" t="Include" />
           <e p="RankedSearchResultDto.cs" t="Include" />
           <e p="SearchQuestionsDto.cs" t="Include" />
           <e p="UpdateBookmarkDto.cs" t="Include" />
-          <e p="UpdateEmailDto.cs" t="Include" />
-          <e p="UpdatePasswordDto.cs" t="Include" />
         </e>
         <e p="PasswordService.cs" t="Include" />
         <e p="Profiles" t="Include">

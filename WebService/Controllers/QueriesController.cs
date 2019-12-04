@@ -13,63 +13,52 @@ namespace WebService.Controllers // also add controllers for other ressources in
     [Route("api/queries")]
     public class QueriesController : ControllerBase
     {
-        private readonly IDataService _dataService;
+        private readonly IQueryService _queryService;
         private readonly IConfiguration _configuration;
         //optional: add mapper
 
-        public QueriesController(IDataService dataService, IConfiguration configuration)
+        public QueriesController(IQueryService queryService, IConfiguration configuration)
         {
-            _dataService = dataService;
+            _queryService = queryService;
             _configuration = configuration;
             //optional add mapper
         }
 
         [Authorize]
-        [HttpGet("{profileId}")]
-        public IActionResult GetAllQueries(int profileId)
+        [HttpGet(Name = nameof(GetQueries))]
+        public ActionResult GetQueries()
         {
-            //if (HttpContext.User.Identity.Name != _dataService.GetProfile(profileId).Email) return Unauthorized();
+            int.TryParse(HttpContext.User.Identity.Name, out var profileId);
 
-            var queries = _dataService.GetAllQueries(profileId);
+            var queries = _queryService.GetQueries(profileId);
 
-            var tags = new {tags = queries};
-
-            return Ok(JsonConvert.SerializeObject(tags)); // is this correct?
+            return Ok(queries);
         }
         
         [Authorize]
-        [HttpPost]
-        public IActionResult CreateQuery([FromBody] CreateQueryDto dto)
+        [HttpPost(Name = nameof(CreateQuery))]
+        public ActionResult CreateQuery([FromBody] QueryForCreation dto)
         {
-            //if (HttpContext.User.Identity.Name != _dataService.GetProfile(dto.ProfileId).Email) return Unauthorized();
+            int.TryParse(HttpContext.User.Identity.Name, out var profileId);
 
-            var query = _dataService.CreateQuery(dto.ProfileId, dto.TimeSearched, dto.QueryText);
+            var query = _queryService.CreateQuery(profileId, dto.QueryText);
             
             if (query == null) return BadRequest();
 
-            return Ok(query); // is return type ok?
+            return Created("", query);
         }
 
         [Authorize]
-        [HttpDelete]
-        public IActionResult DeleteQuery([FromBody] DeleteQueryDto dto)
+        [HttpDelete("{queryId}", Name = nameof(DeleteQuery))]
+        public ActionResult DeleteQuery(int queryId)
         {
-            //if (HttpContext.User.Identity.Name != _dataService.GetProfile(dto.ProfileId).Email) return Unauthorized();
+            int.TryParse(HttpContext.User.Identity.Name, out var profileId);
+
+            var query = _queryService.DeleteQuery(queryId, profileId);
             
-            if (!_dataService.DeleteQuery(dto.ProfileId, dto.TimeSearched)) return NotFound();
+            if(query == null) return BadRequest();
 
-            return Ok(); 
-        }
-        
-        [Authorize]
-        [HttpDelete("{profileId}")]
-        public IActionResult DeleteAllQueries(int profileId)
-        {
-            //if (HttpContext.User.Identity.Name != _dataService.GetProfile(profileId).Email) return Unauthorized();
-
-            _dataService.DeleteQueries(_dataService.GetAllQueries(profileId));
-
-            return Ok(); 
+            return Ok(query); 
         }
     }
 }

@@ -21,6 +21,7 @@ namespace WebService.Controllers
             var token = "eyJhbGciOiJIUzI1NiIsInR5pHQ0";
             var bookmarkId = 1;
             var note = "noteexample";
+            var queryId = 1;
 
             var profileForCreationExample = new ProfileForCreation();
             profileForCreationExample.Email = email;
@@ -48,6 +49,9 @@ namespace WebService.Controllers
             var updateBookmarkDtoExample = new UpdateBookmarkDto();
             updateBookmarkDtoExample.BookmarkId = bookmarkId;
             updateBookmarkDtoExample.Note = note;
+            
+            var queryForCreationExample = new QueryForCreation();
+            queryForCreationExample.QueryText = "noob new post";
 
                 // QA API
             var welcome = "Welcome to the raw11 project portfolio rest api!";
@@ -186,6 +190,28 @@ namespace WebService.Controllers
                 token
             };
 
+            var getQueriesExample = new
+            {
+                type = "GET",
+                url = Url.Link(nameof(QueriesController.GetQueries), new {}),
+                token
+            };
+
+            var createQueryExample = new
+            {
+                type = "POST",
+                url = Url.Link(nameof(QueriesController.CreateQuery), new {}),
+                body = queryForCreationExample,
+                token
+            };
+
+            var deleteQueryExample = new
+            {
+                type = "DELETE",
+                url = Url.Link(nameof(QueriesController.DeleteQuery), new {queryId}),
+                token
+            };
+
             return Ok(new
             {
                 welcome,
@@ -208,7 +234,10 @@ namespace WebService.Controllers
                 getBookmarkExample,
                 createBookmarkExample,
                 updateBookmarkExample,
-                deleteBookmarkExample
+                deleteBookmarkExample,
+                getQueriesExample,
+                createQueryExample,
+                deleteQueryExample
             });
         }
     }

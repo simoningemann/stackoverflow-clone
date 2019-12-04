@@ -33,7 +33,7 @@ namespace WebService
         {
             services.AddControllers();
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-            services.AddSingleton<IDataService, DataService>();
+            services.AddSingleton<IQueryService, QueryService>();
             services.AddSingleton<IQuestionService, QuestionService>();
             services.AddSingleton<IAnswerService, AnswerService>();
             services.AddSingleton<IPostService, PostService>();

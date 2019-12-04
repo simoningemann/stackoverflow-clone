@@ -19,7 +19,6 @@
           <e p="Link.cs" t="Include" />
           <e p="Post.cs" t="Include" />
           <e p="Profile.cs" t="Include" />
-          <e p="Profile_LoginResult.cs" t="Include" />
           <e p="Query.cs" t="Include" />
           <e p="Question.cs" t="Include" />
           <e p="User.cs" t="Include" />
@@ -29,19 +28,19 @@
           <e p="AnswerService.cs" t="Include" />
           <e p="BookmarkService.cs" t="Include" />
           <e p="CommentService.cs" t="Include" />
-          <e p="DataService.cs" t="Include" />
           <e p="Interfaces" t="Include">
             <e p="IAnswerService.cs" t="Include" />
             <e p="IBookmarkService.cs" t="Include" />
             <e p="ICommentService.cs" t="Include" />
-            <e p="IDataService.cs" t="Include" />
             <e p="IPostService.cs" t="Include" />
             <e p="IProfileService.cs" t="Include" />
+            <e p="IQueryService.cs" t="Include" />
             <e p="IQuestionService.cs" t="Include" />
             <e p="IUserService.cs" t="Include" />
           </e>
           <e p="PostService.cs" t="Include" />
           <e p="ProfileService.cs" t="Include" />
+          <e p="QueryService.cs" t="Include" />
           <e p="QuestionService.cs" t="Include" />
           <e p="UserService.cs" t="Include" />
         </e>
@@ -84,15 +83,14 @@
         <e p="Models" t="Include">
           <e p="BookmarkDto.cs" t="Include" />
           <e p="BookmarkForCreation.cs" t="Include" />
-          <e p="CreateQueryDto.cs" t="Include" />
           <e p="DeleteBookmarkDto.cs" t="Include" />
-          <e p="DeleteQueryDto.cs" t="Include" />
           <e p="EmailForUpdate.cs" t="Include" />
           <e p="PasswordForUpdate.cs" t="Include" />
           <e p="PostDto.cs" t="Include" />
           <e p="ProfileForCreation.cs" t="Include" />
           <e p="ProfileForDeletion.cs" t="Include" />
           <e p="ProfileForLogin.cs" t="Include" />
+          <e p="QueryForCreation.cs" t="Include" />
           <e p="QuestionDto.cs" t="Include" />
           <e p="RankedSearchDto.cs" t="Include" />
           <e p="RankedSearchResultDto.cs" t="Include" />

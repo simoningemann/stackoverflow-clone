@@ -7,27 +7,36 @@ using rawdata_portfolioproject_2.Services.Interfaces;
 
 namespace rawdata_portfolioproject_2.Services
 {
-    public class DataService : IDataService
+    public class QueryService : IQueryService
     {
-        public Query CreateQuery(int profileId, DateTime timeSearched, string queryText)
+        public Query CreateQuery(int profileId, string queryText)
         {
             using var db = new StackOverflowContext();
             Query query = new Query();
+            query.QueryId = NextQueryId(db);
             query.ProfileId = profileId;
-            query.TimeSearched = timeSearched;
+            query.TimeSearched = DateTime.Now;
             query.QueryText = queryText;
-            db.Queries.Add(query);
-            db.SaveChanges();
-            return query;
+
+            try
+            {
+                db.Queries.Add(query);
+                db.SaveChanges();
+                return query;
+            }
+            catch
+            {
+                return null;
+            }
         }
 
-        public Query GetQuery(int profileId, DateTime timeSearched)
+        public Query GetQuery(int queryId)
         {
             using var db = new StackOverflowContext();
-            return db.Queries.Find(profileId, timeSearched);
+            return db.Queries.Find(queryId);
         }
 
-        public List<Query> GetAllQueries(int profileId)
+        public List<Query> GetQueries(int profileId)
         {
             using var db = new StackOverflowContext();
             return db.Queries.Where(x => x.ProfileId == profileId).Select(x => x).ToList();
@@ -60,29 +69,30 @@ namespace rawdata_portfolioproject_2.Services
             return queries;
         }
 
-        public bool DeleteQuery(int profileId, DateTime timeSearched)
+        public Query DeleteQuery(int queryId, int profileId)
         {
             using var db = new StackOverflowContext();
-            Query query = db.Queries.Find(profileId, timeSearched);
+            var query = db.Queries.Find(queryId);
 
-            if (query == null)
-                return false;
+            if (query == null) return null;
+            if (query.ProfileId != profileId) return null;
 
             db.Queries.Remove(query);
             db.SaveChanges();
-            return true;
+            return query;
         }
 
-        public bool DeleteQueries(List<Query> queries)
+        private int NextQueryId(StackOverflowContext db)
         {
-            using var db = new StackOverflowContext();
-            foreach (var query in queries)
+            var id = 1;
+            var ids = db.Queries.Select(x => x.QueryId);
+
+            while (ids.Contains(id))
             {
-                db.Queries.Remove(query);
+                id = id + 1;
             }
 
-            db.SaveChanges();
-            return true; // make void or check for nulls
+            return id;
         }
     }
 }

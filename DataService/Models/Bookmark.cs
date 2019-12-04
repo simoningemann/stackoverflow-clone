@@ -7,6 +7,7 @@ namespace rawdata_portfolioproject_2.Models
     public class Bookmark
     {
         [Key]
+        public int BookmarkId { get; set; }
         public int ProfileId { get; set; }
         public int PostId { get; set; }
         public string Note { get; set; }

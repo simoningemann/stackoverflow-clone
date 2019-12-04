@@ -13,13 +13,13 @@ namespace WebService.Controllers // also add controllers for other ressources in
     [Route("api/bookmarks")]
     public class BookmarksController : ControllerBase
     {
-        private readonly IDataService _dataService;
+        private readonly IBookmarkService _bookmarkService;
         private readonly IConfiguration _configuration;
         //optional: add mapper
 
-        public BookmarksController(IDataService dataService, IConfiguration configuration)
+        public BookmarksController(IBookmarkService bookmarkService, IConfiguration configuration)
         {
-            _dataService = dataService;
+            _bookmarkService = bookmarkService;
             _configuration = configuration;
             //optional add mapper
         }
@@ -28,22 +28,23 @@ namespace WebService.Controllers // also add controllers for other ressources in
         [HttpGet(Name = nameof(GetBookmarks))]
         public IActionResult GetBookmarks()
         {
-            if (HttpContext.User.Identity.Name != _dataService.GetProfile(profileId).Email) return Unauthorized();
+            int.TryParse(HttpContext.User.Identity.Name, out var profileId);
+            var bookmarks = _bookmarkService.GetAllBookmarks(profileId);
 
-            var bookmarks = _dataService.GetAllBookmarks(profileId);
-
-            var tags = new {tags = bookmarks};
-
-            return Ok(JsonConvert.SerializeObject(tags)); // is this correct?
+            return Ok(bookmarks);
+            //var tags = new {tags = bookmarks};
+            //return Ok(JsonConvert.SerializeObject(tags)); // is this correct?
         }
         
         [Authorize]
         [HttpPost]
         public IActionResult CreateBookmark([FromBody] CreateOrUpdateBookmarkDto dto)
         {
-            if (HttpContext.User.Identity.Name != _dataService.GetProfile(dto.ProfileId).Email) return Unauthorized();
+            int.TryParse(HttpContext.User.Identity.Name, out var profileId);
 
-            var bookmark = _dataService.CreateBookmark(dto.ProfileId, dto.BookmarkId, dto.Note);
+            var bookmark = _bookmarkService.CreateBookmark(profileId,
+                dto.BookmarkId,
+                dto.Note);
             
             if (bookmark == null) return BadRequest();
 
@@ -54,9 +55,9 @@ namespace WebService.Controllers // also add controllers for other ressources in
         [HttpPut]
         public IActionResult UpdateBookmark([FromBody] CreateOrUpdateBookmarkDto dto)
         {
-            if (HttpContext.User.Identity.Name != _dataService.GetProfile(dto.ProfileId).Email) return Unauthorized();
+            if (HttpContext.User.Identity.Name != _bookmarkService.GetProfile(dto.ProfileId).Email) return Unauthorized();
             
-            if (!_dataService.UpdateBookmark(dto.ProfileId, dto.BookmarkId, dto.Note)) return NotFound();
+            if (!_bookmarkService.UpdateBookmark(dto.ProfileId, dto.BookmarkId, dto.Note)) return NotFound();
 
             return Ok(); 
         }
@@ -65,9 +66,9 @@ namespace WebService.Controllers // also add controllers for other ressources in
         [HttpDelete]
         public IActionResult DeleteBookmark([FromBody] DeleteBookmarkDto dto)
         {
-            if (HttpContext.User.Identity.Name != _dataService.GetProfile(dto.ProfileId).Email) return Unauthorized();
+            if (HttpContext.User.Identity.Name != _bookmarkService.GetProfile(dto.ProfileId).Email) return Unauthorized();
             
-            if (!_dataService.DeleteBookmark(dto.ProfileId, dto.BookmarkId)) return NotFound();
+            if (!_bookmarkService.DeleteBookmark(dto.ProfileId, dto.BookmarkId)) return NotFound();
 
             return Ok(); 
         }

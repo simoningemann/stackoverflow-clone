@@ -71,6 +71,22 @@ namespace rawdata_portfolioproject_2.Services
                 return null;
             }
         }
+        public Profile UpdateProfileEmail(string email, string newEmail)
+        {
+            using var db = new StackOverflowContext();
+            var profile = db.Profiles.Where(x => x.Email == email).Select(x => x).FirstOrDefault();
+            
+            try
+            {
+                profile.Email = newEmail;
+                db.SaveChanges();
+                return profile;
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+        }
 
         private int NextProfileId(StackOverflowContext db)
         {

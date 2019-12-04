@@ -96,7 +96,7 @@ namespace WebService.Controllers // also add controllers for other ressources in
 
         [Authorize]
         [HttpPut("updatepassword")]
-        public IActionResult UpdatePassword([FromBody] UpdatePasswordDto dto)
+        public ActionResult UpdateProfilePassword([FromBody] UpdatePasswordDto dto)
         {
             var email = HttpContext.User.Identity.Name;
             var profile = _profileService.GetProfile(email);
@@ -120,6 +120,32 @@ namespace WebService.Controllers // also add controllers for other ressources in
             if (updatedProfile == null) return BadRequest("Error on updating profile");
 
             return Ok("Updated password for: " + updatedProfile.Email);
+        }
+        
+        [Authorize]
+        [HttpPut("updateemail")]
+        public ActionResult UpdateProfileEmail([FromBody] UpdateEmailDto dto)
+        {
+            var email = HttpContext.User.Identity.Name;
+            var profile = _profileService.GetProfile(email);
+
+            if (profile == null) return NotFound();
+            
+            int.TryParse(
+                _configuration.GetSection("Auth:PwdSize").Value, 
+                out var size);
+
+            if (size == 0) return BadRequest("Hash size should be bigger than 0");
+
+            var hash = PasswordService.HashPassword(dto.Password, profile.Salt, size);
+
+            if (profile.Hash != hash) return Unauthorized("Wrong password");
+
+            var updatedProfile = _profileService.UpdateProfileEmail(email, dto.NewEmail);
+
+            if (updatedProfile == null) return BadRequest("Error on updating profile");
+
+            return Ok("Updated email to: " + updatedProfile.Email);
         }
         
         private string CreateToken(string email, int timeValid)

@@ -55,6 +55,23 @@ namespace rawdata_portfolioproject_2.Services
             }
         }
 
+        public Profile UpdateProfilePassword(string email, string newHash)
+        {
+            using var db = new StackOverflowContext();
+            var profile = db.Profiles.Where(x => x.Email == email).Select(x => x).FirstOrDefault();
+            
+            try
+            {
+                profile.Hash = newHash;
+                db.SaveChanges();
+                return profile;
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+        }
+
         private int NextProfileId(StackOverflowContext db)
         {
             int id = 1;

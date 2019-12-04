@@ -83,6 +83,7 @@
           <e p="CreateOrUpdateBookmarkDto.cs" t="Include" />
           <e p="CreateQueryDto.cs" t="Include" />
           <e p="DeleteBookmarkDto.cs" t="Include" />
+          <e p="DeleteProfileDto.cs" t="Include" />
           <e p="DeleteQueryDto.cs" t="Include" />
           <e p="LoginDto.cs" t="Include" />
           <e p="PostDto.cs" t="Include" />

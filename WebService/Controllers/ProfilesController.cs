@@ -68,13 +68,12 @@ namespace WebService.Controllers // also add controllers for other ressources in
 
         [Authorize]
         [HttpPost("delete", Name = nameof(DeleteProfile))]
-        public ActionResult DeleteProfile([FromBody] LoginDto dto)
+        public ActionResult DeleteProfile([FromBody] DeleteProfileDto dto)
         {
             var email = HttpContext.User.Identity.Name;
             var profile = _profileService.GetProfile(email);
 
-            if (profile == null)
-                return NotFound();
+            if (profile == null) return NotFound();
             
             int.TryParse(
                 _configuration.GetSection("Auth:PwdSize").Value, 
@@ -87,12 +86,42 @@ namespace WebService.Controllers // also add controllers for other ressources in
             if (hash != profile.Hash) return BadRequest("Wrong password.");
 
             var deletedProfile = _profileService.DeleteProfile(email);
+
+            if (deletedProfile == null) return BadRequest("Error on deleting profile");
             
             // preferable end session here
 
-            return Ok(deletedProfile.Email);
+            return Ok("Deleted: " + deletedProfile.Email);
         }
 
+        [Authorize]
+        [HttpPut("updatepassword")]
+        public IActionResult UpdatePassword([FromBody] UpdatePasswordDto dto)
+        {
+            var email = HttpContext.User.Identity.Name;
+            var profile = _profileService.GetProfile(email);
+
+            if (profile == null) return NotFound();
+            
+            int.TryParse(
+                _configuration.GetSection("Auth:PwdSize").Value, 
+                out var size);
+
+            if (size == 0) return BadRequest("Hash size should be bigger than 0");
+
+            var oldHash = PasswordService.HashPassword(dto.OldPassword, profile.Salt, size);
+
+            if (profile.Hash != oldHash) return Unauthorized("Wrong password");
+
+            var newHash = PasswordService.HashPassword(dto.NewPassword, profile.Salt, size);
+
+            var updatedProfile = _profileService.UpdateProfilePassword(email, newHash);
+
+            if (updatedProfile == null) return BadRequest("Error on updating profile");
+
+            return Ok("Updated password for: " + updatedProfile.Email);
+        }
+        
         private string CreateToken(string email, int timeValid)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
@@ -115,39 +144,6 @@ namespace WebService.Controllers // also add controllers for other ressources in
         }
 
         /*
-        [Authorize]
-        [HttpGet("email/{email}")]
-        public ActionResult<Profile> GetProfile(string email)
-        {
-            var profile = _dataService.GetProfile(email);
-
-            if (profile == null) return NotFound();
-            if (HttpContext.User.Identity.Name != email) return Unauthorized();
-
-            return Ok(profile);
-        }
-        
-        [Authorize]
-        [HttpGet("{profileId}")]
-        public ActionResult<Profile> GetProfile(int profileId)
-        {
-            var profile = _dataService.GetProfile(profileId);
-
-            if (profile == null) return NotFound();
-            if (HttpContext.User.Identity.Name != profile.Email) return Unauthorized();
-
-            return Ok(profile);
-        }
-
-        [HttpPost]
-        public IActionResult CreateProfile([FromBody] LoginDto loginDto)
-        {
-            var profile = _dataService.CreateProfile(loginDto.Email, loginDto.Password);
-
-            if (profile == null) return BadRequest();
-            
-            return Created("", profile);
-        }
 
         [Authorize]
         [HttpPut("updatepassword")]

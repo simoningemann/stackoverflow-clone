@@ -1,7 +1,8 @@
 ﻿define([], function() {
+    
     var getNames = async function(callback) {
-        var response = await fetch("api/names");
-        var data = await response.json();
+        const response = await fetch("api/names");
+        const data = await response.json();
         callback(data);
     };
 

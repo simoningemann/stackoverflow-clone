@@ -159,6 +159,7 @@
             <e p="parentChildApp.js" t="Include" />
             <e p="services" t="Include">
               <e p="dataService.js" t="Include" />
+              <e p="postService.js" t="Include" />
               <e p="postman.js" t="Include" />
             </e>
           </e>

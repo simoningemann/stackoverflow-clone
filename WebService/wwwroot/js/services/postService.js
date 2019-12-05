@@ -12,6 +12,12 @@ define([], function() {
         callback(data);
     };
     
+    var getWordCloud = async function (callback, postId) {
+        var response = await fetch("api/posts/" + postId);
+        var data = await response.json();
+        callback(data);
+    };
+    
     function createGetPostsUrl (postIds) {
         var url = "api/posts/?";
         for (var postId of postIds)
@@ -23,6 +29,7 @@ define([], function() {
     
     return {
         getPost,
-        getPosts
+        getPosts,
+        getWordCloud
     };
 });

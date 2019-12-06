@@ -9,9 +9,9 @@ require.config({
         commentService: "js/services/commentService",
         postService: "js/services/postService",
         questionService: "js/services/questionService",
-        userService: "js/services/userService"
+        userService: "js/services/userService",
         // more services later
-        // app: ""
+        app: "js/stackOverflowApp"
     },
     shim: {
         jqcloud: ["jquery"]
@@ -19,15 +19,13 @@ require.config({
 });
 
 require(["knockout"], function(ko) {
-    /* load component example
-    ko.components.register("name", {
-        viewModel: { require: "path/to/jsfile" },
-        template: { require: "text!path/to/file.html" }
+    ko.components.register("mainComponent", {
+        viewModel: { require: "js/components/mainComponent/mainComponent" },
+        template: { require: "text!js/components/mainComponent/mainComponent.html" }
     });
-    */
 });
 
 
-require(["knockout"], function(ko){
+require(["knockout", "postmanager", "app"], function(ko, pm, app){
     console.log("hello from main");
 });

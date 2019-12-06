@@ -5,6 +5,7 @@ require.config({
         knockout: "lib/knockout/build/output/knockout-latest.debug",
         text: "lib/requirejs-text/text",
         jqcloud: "lib/jqcloud2/dist/jqcloud",
+        bootstrap: "lib/bootstrap/dist/js/bootstrap.bundle",
         answerService: "js/services/answerService",
         commentService: "js/services/commentService",
         postService: "js/services/postService",
@@ -40,7 +41,7 @@ require(["knockout"], function(ko) {
     
 });
 
-require(["knockout", "postmanager", "app"], function(ko, pm, app){
+require(["knockout", "jquery", "bootstrap", "postmanager", "app"], function(ko, jq, bs, pm, app){
     
     console.log("hello from main");
     ko.applyBindings(app);

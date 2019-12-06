@@ -32,6 +32,11 @@ require(["knockout"], function(ko) {
         viewModel: { require: "js/components/navbar/navbar" },
         template: { require: "text!js/components/navbar/navbar.html" }
     });
+
+    ko.components.register("login", {
+        viewModel: { require: "js/components/login/login" },
+        template: { require: "text!js/components/login/login.html" }
+    });
     
 });
 

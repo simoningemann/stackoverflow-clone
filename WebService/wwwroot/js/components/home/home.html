@@ -1,1 +1,10 @@
-<h1>home</h1>
+<div class="col">
+    <input class="form-control form-control-borderless" type="search" placeholder="keywords" data-bind="value: input">
+    <button class="btn btn-default" type="submit" data-bind="click: search">Search</button>
+    <p data-bind="text: results().totalQuestions">Results:</p> <p data-bind="text: results().totalPages">Pages:</p>
+    <ul data-bind="foreach: results().questions">
+        <li>
+            <span data-bind="text: $data.title"></span>
+        </li>
+    </ul>
+</div>

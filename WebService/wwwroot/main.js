@@ -3,10 +3,21 @@ require.config({
     paths: {
         jquery: "lib/jquery/dist/jquery",
         knockout: "lib/knockout/build/output/knockout-latest.debug",
-        text: "lib/requirejs-text/text"
+        text: "lib/requirejs-text/text",
+        jqcloud: "lib/jqcloud2/dist/jqcloud",
+        answerService: "js/services/answerService",
+        commentService: "js/services/commentService",
+        postService: "js/services/postService",
+        questionService: "js/services/questionService",
+        userService: "js/services/userService"
+        // more services later
+        // app: ""
+    },
+    shim: {
+        jqcloud: ["jquery"]
     }
 });
 
-require(["knockout", "text", "searchVm"], function(ko, tx, svm){
+require(["knockout"], function(ko){
     console.log("hello from main");
 });

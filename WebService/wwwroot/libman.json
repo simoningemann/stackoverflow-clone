@@ -21,6 +21,10 @@
     {
       "library": "requirejs-text@2.0.15",
       "destination": "lib/requirejs-text"
+    },
+    {
+      "library": "jqcloud2@2.0.3",
+      "destination": "lib/jqcloud2/"
     }
   ]
 }

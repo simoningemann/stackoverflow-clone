@@ -11,6 +11,7 @@ require.config({
         questionService: "js/services/questionService",
         userService: "js/services/userService",
         // more services later
+        postmanager: "js/services/postmanager",
         app: "js/stackOverflowApp"
     },
     shim: {
@@ -23,9 +24,15 @@ require(["knockout"], function(ko) {
         viewModel: { require: "js/components/mainComponent/mainComponent" },
         template: { require: "text!js/components/mainComponent/mainComponent.html" }
     });
+    
+    ko.components.register("signupComponent", {
+        viewModel: { require: "js/components/signupComponent/signupComponent" },
+        template: {require: "text!js/components/signupComponent/signupComponent.html" }
+    }); 
 });
 
 
 require(["knockout", "postmanager", "app"], function(ko, pm, app){
     console.log("hello from main");
+    ko.applyBindings(app);
 });

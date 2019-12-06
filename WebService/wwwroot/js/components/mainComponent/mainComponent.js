@@ -1,3 +1,10 @@
 define(["knockout", "postmanager"], function (ko, pm) {
-    console.log("Hello from mainComponent");
+    return function () {
+        console.log("Hello from mainComponent");
+        
+        pm.publish("changeComponent", "signupComponent");
+
+        return {
+        };
+    }
 });

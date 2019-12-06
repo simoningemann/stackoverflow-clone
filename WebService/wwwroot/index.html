@@ -1,39 +1,14 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>index</title>
+    <meta charset="UTF-8">
+    <title>Title</title>
     <link href="lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="lib/jqcloud2/dist/jqcloud.css" rel="stylesheet" />
-    <link href="css/app.css" rel="stylesheet" />
 </head>
-<body class="container-fluid">
+<body>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">StackExplorer</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto" data-bind="foreach: menuElements">
-            <li class="nav-item">
-                <a class="nav-link" href="#" data-bind="click: $parent.changeContent">
-                    <span data-bind="text: name"></span>
-                </a>
-            </li>
-        </ul>
-        <form class="form-inline my-2 my-lg-0" data-bind="with: loginElem">
-            <a class="nav-link my-2 my-sm-0" href="#" data-bind="click: $parent.changeContent">
-                Login
-            </a>
-        </form>
-    </div>
-
-</nav>
-
-<div data-bind="component: {name: currentComponent}"></div>
-
-<!--<pre data-bind="text: ko.toJSON($data, null, 2)"></pre>-->
 <script data-main="main.js" src="lib/requirejs/require.js"></script>
 </body>
 </html>

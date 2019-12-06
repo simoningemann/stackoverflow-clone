@@ -18,6 +18,16 @@ require.config({
     }
 });
 
+require(["knockout"], function(ko) {
+    /* load component example
+    ko.components.register("name", {
+        viewModel: { require: "path/to/jsfile" },
+        template: { require: "text!path/to/file.html" }
+    });
+    */
+});
+
+
 require(["knockout"], function(ko){
     console.log("hello from main");
 });

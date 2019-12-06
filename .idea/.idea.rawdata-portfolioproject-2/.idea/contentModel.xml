@@ -119,48 +119,16 @@
           </e>
         </e>
         <e p="wwwroot" t="Include">
-          <e p="css" t="Include">
-            <e p="app.css" t="Include" />
-          </e>
+          <e p="css" t="Include" />
           <e p="index.html" t="Include" />
-          <e p="jquery" t="Include">
-            <e p="dist" t="Include">
-              <e p="jquery.js" t="Include" />
-              <e p="jquery.min.js" t="Include" />
-            </e>
-          </e>
           <e p="js" t="Include">
-            <e p="app.js" t="Include" />
-            <e p="components" t="Include">
-              <e p="child" t="Include">
-                <e p="child.html" t="Include" />
-                <e p="child.js" t="Include" />
-              </e>
-              <e p="component1" t="Include">
-                <e p="component1.html" t="Include" />
-                <e p="component1.js" t="Include" />
-              </e>
-              <e p="component2" t="Include">
-                <e p="component2.html" t="Include" />
-                <e p="component2.js" t="Include" />
-              </e>
-              <e p="parent" t="Include">
-                <e p="parent.html" t="Include" />
-                <e p="parent.js" t="Include" />
-              </e>
-              <e p="wordcloud" t="Include">
-                <e p="cloud.html" t="Include" />
-                <e p="cloud.js" t="Include" />
-              </e>
-            </e>
-            <e p="main.js" t="Include" />
-            <e p="messageApp.js" t="Include" />
-            <e p="navbarApp.js" t="Include" />
-            <e p="parentChildApp.js" t="Include" />
             <e p="services" t="Include">
-              <e p="dataService.js" t="Include" />
+              <e p="QuestionService.js" t="Include" />
+              <e p="answerService.js" t="Include" />
+              <e p="commentService.js" t="Include" />
               <e p="postService.js" t="Include" />
-              <e p="postman.js" t="Include" />
+              <e p="postmanager.js" t="Include" />
+              <e p="userService.js" t="Include" />
             </e>
           </e>
           <e p="lib" t="Include">
@@ -341,11 +309,28 @@
               </e>
             </e>
             <e p="jqcloud2" t="Include">
+              <e p=".jshintrc" t="Include" />
+              <e p=".npmignore" t="Include" />
+              <e p=".scss-lint.yml" t="Include" />
+              <e p="Gruntfile.js" t="Include" />
+              <e p="LICENSE.txt" t="Include" />
+              <e p="README.md" t="Include" />
+              <e p="bower.json" t="Include" />
               <e p="dist" t="Include">
                 <e p="jqcloud.css" t="Include" />
                 <e p="jqcloud.js" t="Include" />
                 <e p="jqcloud.min.css" t="Include" />
                 <e p="jqcloud.min.js" t="Include" />
+              </e>
+              <e p="package.json" t="Include" />
+              <e p="src" t="Include">
+                <e p=".wrapper.js" t="Include" />
+                <e p="jqcloud.js" t="Include" />
+                <e p="jqcloud.scss" t="Include" />
+              </e>
+              <e p="test" t="Include">
+                <e p="core_tests.js" t="Include" />
+                <e p="index.html" t="Include" />
               </e>
             </e>
             <e p="jquery" t="Include">
@@ -555,7 +540,6 @@
           </e>
           <e p="libman.json" t="Include" />
           <e p="main.js" t="Include" />
-          <e p="searchVm.js" t="Include" />
         </e>
       </e>
       <e p="packages" t="ExcludeRecursive" />

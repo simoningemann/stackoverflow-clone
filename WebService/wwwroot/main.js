@@ -1,7 +1,7 @@
 require.config({
-    //baseUrl: "",
+    // baseUrl: "", optional
     paths: {
-        // add if needed jquery: "lib/jquery/dist/jquery",
+        jquery: "lib/jquery/dist/jquery",
         knockout: "lib/knockout/build/output/knockout-latest.debug",
         text: "lib/requirejs-text/text"
     }

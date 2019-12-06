@@ -1,5 +1,5 @@
 require.config({
-    // baseUrl: "", optional
+    
     paths: {
         jquery: "lib/jquery/dist/jquery",
         knockout: "lib/knockout/build/output/knockout-latest.debug",
@@ -12,27 +12,32 @@ require.config({
         userService: "js/services/userService",
         // more services later
         postmanager: "js/services/postmanager",
-        app: "js/stackOverflowApp"
+        app: "js/app"
     },
+    
     shim: {
         jqcloud: ["jquery"]
     }
+    
 });
 
 require(["knockout"], function(ko) {
-    ko.components.register("mainComponent", {
-        viewModel: { require: "js/components/mainComponent/mainComponent" },
-        template: { require: "text!js/components/mainComponent/mainComponent.html" }
+    
+    ko.components.register("home", {
+        viewModel: { require: "js/components/home/home" },
+        template: { require: "text!js/components/home/home.html" }
     });
     
-    ko.components.register("signupComponent", {
-        viewModel: { require: "js/components/signupComponent/signupComponent" },
-        template: {require: "text!js/components/signupComponent/signupComponent.html" }
-    }); 
+    ko.components.register("navbar", {
+        viewModel: { require: "js/components/navbar/navbar" },
+        template: { require: "text!js/components/navbar/navbar.html" }
+    });
+    
 });
 
-
 require(["knockout", "postmanager", "app"], function(ko, pm, app){
+    
     console.log("hello from main");
     ko.applyBindings(app);
+    
 });

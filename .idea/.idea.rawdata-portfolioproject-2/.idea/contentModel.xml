@@ -122,6 +122,21 @@
           <e p="css" t="Include" />
           <e p="index.html" t="Include" />
           <e p="js" t="Include">
+            <e p="app.js" t="Include" />
+            <e p="components" t="Include">
+              <e p="home" t="Include">
+                <e p="home.html" t="Include" />
+                <e p="home.js" t="Include" />
+              </e>
+              <e p="login" t="Include">
+                <e p="login.html" t="Include" />
+                <e p="login.js" t="Include" />
+              </e>
+              <e p="navbar" t="Include">
+                <e p="navbar.html" t="Include" />
+                <e p="navbar.js" t="Include" />
+              </e>
+            </e>
             <e p="services" t="Include">
               <e p="QuestionService.js" t="Include" />
               <e p="answerService.js" t="Include" />

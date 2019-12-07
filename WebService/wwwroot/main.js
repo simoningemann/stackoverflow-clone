@@ -17,7 +17,8 @@ require.config({
     },
     
     shim: {
-        jqcloud: ["jquery"]
+        jqcloud: ["jquery"],
+        bootstrap: ["jquery"]
     }
     
 });

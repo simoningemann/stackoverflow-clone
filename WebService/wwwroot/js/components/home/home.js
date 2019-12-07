@@ -3,19 +3,31 @@ define(["knockout", "postmanager", "questionService"], function(ko, pm, qs) {
         console.log("hello from home");
         var input = ko.observable("");
         var results = ko.observable({});
+        var page = ko.observable(1);
         
         var search = async function () {
             var keywords = input().split(" ");
             await qs.searchQuestions(function(data) {
                 results(data);
-            }, 1, 10, keywords);
+            }, page(), 10, keywords);
             console.log(results());
+        };
+        
+        page.subscribe(search);
+        
+        var pages = function () {
+            var pages = [];
+            for(var i = 1; i <= results().totalPages; i++)
+                pages.push(i);
+            return pages;
         };
         
         return {
             input,
             search,
-            results
+            results,
+            page,
+            pages
         }
     }
 });

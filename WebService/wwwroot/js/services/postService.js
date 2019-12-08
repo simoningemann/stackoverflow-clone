@@ -13,7 +13,7 @@ define([], function() {
     };
     
     var getWordCloud = async function (callback, postId) {
-        var response = await fetch("api/posts/" + postId);
+        var response = await fetch("api/posts/wordcloud/" + postId);
         var data = await response.json();
         callback(data);
     };

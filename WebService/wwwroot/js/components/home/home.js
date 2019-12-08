@@ -22,7 +22,7 @@ define(["knockout", "postmanager", "questionService"], function(ko, pm, qs) {
         return pages;
     };
     
-    var showWordcloud = function (postId) {
+    var showWordCloud = function (postId) {
         pm.publish("changePostId", postId);
         pm.publish("changeComponent", "wordcloud");
     };
@@ -36,7 +36,7 @@ define(["knockout", "postmanager", "questionService"], function(ko, pm, qs) {
             results,
             page,
             pages,
-            showWordcloud
+            showWordCloud
         }
     }
 });

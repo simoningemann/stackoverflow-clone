@@ -61,7 +61,7 @@ namespace WebService.Controllers
 
             foreach (var word in wordCloud)
             {
-                words.Add(new {word.Word, word.Weight});
+                words.Add(new {text= word.Word, word.Weight});
             }
             
             return Ok(new

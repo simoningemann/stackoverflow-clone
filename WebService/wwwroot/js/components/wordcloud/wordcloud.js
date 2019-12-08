@@ -13,7 +13,6 @@ define(["jquery", "knockout", "postmanager", "postService", "jqcloud"], function
         console.log(results());
         $('#cloud').jQCloud(results().words, {
             autoResize: true,
-            height: 500
         });
     };
     

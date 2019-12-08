@@ -1,0 +1,52 @@
+:root {
+    --wordcloud-base: 100%;
+    --wordcloud-scale: 15%;
+}
+
+.jqcloud {
+    font-size: 3vmin;
+}
+#cloud {
+    height: 90vh;
+}
+
+.jqcloud-word.w1 {
+    color: #aab5f0;
+    font-size: var(--wordcloud-base);
+}
+.jqcloud-word.w2 {
+    color: #99ccee;
+    font-size: calc(var(--wordcloud-base) + var(--wordcloud-scale));
+}
+.jqcloud-word.w3 {
+    color: #a0ddff;
+    font-size: calc(var(--wordcloud-base) + var(--wordcloud-scale) * 2);
+}
+.jqcloud-word.w4 {
+    color: #90c5f0;
+    font-size: calc(var(--wordcloud-base) + var(--wordcloud-scale) * 3);
+}
+.jqcloud-word.w5 {
+    color: #90a0dd;
+    font-size: calc(var(--wordcloud-base) + var(--wordcloud-scale) * 4);
+}
+.jqcloud-word.w6 {
+    color: #90c5f0;
+    font-size: calc(var(--wordcloud-base) + var(--wordcloud-scale) * 5);
+}
+.jqcloud-word.w7 {
+    color: #3399dd;
+    font-size: calc(var(--wordcloud-base) + var(--wordcloud-scale) * 6);
+}
+.jqcloud-word.w8 {
+    color: #00ccff;
+    font-size: calc(var(--wordcloud-base) + var(--wordcloud-scale) * 7);
+}
+.jqcloud-word.w9 {
+    color: #00ccff;
+    font-size: calc(var(--wordcloud-base) + var(--wordcloud-scale) * 8);
+}
+.jqcloud-word.w10 {
+    color: #00ccff;
+    font-size: calc(var(--wordcloud-base) + var(--wordcloud-scale) * 9);
+}

@@ -6,7 +6,7 @@ define(["knockout", "postmanager", "questionService"], function(ko, pm, qs) {
     var page = ko.observable(1);
 
     var search = async function () {
-        var keywords = input().split(" ");
+        var keywords = input().toLowerCase().split(" ");
         await qs.searchQuestions(function(data) {
             results(data);
         }, page(), 10, keywords);

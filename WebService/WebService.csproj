@@ -319,8 +319,4 @@
       <_ContentIncludedByDefault Remove="wwwroot\js\components\mainComponent\mainComponent.js" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="wwwroot\css" />
-    </ItemGroup>
-
 </Project>

@@ -2,11 +2,16 @@
     <input class="form-control form-control-borderless" type="search" placeholder="keywords" data-bind="value: input">
     <button class="btn btn-outline-secondary" type="button" data-bind="click: search">Search</button>
     <ul class="pagination" data-bind="foreach: pages()">
-        <li class="page-item"><a class="page-link" href="#" data-bind="text: $data, click: () => $parent.page($data)"></a></li>
+        <li class="page-item" data-bind="class: $parent.isPageActive($data)">
+            <a class="page-link" 
+               href="#" 
+               data-bind="text: $data, click: () => $parent.page($data)"></a>
+        </li>
     </ul>
     <ul class="list-group" data-bind="foreach: results().questions">
         <a href="#" 
            class="list-group-item list-group-item-action" 
-           data-bind="text: $data.title, click: () => $parent.showWordCloud($data.postId)"></a>
+           data-bind="text: $data.title, 
+           click: () => $parent.showWordCloud($data.postId)"></a>
     </ul>
 </div>

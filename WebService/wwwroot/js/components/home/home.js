@@ -27,7 +27,12 @@ define(["knockout", "postmanager", "questionService"], function(ko, pm, qs) {
         pm.publish("changeComponent", "wordcloud");
     };
     
-    
+    var isPageActive = function (somePage) {
+        console.log(somePage + (somePage === page()));
+        if (somePage === page())
+            return "active";
+        return "";
+    };
     
     return function () {        
         return {
@@ -36,7 +41,8 @@ define(["knockout", "postmanager", "questionService"], function(ko, pm, qs) {
             results,
             page,
             pages,
-            showWordCloud
+            showWordCloud,
+            isPageActive
         }
     }
 });

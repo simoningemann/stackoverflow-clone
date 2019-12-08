@@ -136,13 +136,17 @@
                 <e p="navbar.html" t="Include" />
                 <e p="navbar.js" t="Include" />
               </e>
+              <e p="wordcloud" t="Include">
+                <e p="wordcloud.html" t="Include" />
+                <e p="wordcloud.js" t="Include" />
+              </e>
             </e>
             <e p="services" t="Include">
-              <e p="QuestionService.js" t="Include" />
               <e p="answerService.js" t="Include" />
               <e p="commentService.js" t="Include" />
               <e p="postService.js" t="Include" />
               <e p="postmanager.js" t="Include" />
+              <e p="questionService.js" t="Include" />
               <e p="userService.js" t="Include" />
             </e>
           </e>

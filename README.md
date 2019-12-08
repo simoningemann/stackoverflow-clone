@@ -48,7 +48,8 @@ Get creative. Look here for inspiration: https://www.anychart.com/blog/2019/04/3
 - Made API helper page
 - Made wordcloud api
 - Improvements to QA data API in general - comments, posts, questions, answers
-
+- moved authentication and hash/salt generation to the web service
+- moved id generation to webservice
 
 #### Changes to data base
 - added primary keys and serials to bookmarks and queries
@@ -67,6 +68,20 @@ Summarize project 1, 2 and 3, relate implementation and theory
 
 4. Project Discussion
 5. Conclusion and Future Work
+
+### Hand-in details
+- report: minimum 5 pages
+- synopsis: minimum 8 pages (2 + 2 for each member)
+
+#### Remember
+- title and full names (obviously)
+- section3 tag the last commit
+- link to github repo
+- database login info
+- database must run on ruc server
+- hand in on eksamen.ruc.dk as 1 pdf
+
+
 
 ## SECTION 2 NOTES
 

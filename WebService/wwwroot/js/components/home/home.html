@@ -5,6 +5,8 @@
         <li class="page-item"><a class="page-link" href="#" data-bind="text: $data, click: () => $parent.page($data)"></a></li>
     </ul>
     <ul class="list-group" data-bind="foreach: results().questions">
-        <a href="#" class="list-group-item list-group-item-action" data-bind="text: $data.title"></a>
+        <a href="#" 
+           class="list-group-item list-group-item-action" 
+           data-bind="text: $data.title, click: () => $parent.showWordcloud($data.postId)"></a>
     </ul>
 </div>

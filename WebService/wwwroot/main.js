@@ -25,6 +25,8 @@ require.config({
 
 require(["knockout"], function(ko) {
     
+    console.log("hello from component registration");
+    
     ko.components.register("home", {
         viewModel: { require: "js/components/home/home" },
         template: { require: "text!js/components/home/home.html" }
@@ -39,12 +41,22 @@ require(["knockout"], function(ko) {
         viewModel: { require: "js/components/login/login" },
         template: { require: "text!js/components/login/login.html" }
     });
+
+    ko.components.register("wordcloud", {
+        viewModel: { require: "js/components/wordcloud/wordcloud" },
+        template: { require: "text!js/components/wordcloud/wordcloud.html" }
+    });
     
 });
 
 require(["knockout", "jquery", "bootstrap", "postmanager", "app"], function(ko, jq, bs, pm, app){
     
     console.log("hello from main");
+
     ko.applyBindings(app);
-    
+
+    // preload components so that they may subscribe
+    var componentsForPreload = ["login", "wordcloud", "home"]; // end with the starting component
+    for (var component of componentsForPreload)
+        pm.publish("changeComponent", component);
 });

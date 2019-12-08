@@ -1,5 +1,7 @@
 ﻿define([], function() {
     
+    console.log("hello from postmanager");
+    
     var subscribers = [];
     
     // call when wanting to know about changes

@@ -49,6 +49,7 @@ namespace WebService.Controllers
             {
                 thisPage,
                 dto.Keywords,
+                dto.PageSize,
                 totalQuestions,
                 totalPages,
                 prevPage,

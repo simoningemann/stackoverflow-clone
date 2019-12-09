@@ -1,22 +1,16 @@
 <div class="col">
-    <form>
-        <div class="form-group">
-        <label for="keywords">search keywords</label>
-        <input class="form-control form-control-borderless" type="search" id="keywords" placeholder="how to " data-bind="value: input" required>
-        </div>
-        <div class="form-group">
-            <label for="sizes">page size</label>
-            <select class="form-control" id="sizes" data-bind="foreach: sizes, value: size">
-                <option data-bind="text: $data"></option>
-            </select>
-        </div>
-        <button class="btn btn-outline-secondary" type="submit">Search</button> <!--data-bind="click: search"-->
+    <form data-bind="submit: search">
+        <input class="form-control form-control-borderless" type="search"  placeholder="how to print hello word" data-bind="value: input" required>
+        <select class="form-control" id="sizes" data-bind="foreach: sizes, value: size">
+            <option data-bind="text: $data"></option>
+        </select>
+        <button class="btn btn-outline-secondary" type="submit">Search</button>
     </form>
     <ul class="pagination" data-bind="foreach: pages()">
         <li class="page-item" data-bind="class: $parent.isPageActive($data)">
             <a class="page-link" 
                href="#" 
-               data-bind="text: $data, click: () => $parent.page($data)"></a>
+               data-bind="text: $data, click: () => $parent.changePage($data)"></a>
         </li>
     </ul>
     <ul class="list-group" data-bind="foreach: results().questions">

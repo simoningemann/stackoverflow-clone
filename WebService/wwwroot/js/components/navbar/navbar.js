@@ -3,7 +3,7 @@ define(["knockout", "postmanager"], function(ko, pm) {
         
         console.log("hello from navbar");
         
-        var options = ["home", "login"];
+        var options = ["home", "profile"];
         
         var changeComponent = function (component) {
             pm.publish("changeComponent", component);

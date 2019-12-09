@@ -11,6 +11,7 @@ require.config({
         postService: "js/services/postService",
         questionService: "js/services/questionService",
         userService: "js/services/userService",
+        profileService: "js/services/profileService",
         // more services later
         postmanager: "js/services/postmanager",
         app: "js/app"
@@ -37,7 +38,7 @@ require(["knockout"], function(ko) {
         template: { require: "text!js/components/navbar/navbar.html" }
     });
 
-    ko.components.register("login", {
+    ko.components.register("profile", {
         viewModel: { require: "js/components/login/login" },
         template: { require: "text!js/components/login/login.html" }
     });

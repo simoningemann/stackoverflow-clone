@@ -16,6 +16,10 @@ define(["jquery", "knockout", "postmanager", "postService", "jqcloud"], function
         });
     };
     
+    var back = function () {
+        pm.publish("changeComponent", "home");  
+    };
+    
     postId.subscribe(getWordCloud);
     pm.subscribe ("changePostId", postId);
     
@@ -23,7 +27,8 @@ define(["jquery", "knockout", "postmanager", "postService", "jqcloud"], function
         
         return {
             postId,
-            results
+            results,
+            back
         }
     }
 });

@@ -53,7 +53,7 @@ namespace WebService.Controllers // also add controllers for other ressources in
         {
             var profile = _profileService.GetProfile(dto.Email);
             
-            if (profile == null) return NotFound("Profile not found");
+            if (profile == null) return NotFound(new {error="Profile not found"});
             
             int.TryParse(
                 _configuration.GetSection("Auth:PwdSize").Value, 
@@ -63,7 +63,7 @@ namespace WebService.Controllers // also add controllers for other ressources in
             
             var hash = PasswordService.HashPassword(dto.Password, profile.Salt, size);
 
-            if (hash != profile.Hash) return BadRequest("Wrong password.");
+            if (hash != profile.Hash) return BadRequest(new {error= "Wrong password"});
 
             var token = CreateToken(profile.ProfileId, 30);
 
@@ -83,7 +83,7 @@ namespace WebService.Controllers // also add controllers for other ressources in
             int.TryParse(HttpContext.User.Identity.Name, out var profileId);
             var profile = _profileService.GetProfile(profileId);
 
-            if (profile == null) return NotFound();
+            if (profile == null) return NotFound(new {error="Profile not found"});
             
             int.TryParse(
                 _configuration.GetSection("Auth:PwdSize").Value, 
@@ -93,15 +93,15 @@ namespace WebService.Controllers // also add controllers for other ressources in
 
             var hash = PasswordService.HashPassword(dto.Password, profile.Salt, size);
 
-            if (hash != profile.Hash) return BadRequest("Wrong password.");
+            if (hash != profile.Hash) return BadRequest(new {error="Wrong password."});
 
             var deletedProfile = _profileService.DeleteProfile(profileId);
 
-            if (deletedProfile == null) return BadRequest("Error on deleting profile");
+            if (deletedProfile == null) return BadRequest(new {error="Error on deleting profile"});
             
             // preferably end session here
 
-            return Ok("Deleted: " + deletedProfile.Email);
+            return Ok(new {deletedProfile.Email});
         }
 
         [Authorize]

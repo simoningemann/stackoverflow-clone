@@ -20,8 +20,6 @@ define(["knockout", "postmanager", "questionService"], function(ko, pm, qs) {
         }, page(), size(), keywords);
         console.log(results());
     };
-
-    //page.subscribe(search);
     
     var changePage = function (num) {
         page(num);

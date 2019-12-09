@@ -4,12 +4,14 @@ define(["knockout", "postmanager", "questionService"], function(ko, pm, qs) {
     var input = ko.observable("");
     var results = ko.observable({});
     var page = ko.observable(1);
+    var size = ko.observable(10);
+    var sizes = ko.observableArray([10, 20, 30, 40, 50]);
 
     var search = async function () {
         var keywords = input().toLowerCase().split(" ");
         await qs.searchQuestions(function(data) {
             results(data);
-        }, page(), 10, keywords);
+        }, page(), size(), keywords);
         console.log(results());
     };
 
@@ -28,7 +30,6 @@ define(["knockout", "postmanager", "questionService"], function(ko, pm, qs) {
     };
     
     var isPageActive = function (somePage) {
-        console.log(somePage + (somePage === page()));
         if (somePage === page())
             return "active";
         return "";
@@ -40,6 +41,8 @@ define(["knockout", "postmanager", "questionService"], function(ko, pm, qs) {
             search,
             results,
             page,
+            size,
+            sizes,
             pages,
             showWordCloud,
             isPageActive

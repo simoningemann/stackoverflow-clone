@@ -119,7 +119,9 @@
           </e>
         </e>
         <e p="wwwroot" t="Include">
-          <e p="css" t="Include" />
+          <e p="css" t="Include">
+            <e p="custom.css" t="Include" />
+          </e>
           <e p="index.html" t="Include" />
           <e p="js" t="Include">
             <e p="app.js" t="Include" />

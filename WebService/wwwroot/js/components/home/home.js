@@ -4,7 +4,6 @@ define(["knockout", "postmanager", "questionService"], function(ko, pm, qs) {
     var input = ko.observable("");
     var results = ko.observable({
         keywords: [""],
-        totalPages: 1,
         pageSize: 10
     });
     var page = ko.observable(1);

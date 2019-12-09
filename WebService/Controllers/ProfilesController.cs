@@ -39,7 +39,7 @@ namespace WebService.Controllers // also add controllers for other ressources in
             var hash = PasswordService.HashPassword(dto.Password, salt, size);
             var profile = _profileService.CreateProfile(dto.Email, salt, hash);
 
-            if (profile == null) return BadRequest("Non-unique email");
+            if (profile == null) return BadRequest(new {error= "Non-unique email"});
             
             return Created("", new
             {

@@ -148,6 +148,7 @@
               <e p="commentService.js" t="Include" />
               <e p="postService.js" t="Include" />
               <e p="postmanager.js" t="Include" />
+              <e p="profileService.js" t="Include" />
               <e p="questionService.js" t="Include" />
               <e p="userService.js" t="Include" />
             </e>

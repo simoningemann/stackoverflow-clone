@@ -12,10 +12,14 @@ define(["knockout", "postmanager", "profileService"], function(ko, pm, ps) {
 
     var signup = async function () {
         console.log("signup " + email() + password());
-        await ps.signup(function (data) {
-            profile(data);
+        await ps.signup(function (data, response) {
+            if(response.ok) {
+                profile(data);
+                alert ("Created profile with email " + profile().email);
+            }
+            else 
+                alert(data.error);
         }, email(), password());
-        console.log(profile());
     };
     
     return function () {

@@ -3,7 +3,9 @@
         
         <form data-bind="submit: search">
             <div class="row">
+                <!--<h8>Search Terms:</h8>-->
                 <input class="col form-control form-control-borderless m-2" type="search"  placeholder="how to print hello word" data-bind="value: input" required>
+                <!--<h8>Results per Page:</h8>-->
                 <select class="col-2 col-sm-2 col-md-1 form-control m-2" id="sizes" data-bind="foreach: sizes, value: size">
                     <option data-bind="text: $data"></option>
                 </select>

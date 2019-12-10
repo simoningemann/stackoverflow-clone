@@ -23,7 +23,7 @@ define([], function() {
         for (var postId of postIds)
             url = url + "postIds=" + postId + "&";
         url = url.slice(0, url.length-1);
-        
+        console.log(url);
         return url;
     }
     

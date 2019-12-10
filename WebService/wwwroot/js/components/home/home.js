@@ -33,15 +33,15 @@ define(["knockout", "postmanager", "questionService"], function(ko, pm, qs) {
         return pages;
     };
     
-    var showWordCloud = function (postId) {
-        pm.publish("changePostId", postId);
-        pm.publish("changeComponent", "wordcloud");
-    };
-    
     var isPageActive = function (somePage) {
         if (somePage === page())
             return "active";
         return "";
+    };
+
+    var showPost = function (postId) {
+        pm.publish("changePostId", postId);
+        pm.publish("changeComponent", "post");
     };
     
     return function () {        
@@ -54,7 +54,7 @@ define(["knockout", "postmanager", "questionService"], function(ko, pm, qs) {
             sizes,
             pages,
             changePage,
-            showWordCloud,
+            showPost,
             isPageActive
         }
     }

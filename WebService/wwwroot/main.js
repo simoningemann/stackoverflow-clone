@@ -47,6 +47,11 @@ require(["knockout"], function(ko) {
         viewModel: { require: "js/components/wordcloud/wordcloud" },
         template: { require: "text!js/components/wordcloud/wordcloud.html" }
     });
+
+    ko.components.register("post", {
+        viewModel: { require: "js/components/post/post" },
+        template: { require: "text!js/components/post/post.html" }
+    });
     
 });
 
@@ -57,7 +62,8 @@ require(["knockout", "jquery", "bootstrap", "postmanager", "app"], function(ko, 
     ko.applyBindings(app);
 
     // preload components so that they may subscribe
-    var componentsForPreload = ["login", "wordcloud", "home"]; // end with the starting component
+    var componentsForPreload = ["login", "wordcloud", "post", "home"]; // end with the starting component
     for (var component of componentsForPreload)
         pm.publish("changeComponent", component);
+    
 });

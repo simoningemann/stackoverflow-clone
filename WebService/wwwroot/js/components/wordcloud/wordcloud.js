@@ -17,13 +17,14 @@ define(["jquery", "knockout", "postmanager", "postService", "jqcloud"], function
     };
     
     var back = function () {
-        pm.publish("changeComponent", "home");  
+        pm.publish("changeComponent", "post");  
     };
     
-    postId.subscribe(getWordCloud);
     pm.subscribe ("changePostId", postId);
     
     return function () {
+        
+        getWordCloud();
         
         return {
             postId,

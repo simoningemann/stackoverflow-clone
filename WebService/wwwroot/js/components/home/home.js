@@ -46,14 +46,12 @@ define(["knockout", "postmanager", "questionService"], function(ko, pm, qs) {
     };
     
     var isPrevActive = function() {
-        console.log(page());
         if(page() < 2)
             return "disabled";
         return "";
     };
 
     var isNextActive = function() {
-        console.log(page() <= results().totalPages);
         if(page() < results().totalPages)
             return "";
         return "disabled";

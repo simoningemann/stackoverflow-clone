@@ -138,6 +138,10 @@
                 <e p="navbar.html" t="Include" />
                 <e p="navbar.js" t="Include" />
               </e>
+              <e p="post" t="Include">
+                <e p="post.html" t="Include" />
+                <e p="post.js" t="Include" />
+              </e>
               <e p="wordcloud" t="Include">
                 <e p="wordcloud.html" t="Include" />
                 <e p="wordcloud.js" t="Include" />

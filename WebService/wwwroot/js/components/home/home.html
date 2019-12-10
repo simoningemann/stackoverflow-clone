@@ -1,22 +1,48 @@
-<div class="col">
-    <form data-bind="submit: search">
-        <input class="form-control form-control-borderless" type="search"  placeholder="how to print hello word" data-bind="value: input" required>
-        <select class="form-control" id="sizes" data-bind="foreach: sizes, value: size">
-            <option data-bind="text: $data"></option>
-        </select>
-        <button class="btn btn-outline-secondary" type="submit">Search</button>
-    </form>
-    <ul class="pagination" data-bind="foreach: pages()">
-        <li class="page-item" data-bind="class: $parent.isPageActive($data)">
-            <a class="page-link" 
-               href="#" 
-               data-bind="text: $data, click: () => $parent.changePage($data)"></a>
-        </li>
-    </ul>
-    <ul class="list-group" data-bind="foreach: results().questions">
-        <a href="#" 
-           class="list-group-item list-group-item-action" 
-           data-bind="text: $data.title, 
+<div class=container>
+    <div class="row">
+    <div class=col-sm>
+        <form data-bind="submit: search">
+            <input class="form-control form-control-borderless" type="search"  placeholder="how to print hello word" data-bind="value: input" required>
+            <select class="form-control" id="sizes" data-bind="foreach: sizes, value: size">
+                <option data-bind="text: $data"></option>
+            </select>
+            <button class="btn btn-outline-secondary" type="submit">Search</button>
+        </form>
+        <ul class="pagination" data-bind="foreach: pages()">
+            <li class="page-item" data-bind="class: $parent.isPageActive($data)">
+                <a class="page-link"
+                   href="#"
+                   data-bind="text: $data, click: () => $parent.changePage($data)"></a>
+            </li>
+        </ul>
+        <ul class="list-group" data-bind="foreach: results().questions">
+            <a href="#"
+               class="list-group-item list-group-item-action"
+               data-bind="text: $data.title, 
            click: () => $parent.showPost($data.postId)"></a>
-    </ul>
+        </ul>
+    </div>
+    <div class=col-sm>
+        <form data-bind="submit: search">
+            <input class="form-control form-control-borderless" type="search"  placeholder="how to print hello word" data-bind="value: input" required>
+            <select class="form-control" id="sizes" data-bind="foreach: sizes, value: size">
+                <option data-bind="text: $data"></option>
+            </select>
+            <button class="btn btn-outline-secondary" type="submit">Search</button>
+        </form>
+        <ul class="pagination" data-bind="foreach: pages()">
+            <li class="page-item" data-bind="class: $parent.isPageActive($data)">
+                <a class="page-link"
+                   href="#"
+                   data-bind="text: $data, click: () => $parent.changePage($data)"></a>
+            </li>
+        </ul>
+        <ul class="list-group" data-bind="foreach: results().questions">
+            <a href="#"
+               class="list-group-item list-group-item-action"
+               data-bind="text: $data.title, 
+           click: () => $parent.showPost($data.postId)"></a>
+        </ul>
+    </div>
+    </div>
 </div>

@@ -1,7 +1,7 @@
 <div class="col">
     <form data-bind="submit: search">
         <h8>Search Terms:</h8>
-        <input class="form-control form-control-borderless" id="searchTerms" type="search"  placeholder="how to print hello word" data-bind="value: input" required>
+        <input class="form-control form-control-borderless" id="searchTerms" type="search"  placeholder="Example: &quot;how to print hello word&quot;" data-bind="value: input" required>
         <h8>Results per Page:</h8>
         <select class="form-control" id="sizes" data-bind="foreach: sizes, value: size">
             <option data-bind="text: $data"></option>

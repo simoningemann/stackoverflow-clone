@@ -49,6 +49,9 @@ define(["knockout", "postmanager", "questionService", "postService", "answerServ
         getAnswers();
         
         return {
+            question,
+            post,
+            answers,
             back,
             showWordCloud
         }

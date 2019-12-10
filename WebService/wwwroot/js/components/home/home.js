@@ -4,7 +4,8 @@ define(["knockout", "postmanager", "questionService"], function(ko, pm, qs) {
     var input = ko.observable("");
     var results = ko.observable({
         keywords: [""],
-        pageSize: 10
+        pageSize: 10,
+        totalPages: 0
     });
     var page = ko.observable(1);
     var size = ko.observable(10);
@@ -44,6 +45,20 @@ define(["knockout", "postmanager", "questionService"], function(ko, pm, qs) {
         pm.publish("changeComponent", "post");
     };
     
+    var isPrevActive = function() {
+        console.log(page());
+        if(page() < 2)
+            return "disabled";
+        return "";
+    };
+
+    var isNextActive = function() {
+        console.log(page() <= results().totalPages);
+        if(page() < results().totalPages)
+            return "";
+        return "disabled";
+    };
+    
     return function () {        
         return {
             input,
@@ -55,7 +70,9 @@ define(["knockout", "postmanager", "questionService"], function(ko, pm, qs) {
             pages,
             changePage,
             showPost,
-            isPageActive
+            isPageActive,
+            isPrevActive,
+            isNextActive
         }
     }
 });

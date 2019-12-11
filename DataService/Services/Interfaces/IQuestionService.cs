@@ -7,7 +7,7 @@ namespace rawdata_portfolioproject_2.Services.Interfaces
     {
         List<Question> SearchQuestions(string[] keywords);
         Question GetQuestion(int postId);
-
         List<Question> GetLinkedQuestions(int postId);
+        List<Question> GetQuestions(int[] postIds);
     }
 }

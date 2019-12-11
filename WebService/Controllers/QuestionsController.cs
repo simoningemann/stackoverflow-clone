@@ -70,6 +70,14 @@ namespace WebService.Controllers
             return Ok(CreateQuestionDto(question));
         }
         
+        [HttpGet("specific", Name = nameof(GetQuestions))] 
+        public ActionResult GetQuestions([FromQuery] int [] postIds)
+        {
+            var questions = _questionService.GetQuestions(postIds);
+
+            return Ok(new {questions});
+        }
+        
         [HttpGet("links/{postId}", Name = nameof(GetLinkedQuestions))]
         public ActionResult GetLinkedQuestions(int postId)
         {

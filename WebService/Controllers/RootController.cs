@@ -67,6 +67,12 @@ namespace WebService.Controllers
                 type = "GET",
                 url = Url.Link(nameof(QuestionsController.GetQuestion), new {postId})
             };
+            
+            var getQuestionsExample = new
+            {
+                type = "GET",
+                url = Url.Link(nameof(QuestionsController.GetQuestions), new {postIds})
+            };
 
             var getLinksExample = new
             {
@@ -217,6 +223,7 @@ namespace WebService.Controllers
                 welcome,
                 searchQuestionsExample,
                 getQuestionExample,
+                getQuestionsExample,
                 getLinksExample,
                 getPostExample,
                 getPostsExample,

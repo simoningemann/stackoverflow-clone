@@ -24,6 +24,13 @@ namespace rawdata_portfolioproject_2.Services
             return question;
         }
 
+        public List<Question> GetQuestions(int [] postIds)
+        {
+            using var db = new StackOverflowContext();
+            var questions = db.Questions.Where(x => postIds.Contains(x.PostId)).Select(x => x).ToList();
+            return questions;
+        }
+
         public List<Question> GetLinkedQuestions(int postId)
         {
             using var db = new StackOverflowContext();

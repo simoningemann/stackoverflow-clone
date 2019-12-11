@@ -12,6 +12,7 @@ require.config({
         questionService: "js/services/questionService",
         userService: "js/services/userService",
         profileService: "js/services/profileService",
+        bookmarkService: "js/services/bookmarkService",
         // more services later
         postmanager: "js/services/postmanager",
         app: "js/app"
@@ -52,6 +53,11 @@ require(["knockout"], function(ko) {
         viewModel: { require: "js/components/post/post" },
         template: { require: "text!js/components/post/post.html" }
     });
+
+    ko.components.register("bookmark", {
+        viewModel: { require: "js/components/bookmark/bookmark" },
+        template: { require: "text!js/components/bookmark/bookmark.html" }
+    });
     
 });
 
@@ -62,7 +68,7 @@ require(["knockout", "jquery", "bootstrap", "postmanager", "app"], function(ko, 
     ko.applyBindings(app);
 
     // preload components so that they may subscribe
-    var componentsForPreload = ["login", "wordcloud", "post", "home"]; // end with the starting component
+    var componentsForPreload = ["login", "wordcloud", "bookmark", "post", "home"]; // end with the starting component
     for (var component of componentsForPreload)
         pm.publish("changeComponent", component);
     

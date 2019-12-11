@@ -12,6 +12,13 @@ define(["knockout", "postmanager", "bookmarkService"], function(ko, pm, bs) {
         console.log(bookmarks());
     };
     
+    var deleteBookmark = async function (bookmarkId) {
+        await bs.deleteBookmark(function (data) {
+            alert("Deleted bookmark with id " + data.bookmarkId);
+        }, bookmarkId, profile().token);
+        getBookmarks();
+    };
+    
     var goToPost = function (postId) {
         pm.publish("changePostId", postId);  
         pm.publish("changeComponent", "post")
@@ -31,7 +38,8 @@ define(["knockout", "postmanager", "bookmarkService"], function(ko, pm, bs) {
             bookmarks,
             getBookmarks,
             isLoginPromptVisible,
-            goToPost
+            goToPost,
+            deleteBookmark
         }
     }
 });

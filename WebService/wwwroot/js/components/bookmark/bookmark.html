@@ -3,7 +3,8 @@
     <div class="container" data-bind="foreach: bookmarks().bookmarks">
         <div class="container border">
             <button class="btn btn-outline-secondary" data-bind="click: () => $parent.goToPost($data.postId)">Go To Post</button>
-            <span data-bind="text: $data.note"></span>
+            <button class="btn btn-outline-danger" data-bind="click: () => $parent.deleteBookmark($data.bookmarkId)">Delete</button>
+            <div class="container" data-bind="text: $data.note"></div>
         </div>
     </div>
 </div>

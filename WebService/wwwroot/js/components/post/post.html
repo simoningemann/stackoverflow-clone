@@ -2,12 +2,13 @@
     <div class="col">
         <button class="btn btn-outline-secondary" data-bind="click: back">Back</button>
         <button class="btn btn-outline-secondary" data-bind="click: showWordCloud">Show Word Cloud</button>
+        <button class="btn btn-outline-secondary" data-bind="click: createBookmark">Bookmark</button>
         <div class="d-flex">
             <h2 data-bind="text: question().title"></h2>
             <span class="badge badge-success ml-1" data-bind="text: post().score"></span>
         </div>      
         <div class="container border" data-bind="html: post().body"></div>
-        <div class="container" data-bind="foreach: answers().posts">
+            <div class="container" data-bind="foreach: answers().posts">
                 <label for="data.postId">
                     <span class="badge badge-success" data-bind="text: $data.score"></span>
                     <span data-bind="text: $data.creationDate"></span>

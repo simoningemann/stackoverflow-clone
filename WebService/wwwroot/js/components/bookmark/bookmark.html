@@ -1,4 +1,9 @@
 <div class="container">
     <h3 data-bind="class: isLoginPromptVisible()">Please login to enable bookmarks.</h3>
-    
+    <div class="container" data-bind="foreach: bookmarks().bookmarks">
+        <div class="container border">
+            <button class="btn btn-outline-secondary" data-bind="click: () => $parent.goToPost($data.postId)">Go To Post</button>
+            <span data-bind="text: $data.note"></span>
+        </div>
+    </div>
 </div>

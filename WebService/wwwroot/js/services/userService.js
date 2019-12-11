@@ -22,6 +22,7 @@ define([], function() {
     }
     
     return {
-        getUser
+        getUser,
+        getUsers
     };
 });

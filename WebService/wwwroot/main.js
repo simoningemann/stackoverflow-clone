@@ -68,7 +68,7 @@ require(["knockout", "jquery", "bootstrap", "postmanager", "app"], function(ko, 
     ko.applyBindings(app);
 
     // preload components so that they may subscribe
-    var componentsForPreload = ["login", "wordcloud", "bookmark", "post", "home"]; // end with the starting component
+    var componentsForPreload = ["login", "wordcloud", "bookmark", "profile", "post", "home"]; // end with the starting component
     for (var component of componentsForPreload)
         pm.publish("changeComponent", component);
     

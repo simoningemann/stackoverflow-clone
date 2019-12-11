@@ -11,6 +11,7 @@ define(["knockout", "postmanager", "profileService"], function(ko, pm, ps) {
             if(response.ok) {
                 profile(data);
                 alert ("Login successful");
+                pm.publish("login", profile());
             }
             else
                 alert(data.error);
@@ -32,6 +33,8 @@ define(["knockout", "postmanager", "profileService"], function(ko, pm, ps) {
         await ps.deletion(function (data, response) {
             if(response.ok) {
                 alert ("Deleted profile with email " + data.email);
+                profile({});
+                pm.publish("login", profile());
             }
             else
                 alert(data.error);

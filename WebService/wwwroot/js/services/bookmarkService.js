@@ -8,8 +8,12 @@ define([], function () {
                 "Authorization": "Bearer " + token
             }
         });
-        var data = await response.json();
-        callback(data);
+        var data;
+        if(response.status !== 401)
+            data = await response.json();
+        else
+            data = {error: "Unauthorized"};
+        callback(data, response);
     };
     
     var createBookmark = async function (callback, postId, note, token) {

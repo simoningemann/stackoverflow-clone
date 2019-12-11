@@ -10,6 +10,7 @@ define(["knockout", "postmanager", "questionService", "postService", "answerServ
     var answers = ko.observable({});
     var users = ko.observable({});
     var profile = ko.observable({});
+    var comments = ko.observable({comments: []});
     var bookmarks = ko.observable({bookmarks: []});
     pm.subscribe("bookmarks", bookmarks);
     pm.subscribe("login", profile);
@@ -22,15 +23,25 @@ define(["knockout", "postmanager", "questionService", "postService", "answerServ
     };
 
     var getAnswers = async function () {
-        var postIds = [];
+        var postIds = [postId()];
         await as.getAnswers(function (data) {
             for(var answer in data.answers)
                 postIds.push(data.answers[answer].postId);
         }, postId());
+        await getPosts(postIds);
+        await getComments(postIds);
+    };
+    
+    var getPosts = async function (postIds) {
         await ps.getPosts(function (data) {
             answers(data);
         }, postIds);
-        console.log(answers());
+    };
+
+    var getComments = async function (postIds) {
+        await cs.getComments(function (data) {
+            comments(data);
+        }, postIds);
     };
 
     var getPost = async function () {
@@ -74,6 +85,13 @@ define(["knockout", "postmanager", "questionService", "postService", "answerServ
         }, profile().token);
     };
     
+    var findComments = function (postId) {
+        if (comments().comments === undefined) return;
+        return comments().comments.filter(function (value) {
+            return value.postId === postId
+        });
+    };
+    
     return function () {
         
         getQuestion();
@@ -89,7 +107,8 @@ define(["knockout", "postmanager", "questionService", "postService", "answerServ
             back,
             showWordCloud,
             createBookmark,
-            isBookmarkVisible
+            isBookmarkVisible,
+            findComments
         }
     }
 });

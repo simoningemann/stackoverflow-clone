@@ -25,6 +25,7 @@ define(["jquery", "knockout", "postmanager", "postService", "jqcloud"], function
     return function () {
         
         getWordCloud();
+        window.scrollTo(0, 0);
         
         return {
             postId,

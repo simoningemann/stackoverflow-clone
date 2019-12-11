@@ -57,7 +57,8 @@ define(["knockout", "postmanager", "questionService"], function(ko, pm, qs) {
         return "disabled";
     };
     
-    return function () {        
+    return function () {
+        window.scrollTo(0, 0);
         return {
             input,
             search,

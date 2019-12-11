@@ -11,12 +11,18 @@ define(["knockout", "postmanager", "bookmarkService"], function(ko, pm, bs) {
         }, profile().token);
         console.log(bookmarks());
     };
+
+    var updateBookmark = async function (bookmarkId, note) {
+        await bs.updateBookmark(function (data) {
+            alert("Updated note of bookmark with id " + data.bookmarkId);
+        }, bookmarkId, note, profile().token);
+    };
     
     var deleteBookmark = async function (bookmarkId) {
         await bs.deleteBookmark(function (data) {
             alert("Deleted bookmark with id " + data.bookmarkId);
         }, bookmarkId, profile().token);
-        getBookmarks();
+        await getBookmarks();
     };
     
     var goToPost = function (postId) {
@@ -33,13 +39,15 @@ define(["knockout", "postmanager", "bookmarkService"], function(ko, pm, bs) {
     return function () {
         
         getBookmarks();
+        window.scrollTo(0, 0);
         
         return {
             bookmarks,
             getBookmarks,
             isLoginPromptVisible,
             goToPost,
-            deleteBookmark
+            deleteBookmark,
+            updateBookmark
         }
     }
 });

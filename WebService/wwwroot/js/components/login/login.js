@@ -42,6 +42,7 @@ define(["knockout", "postmanager", "profileService"], function(ko, pm, ps) {
     };
     
     return function () {
+        window.scrollTo(0, 0);
         return {
             email,
             password,

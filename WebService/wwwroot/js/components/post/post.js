@@ -10,6 +10,8 @@ define(["knockout", "postmanager", "questionService", "postService", "answerServ
     var answers = ko.observable({});
     var users = ko.observable({});
     var profile = ko.observable({});
+    var bookmarks = ko.observable({bookmarks: []});
+    pm.subscribe("bookmarks", bookmarks);
     pm.subscribe("login", profile);
     
     var getQuestion = async function () {
@@ -42,6 +44,7 @@ define(["knockout", "postmanager", "questionService", "postService", "answerServ
         await bs.createBookmark(function (data) {
             alert("Created bookmark with id " + data.bookmarkId); 
         }, postId(), "", profile().token);
+        await getBookmarks();
     };
 
     var showWordCloud = function () {
@@ -52,19 +55,41 @@ define(["knockout", "postmanager", "questionService", "postService", "answerServ
         pm.publish("changeComponent", "home");
     };
     
+    var isBookmarkVisible = function () {
+        if(profile().token === undefined)
+            return "d-none";
+        else {
+            var postIds = [];
+            bookmarks().bookmarks.forEach(function (value) {postIds.push(value.postId)});
+            console.log(postIds);
+            if(postIds.includes(postId())) return "d-none";
+        }
+        return "";
+    };
+    
+    var getBookmarks = async function () {
+        await bs.getBookmarks(function (data) {
+            if (data.bookmarks !== undefined)
+                bookmarks(data)
+        }, profile().token);
+    };
+    
     return function () {
         
         getQuestion();
         getPost();
         getAnswers();
-        
+        getBookmarks();
+        window.scrollTo(0, 0);
+
         return {
             question,
             post,
             answers,
             back,
             showWordCloud,
-            createBookmark
+            createBookmark,
+            isBookmarkVisible
         }
     }
 });

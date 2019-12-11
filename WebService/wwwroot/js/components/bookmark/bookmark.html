@@ -4,7 +4,13 @@
         <div class="container border">
             <button class="btn btn-outline-secondary" data-bind="click: () => $parent.goToPost($data.postId)">Go To Post</button>
             <button class="btn btn-outline-danger" data-bind="click: () => $parent.deleteBookmark($data.bookmarkId)">Delete</button>
-            <div class="container" data-bind="text: $data.note"></div>
+            <button class="btn btn-outline-warning" data-bind="click: () => $parent.updateBookmark($data.bookmarkId, $data.note)">Update</button>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Note</span>
+                </div>
+                <textarea class="form-control" aria-label="Note" data-bind="value: $data.note"></textarea>
+            </div>
         </div>
     </div>
 </div>

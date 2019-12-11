@@ -2,7 +2,7 @@
     <div class="col">
         <button class="btn btn-outline-secondary" data-bind="click: back">Back</button>
         <button class="btn btn-outline-secondary" data-bind="click: showWordCloud">Show Word Cloud</button>
-        <button class="btn btn-outline-secondary" data-bind="click: createBookmark">Bookmark</button>
+        <button class="btn btn-outline-secondary" data-bind="click: createBookmark, class: isBookmarkVisible()">Bookmark</button>
         <div class="d-flex">
             <h2 data-bind="text: question().title"></h2>
             <span class="badge badge-success ml-1" data-bind="text: post().score"></span>

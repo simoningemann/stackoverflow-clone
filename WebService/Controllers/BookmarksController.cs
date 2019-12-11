@@ -67,7 +67,7 @@ namespace WebService.Controllers // also add controllers for other ressources in
                 dto.PostId,
                 dto.Note);
             
-            if (bookmark == null) return BadRequest();
+            if (bookmark == null) return BadRequest(new {});
 
             return Created("", CreateBookmarkDto(bookmark));
         }
@@ -79,7 +79,7 @@ namespace WebService.Controllers // also add controllers for other ressources in
             int.TryParse(HttpContext.User.Identity.Name, out var profileId);
             var bookmark = _bookmarkService.UpdateBookmark(dto.BookmarkId, profileId, dto.Note);
 
-            if (bookmark == null) return BadRequest("Error updating bookmark, bookmark not found or bookmark does not belong to profile.");
+            if (bookmark == null) return BadRequest(new {error="Error updating bookmark, bookmark not found or bookmark does not belong to profile."});
 
             return Ok(CreateBookmarkDto(bookmark)); 
         }
@@ -92,9 +92,11 @@ namespace WebService.Controllers // also add controllers for other ressources in
             
             var bookmark = _bookmarkService.DeleteBookmark(bookmarkId, profileId);
 
-            if (bookmark == null) return BadRequest();
+            if (bookmark == null) return BadRequest(new {});
 
-            return Ok("Deleted bookmark: " + bookmark.BookmarkId); 
+            return Ok(new{
+                bookmark.BookmarkId
+            }); 
         }
 
         private BookmarkDto CreateBookmarkDto(Bookmark bookmark)

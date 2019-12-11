@@ -28,8 +28,12 @@ define([], function () {
                   note
               })
           });
-          var data = await response.json();
-          callback(data);
+          var data;
+          if(response.status !== 401)
+              data = await response.json();
+          else
+              data = {error: "Unauthorized"};
+          callback(data, response);
     };
     
     var updateBookmark = async function (callback, bookmarkId, note, token) {
@@ -44,8 +48,12 @@ define([], function () {
                 note
             })
         });
-        var data = await response.json();
-        callback(data);
+        var data;
+        if(response.status !== 401)
+            data = await response.json();
+        else
+            data = {error: "Unauthorized"};
+        callback(data, response);
     };
 
     var deleteBookmark = async function (callback, bookmarkId, token) {
@@ -56,8 +64,12 @@ define([], function () {
                 "Authorization": "Bearer " + token
             }
         });
-        var data = await response.json();
-        callback(data);
+        var data;
+        if(response.status !== 401)
+            data = await response.json();
+        else
+            data = {error: "Unauthorized"};
+        callback(data, response);
     };
     
     return {

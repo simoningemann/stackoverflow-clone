@@ -12,11 +12,10 @@ define(["knockout", "postmanager", "bookmarkService"], function(ko, pm, bs) {
         console.log(bookmarks());
     };
     
-    var displayLoginPrompt = function () {
+    var isLoginPromptVisible = function () {
         if(profile().token === undefined)
             return "";
         return "d-none";
-            
     };
     
     return function () {
@@ -25,7 +24,7 @@ define(["knockout", "postmanager", "bookmarkService"], function(ko, pm, bs) {
         
         return {
             getBookmarks,
-            displayLoginPrompt
+            displayLoginPrompt: isLoginPromptVisible
         }
     }
 });

@@ -1,5 +1,5 @@
-define(["knockout", "postmanager", "questionService", "postService", "answerService", "commentService"],
-    function(ko, pm, qs, ps, as, cs) {
+define(["knockout", "postmanager", "questionService", "postService", "answerService", "commentService", "userService"],
+    function(ko, pm, qs, ps, as, cs, us) {
     
     console.log("hello from post");
     var postId = ko.observable(19);
@@ -7,6 +7,7 @@ define(["knockout", "postmanager", "questionService", "postService", "answerServ
     var question = ko.observable({});
     var post = ko.observable({});
     var answers = ko.observable({});
+    var users = ko.observable({});
     
     var getQuestion = async function () {
         await qs.getQuestion(function (data) {
@@ -33,9 +34,26 @@ define(["knockout", "postmanager", "questionService", "postService", "answerServ
         }, postId());
         console.log(post());
     };
+    
+    var getUsers = async function () {
+        var postIds = [];
+        await as.getAnswers(function (data) {
+            for (var answer in data.answers)
+                postIds.push(data.answers[answer].postId);
+        }, postid());
+        var userIds = [];
+        await ps.getPosts(function (data) {
+            for(var post in data.posts)
+                userIds.push(data.posts[post].userId);
+        }, userId());
+        await us.getUsers(function (data) {    
+            users(data);
+        }, userIds());
+           console.log(user()); 
+    };
 
     var showWordCloud = function () {
-    pm.publish("changeComponent", "wordcloud");
+        pm.publish("changeComponent", "wordcloud");
     };
 
     var back = function () {

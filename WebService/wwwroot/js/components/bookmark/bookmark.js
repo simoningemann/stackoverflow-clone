@@ -1,15 +1,29 @@
-define(["knockout", "postmanager", "bookmarkService"], function(ko, pm, bs) {
+define(["knockout", "postmanager", "bookmarkService", "questionService"], function(ko, pm, bs, qs) {
     
     console.log("hello from bookmark");
     var profile = ko.observable({});
     pm.subscribe("login", profile);
-    var bookmarks = ko.observable({});
+    var bookmarks = ko.observable({bookmarks: []});
+    var questions = ko.observable({questions: []});
     
     var getBookmarks = async function () {
         await bs.getBookmarks(function(data) {
-            bookmarks(data);
+            if(data.bookmarks !== undefined)
+                bookmarks(data);
         }, profile().token);
         console.log(bookmarks());
+        var postIds = [];
+        for (var bookmark of bookmarks().bookmarks)
+            postIds.push(bookmark.postId);
+        await getQuestions(postIds);
+    };
+    
+    var getQuestions = async function (postIds) {
+        await qs.getQuestions(function (data) {
+            if(data.questions !== undefined)
+                questions(data);
+        }, postIds);
+        console.log(questions());
     };
 
     var updateBookmark = async function (bookmarkId, note) {
@@ -36,6 +50,12 @@ define(["knockout", "postmanager", "bookmarkService"], function(ko, pm, bs) {
         return "d-none";
     };
     
+    var getTitle = function (postId) {
+        for(var question of questions().questions)
+            if(question.postId === postId)
+                return question.title;
+    };
+    
     return function () {
         
         getBookmarks();
@@ -47,7 +67,8 @@ define(["knockout", "postmanager", "bookmarkService"], function(ko, pm, bs) {
             isLoginPromptVisible,
             goToPost,
             deleteBookmark,
-            updateBookmark
+            updateBookmark,
+            getTitle
         }
     }
 });

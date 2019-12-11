@@ -2,6 +2,7 @@
     <h3 data-bind="class: isLoginPromptVisible()">Please login to enable bookmarks.</h3>
     <div class="container" data-bind="foreach: bookmarks().bookmarks">
         <div class="container border">
+            <p class="text-left" data-bind="text: $parent.getTitle($data.postId)"></p>
             <button class="btn btn-outline-secondary" data-bind="click: () => $parent.goToPost($data.postId)">Go To Post</button>
             <button class="btn btn-outline-danger" data-bind="click: () => $parent.deleteBookmark($data.bookmarkId)">Delete</button>
             <button class="btn btn-outline-warning" data-bind="click: () => $parent.updateBookmark($data.bookmarkId, $data.note)">Update</button>

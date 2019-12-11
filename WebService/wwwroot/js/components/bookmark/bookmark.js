@@ -10,7 +10,13 @@ define(["knockout", "postmanager", "bookmarkService"], function(ko, pm, bs) {
             bookmarks(data);
         }, profile().token);
         console.log(bookmarks());
-        console.log(profile().token);
+    };
+    
+    var displayLoginPrompt = function () {
+        if(profile().token === undefined)
+            return "";
+        return "d-none";
+            
     };
     
     return function () {
@@ -18,7 +24,8 @@ define(["knockout", "postmanager", "bookmarkService"], function(ko, pm, bs) {
         getBookmarks();
         
         return {
-            getBookmarks
+            getBookmarks,
+            displayLoginPrompt
         }
     }
 });

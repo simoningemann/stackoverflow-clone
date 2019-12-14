@@ -10,7 +10,7 @@
 
         subscribers.push(subscriber);
 
-        return function() { // ??
+        return function() { 
             subscribers = subscribers.filter(x => x !== subscriber);
         };
     };

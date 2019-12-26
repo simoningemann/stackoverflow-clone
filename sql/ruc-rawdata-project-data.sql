@@ -120,7 +120,40 @@ insert into lemmas
 select distinct word, pos, lemma
 from words;
 
+-- create views
+create or replace view fullquestions
+as select questions.postid, title, tags, acceptedanswerid,
+timeposted, score, body,
+users.userid, name, timesignedup, location, age
+from questions
+join posts
+on questions.postid = posts.postid
+join users
+on posts.userid = users.userid;
 
+create or replace view fullanswers
+as select answers.postid, answertoid,
+timeposted, score, body,
+users.userid, name, timesignedup, location, age
+from answers
+join posts
+on answers.postid = posts.postid
+join users
+on posts.userid = users.userid;
+
+create or replace view fullcomments
+as select commentid, postid, timecommented, score, body,
+users.userid, name, timesignedup, location, age
+from comments
+join users
+on comments.userid = users.userid;
+
+create or replace view fulllinks
+as select links.postid, linkpostid,
+title, tags, acceptedanswerid
+from links
+join questions
+on linkpostid = questions.postid;
 
 -- drop and alter old tables
 alter table words

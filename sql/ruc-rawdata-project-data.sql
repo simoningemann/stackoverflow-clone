@@ -66,9 +66,13 @@ select userid
 from users
 );
 
+alter table users rename column creationdate to timesignedup;
+
 insert into posts
 select distinct id, creationdate, score, body, ownerid
 from posts_universal;
+
+alter table posts rename column creationdate to timeposted;
 
 insert into questions
 select distinct id, title, tags, acceptedanswerid
@@ -109,6 +113,8 @@ where linkpostid notnull;
 insert into comments
 select distinct commentid, postid, commentcreatedate, commentscore, commenttext, authorid
 from comments_universal;
+
+alter table comments rename column creationdate to timecommented;
 
 insert into lemmas
 select distinct word, pos, lemma

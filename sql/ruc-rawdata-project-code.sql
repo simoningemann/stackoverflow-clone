@@ -1,4 +1,5 @@
 -- framework api
+/* obsolete
 create or replace function create_profile(email_in text, pw_in text)
 returns void as $$
 declare
@@ -68,6 +69,7 @@ where profileid_in = profileid
 and postid_in = postid;
 end; $$
 language 'plpgsql';
+*/
 
 -- search api
 -- simple_search

@@ -7,7 +7,7 @@ namespace rawdata_portfolioproject_2.Models
     {
         [Key]
         public int PostId { get; set; }
-        public DateTime CreationDate { get; set; }
+        public DateTime TimePosted { get; set; }
         public int Score { get; set; }
         public string Body { get; set; }
         public int UserId { get; set; }

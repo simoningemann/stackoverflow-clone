@@ -15,7 +15,7 @@
         
             <div class="container" data-bind="foreach: answers().posts">
                 <span class="badge badge-success" data-bind="text: $data.score"></span>
-                <span data-bind="text: $data.creationDate"></span>
+                <span data-bind="text: $data.timePosted"></span>
                 <span data-bind="text: $data.userId"></span>
                 <div class="container border" data-bind="html: $data.body" id="data.postId"></div>
 
